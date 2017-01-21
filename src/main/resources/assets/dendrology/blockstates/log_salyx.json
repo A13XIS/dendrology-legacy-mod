@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":    { "model": "dendrology:log_salyx" },
+    "axis=z":     { "model": "dendrology:log_salyx_side" },
+    "axis=x":     { "model": "dendrology:log_salyx_side", "y": 90 },
+    "axis=none":   { "model": "dendrology:log_salyx_bark"}
+  }
+}

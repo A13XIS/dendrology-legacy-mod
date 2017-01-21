@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "dendrology:blocks/log_cerasu_top",
+    "side": "dendrology:blocks/log_cerasu"
+  }
+}

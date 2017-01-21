@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":    { "model": "dendrology:log_kulist" },
+    "axis=z":     { "model": "dendrology:log_kulist_side" },
+    "axis=x":     { "model": "dendrology:log_kulist_side", "y": 90 },
+    "axis=none":   { "model": "dendrology:log_kulist_bark"}
+  }
+}

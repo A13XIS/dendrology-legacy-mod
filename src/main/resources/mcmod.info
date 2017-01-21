@@ -1,0 +1,37 @@
+[
+{
+  "modid": "dendrology",
+  "name": "Ancient Trees",
+  "description": "A Minecraft mod that adds many extinct tree species to the world.",
+  "version": "1.8-L1",
+  "mcversion": "1.8",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [
+    "ScottKillen",
+    "Blorph",
+    "Ruyuna",
+    "A13XIS aka TheA13X"
+  ],
+  "credits": "",
+  "logoFile": "assets/logo.png",
+  "screenshots": [
+  ],
+  "parent":"",
+  "requiredMods": [
+    "Forge",
+    "koresample@[1.8-L1)"
+  ],
+  "dependencies": [
+    "Forge",
+    "koresample@[1.8-L1)",
+    "Forestry",
+    "minechem",
+    "chisel@[2.4.0.38,)",
+    "StorageDrawers@[1.8)"
+  ],
+  "dependants": [
+  ],
+  "useDependencyInformation": true
+}
+]

@@ -1,0 +1,7 @@
+{
+  "parent": "block/column_side",
+  "textures": {
+    "end": "dendrology:blocks/log_lata_top",
+    "side": "dendrology:blocks/log_lata"
+  }
+}
