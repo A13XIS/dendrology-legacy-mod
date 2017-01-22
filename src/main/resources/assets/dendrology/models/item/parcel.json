@@ -1,5 +1,5 @@
 {
-  "parent": "dendrology",
+  "parent": "builtin/generated",
   "textures": {
     "layer0": "dendrology:items/parcel"
   },
