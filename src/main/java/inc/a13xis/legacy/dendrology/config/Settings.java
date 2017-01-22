@@ -6,18 +6,10 @@ import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.koresample.config.ConfigSyncable;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.Configuration;
+
 import java.util.Map;
 
-import static net.minecraftforge.common.ChestGenHooks.BONUS_CHEST;
-import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
-import static net.minecraftforge.common.ChestGenHooks.MINESHAFT_CORRIDOR;
-import static net.minecraftforge.common.ChestGenHooks.PYRAMID_DESERT_CHEST;
-import static net.minecraftforge.common.ChestGenHooks.PYRAMID_JUNGLE_CHEST;
-import static net.minecraftforge.common.ChestGenHooks.PYRAMID_JUNGLE_DISPENSER;
-import static net.minecraftforge.common.ChestGenHooks.STRONGHOLD_CORRIDOR;
-import static net.minecraftforge.common.ChestGenHooks.STRONGHOLD_CROSSING;
-import static net.minecraftforge.common.ChestGenHooks.STRONGHOLD_LIBRARY;
-import static net.minecraftforge.common.ChestGenHooks.VILLAGE_BLACKSMITH;
+import static net.minecraftforge.common.ChestGenHooks.*;
 
 public enum Settings implements ConfigSyncable
 {

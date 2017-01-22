@@ -22,7 +22,6 @@ import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
 import inc.a13xis.legacy.koresample.tree.item.LeavesItem;
 import inc.a13xis.legacy.koresample.tree.loader.TreeSpeciesLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
@@ -31,6 +30,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import java.util.List;
 
 public final class ModBlocks

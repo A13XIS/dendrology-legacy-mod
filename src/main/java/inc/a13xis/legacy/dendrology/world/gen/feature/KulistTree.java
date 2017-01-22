@@ -6,6 +6,7 @@ import inc.a13xis.legacy.dendrology.world.gen.feature.kulist.NormalKulistTree;
 import inc.a13xis.legacy.koresample.tree.DefinesTree;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
 import java.util.Random;
 
 public class KulistTree extends AbstractTree

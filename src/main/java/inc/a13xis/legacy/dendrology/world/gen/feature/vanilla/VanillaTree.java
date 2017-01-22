@@ -4,6 +4,7 @@ import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
 import java.util.Random;
 
 public class VanillaTree extends AbstractTree

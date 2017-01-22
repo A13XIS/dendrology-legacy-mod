@@ -6,6 +6,7 @@ import inc.a13xis.legacy.dendrology.content.ProvidesPotionEffect;
 import inc.a13xis.legacy.koresample.tree.DefinesSapling;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import net.minecraft.item.ItemStack;
+
 import java.util.List;
 
 public final class ModSaplingBlock extends SaplingBlock

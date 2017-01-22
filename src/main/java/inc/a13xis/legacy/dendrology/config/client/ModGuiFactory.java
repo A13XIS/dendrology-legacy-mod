@@ -1,8 +1,9 @@
 package inc.a13xis.legacy.dendrology.config.client;
 
-import net.minecraftforge.fml.client.IModGuiFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraftforge.fml.client.IModGuiFactory;
+
 import java.util.Set;
 
 @SuppressWarnings({ "WeakerAccess", "UnusedDeclaration" })

@@ -3,14 +3,15 @@ package inc.a13xis.legacy.dendrology.content.overworld;
 import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.dendrology.config.Settings;
 import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.IWorldGenerator;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import java.util.List;
 import java.util.Random;
 

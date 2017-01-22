@@ -7,6 +7,7 @@ import inc.a13xis.legacy.koresample.tree.DefinesTree;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
 import java.util.Random;
 
 public class CedrumTree extends AbstractTree

@@ -2,12 +2,11 @@ package inc.a13xis.legacy.dendrology.item;
 
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 @ObjectHolder(TheMod.MOD_ID)
 public final class ModItems

@@ -1,13 +1,7 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
 import com.google.common.collect.ImmutableList;
-import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
-import inc.a13xis.legacy.koresample.tree.DefinesLog;
-import inc.a13xis.legacy.koresample.tree.DefinesSapling;
-import inc.a13xis.legacy.koresample.tree.DefinesSlab;
-import inc.a13xis.legacy.koresample.tree.DefinesStairs;
-import inc.a13xis.legacy.koresample.tree.DefinesWood;
-import inc.a13xis.legacy.koresample.tree.TreeTaxonomy;
+import inc.a13xis.legacy.koresample.tree.*;
 
 public final class OverworldTreeTaxonomy implements TreeTaxonomy
 {

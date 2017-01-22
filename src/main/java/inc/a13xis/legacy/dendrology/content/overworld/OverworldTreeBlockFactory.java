@@ -1,22 +1,10 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
-import inc.a13xis.legacy.dendrology.block.ModBlocks;
-import inc.a13xis.legacy.dendrology.block.ModLeavesBlock;
-import inc.a13xis.legacy.dendrology.block.ModLogBlock;
-import inc.a13xis.legacy.dendrology.block.ModSaplingBlock;
-import inc.a13xis.legacy.dendrology.block.ModSlabBlock;
-import inc.a13xis.legacy.dendrology.block.ModStairsBlock;
-import inc.a13xis.legacy.dendrology.block.ModWoodBlock;
+import inc.a13xis.legacy.dendrology.block.*;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
 import inc.a13xis.legacy.koresample.common.util.slab.SingleDoubleSlab;
-import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
-import inc.a13xis.legacy.koresample.tree.DefinesLog;
-import inc.a13xis.legacy.koresample.tree.DefinesSapling;
-import inc.a13xis.legacy.koresample.tree.DefinesSlab;
-import inc.a13xis.legacy.koresample.tree.DefinesStairs;
-import inc.a13xis.legacy.koresample.tree.DefinesWood;
-import inc.a13xis.legacy.koresample.tree.TreeBlockFactory;
+import inc.a13xis.legacy.koresample.tree.*;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
