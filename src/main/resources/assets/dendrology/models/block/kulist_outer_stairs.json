@@ -1,0 +1,8 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": {
+        "bottom": "dendrology:blocks/kulist_planks",
+        "top": "dendrology:blocks/kulist_planks",
+        "side": "dendrology:blocks/kulist_planks"
+    }
+}

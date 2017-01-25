@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "dendrology:blocks/nucis_planks",
+        "top": "dendrology:blocks/nucis_planks",
+        "side": "dendrology:blocks/nucis_planks"
+    }
+}

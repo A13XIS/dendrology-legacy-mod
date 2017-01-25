@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "dendrology:blocks/tuopa_planks",
+        "top": "dendrology:blocks/tuopa_planks",
+        "side": "dendrology:blocks/tuopa_planks"
+    }
+}

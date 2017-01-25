@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "dendrology:blocks/salyx_planks",
+        "top": "dendrology:blocks/salyx_planks",
+        "side": "dendrology:blocks/salyx_planks"
+    }
+}

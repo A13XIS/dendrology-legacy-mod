@@ -1,0 +1,8 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": {
+        "bottom": "dendrology:blocks/ewcaly_planks",
+        "top": "dendrology:blocks/ewcaly_planks",
+        "side": "dendrology:blocks/ewcaly_planks"
+    }
+}
