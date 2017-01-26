@@ -1,8 +1,8 @@
 {
     "parent": "block/inner_stairs",
     "textures": {
-        "bottom": "dendrology:blocks/cerasu_planks",
-        "top": "dendrology:blocks/cerasu_planks",
-        "side": "dendrology:blocks/cerasu_planks"
+        "bottom": "dendrology:blocks/planks_cerasu",
+        "top": "dendrology:blocks/planks_cerasu",
+        "side": "dendrology:blocks/planks_cerasu"
     }
 }

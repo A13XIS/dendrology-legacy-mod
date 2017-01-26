@@ -1,8 +1,8 @@
 {
     "parent": "block/outer_stairs",
     "textures": {
-        "bottom": "dendrology:blocks/acemus_planks",
-        "top": "dendrology:blocks/acemus_planks",
-        "side": "dendrology:blocks/acemus_planks"
+        "bottom": "dendrology:blocks/planks_acemus",
+        "top": "dendrology:blocks/planks_acemus",
+        "side": "dendrology:blocks/planks_acemus"
     }
 }
