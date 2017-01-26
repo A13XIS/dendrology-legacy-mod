@@ -6,8 +6,8 @@ import net.minecraft.block.Block;
 
 public final class ModSlabItem extends SlabItem
 {
-    public ModSlabItem(Block block, ModSlabBlock singleSlab, ModSlabBlock doubleSlab, Boolean isDouble)
+    public ModSlabItem(Block block, ModSlabBlock singleSlab, ModSlabBlock doubleSlab)
     {
-        super(block, singleSlab, doubleSlab, isDouble);
+        super(block, singleSlab, doubleSlab);
     }
 }

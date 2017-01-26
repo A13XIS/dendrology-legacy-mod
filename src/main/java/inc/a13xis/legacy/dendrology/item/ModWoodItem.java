@@ -9,5 +9,7 @@ public final class ModWoodItem extends WoodItem
     public ModWoodItem(Block block, ModWoodBlock log, String[] names)
     {
         super(block, log, names);
+        this.setHasSubtypes(true);
     }
+
 }
