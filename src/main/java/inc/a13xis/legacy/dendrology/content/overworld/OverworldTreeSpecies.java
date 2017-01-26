@@ -1,6 +1,7 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
 
+import inc.a13xis.legacy.dendrology.block.ModWoodBlock;
 import inc.a13xis.legacy.dendrology.content.ProvidesPotionEffect;
 import inc.a13xis.legacy.dendrology.world.AcemusColorizer;
 import inc.a13xis.legacy.dendrology.world.CerasuColorizer;
@@ -50,11 +51,11 @@ public enum OverworldTreeSpecies
     private final Colorizer colorizer;
     private final String potionEffect;
 
-    private int leavesMeta;
-    private int logMeta;
-    private int planksMeta;
-    private int saplingMeta;
-    private int slabMetadata;
+    private ModWoodBlock.EnumType leavesVariant;
+    private ModWoodBlock.EnumType logVariant;
+    private ModWoodBlock.EnumType planksVariant;
+    private ModWoodBlock.EnumType saplingVariant;
+    private ModWoodBlock.EnumType slabVariant;
 
     private SlabBlock doubleSlabBlock = null;
     private LeavesBlock leavesBlock = null;
@@ -136,7 +137,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignLeavesSubBlockIndex(int leavesMeta) { this.leavesMeta = leavesMeta; }
+    public void assignLeavesSubBlockVariant(Enum variant) { this.leavesVariant = (ModWoodBlock.EnumType)variant; }
 
     @Override
     public LeavesBlock leavesBlock()
@@ -146,7 +147,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public int leavesSubBlockIndex() { return leavesMeta; }
+    public Enum leavesSubBlockVariant() { return leavesVariant; }
 
     @SuppressWarnings("ReturnOfThis")
     @Override
@@ -163,7 +164,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignLogSubBlockIndex(int logMeta) { this.logMeta = logMeta; }
+    public void assignLogSubBlockVariant(Enum variant) { this.logVariant = (ModWoodBlock.EnumType)variant; }
 
     @Override
     public LogBlock logBlock()
@@ -173,7 +174,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public int logSubBlockIndex() { return logMeta; }
+    public Enum logSubBlockVariant() { return logVariant; }
 
     @Override
     public WoodBlock woodBlock()
@@ -183,7 +184,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public int woodSubBlockIndex() { return planksMeta; }
+    public ModWoodBlock.EnumType woodSubBlockVariant() { return planksVariant; }
 
     @Override
     public void assignWoodBlock(WoodBlock woodBlock)
@@ -193,7 +194,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignWoodSubBlockIndex(int planksMeta) { this.planksMeta = planksMeta; }
+    public void assignWoodSubBlockVariant(Enum type) { this.planksVariant = (ModWoodBlock.EnumType)type; }
 
     @Override
     public void assignStairsBlock(StairsBlock stairsBlock)
@@ -213,7 +214,8 @@ public enum OverworldTreeSpecies
     public Block stairsModelBlock() { return woodBlock(); }
 
     @Override
-    public int stairsModelSubBlockIndex() { return woodSubBlockIndex(); }
+    public Enum stairsModelSubBlockVariant() { return woodSubBlockVariant();
+    }
 
     @Override
     public String stairsName() { return speciesName(); }
@@ -226,7 +228,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignSaplingSubBlockIndex(int saplingMeta) { this.saplingMeta = saplingMeta; }
+    public void assignSaplingSubBlockVariant(Enum type) { this.saplingVariant = (ModWoodBlock.EnumType)type; }
 
     @Override
     public SaplingBlock saplingBlock()
@@ -236,7 +238,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public int saplingSubBlockIndex() { return saplingMeta; }
+    public Enum saplingSubBlockVariant() { return saplingVariant; }
 
     @Override
     @Deprecated
@@ -263,7 +265,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignSlabSubBlockIndex(int slabMetadata) { this.slabMetadata = slabMetadata; }
+    public void assignSlabSubBlockVariant(Enum slabMetadata) { this.slabVariant = (ModWoodBlock.EnumType)slabMetadata; }
 
     @Override
     public SlabBlock doubleSlabBlock()
@@ -280,13 +282,13 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public int slabSubBlockIndex() { return slabMetadata; }
+    public Enum slabSubBlockVariant() { return slabVariant; }
 
     @Override
     public Block slabModelBlock() { return woodBlock(); }
 
     @Override
-    public int slabModelSubBlockIndex() { return woodSubBlockIndex(); }
+    public Enum slabModelSubBlockIndex() { return woodSubBlockVariant(); }
 
     @Override
     public String slabName() { return speciesName(); }

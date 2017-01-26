@@ -49,8 +49,8 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
     @Override
     public SingleDoubleSlab createSlabBlocks(Iterable<DefinesSlab> subBlocks)
     {
-        final SlabBlock singleSlabBlock = new ModSlabBlock(false, subBlocks);
-        final SlabBlock doubleSlabBlock = new ModSlabBlock(true, subBlocks);
+        final SlabBlock singleSlabBlock = new ModSlabBlock(subBlocks);
+        final SlabBlock doubleSlabBlock = new ModSlabBlock(subBlocks);
 
         for (final DefinesSlab subBlock : subBlocks)
         {
