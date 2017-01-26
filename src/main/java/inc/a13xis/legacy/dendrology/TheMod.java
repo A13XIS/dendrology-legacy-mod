@@ -46,7 +46,7 @@ public final class TheMod
     public static final String MOD_ID = "dendrology";
     static final String MOD_NAME = "Ancient Trees";
     static final String MOD_VERSION = "1.7.10-1.6.4";
-    static final String MOD_GUI_FACTORY = "com.scottkillen.mod.dendrology.config.client.ModGuiFactory";
+    static final String MOD_GUI_FACTORY = "inc.a13xis.legacy.dendrology.config.client.ModGuiFactory";
     private static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ':';
     @SuppressWarnings("PublicField")
     @Instance(MOD_ID)
@@ -59,7 +59,7 @@ public final class TheMod
         @Override
         public ItemStack getIconItemStack()
         {
-            return new ItemStack(ICON.saplingBlock(), 1, ICON.saplingSubBlockIndex());
+            return new ItemStack(ICON.saplingBlock(), 1, ICON.saplingSubBlockVariant().ordinal());
         }
 
         @SuppressWarnings("ReturnOfNull")
@@ -111,6 +111,7 @@ public final class TheMod
 
         new ModBlocks().loadContent();
         new ModItems().loadContent();
+        Proxy.common.initSubRenders();
         //initIntegrators();
         integrateMods(event.getModState());
     }
