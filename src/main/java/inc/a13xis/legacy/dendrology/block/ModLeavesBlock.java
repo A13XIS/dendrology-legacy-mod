@@ -5,20 +5,28 @@ import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
 import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
-import net.minecraft.block.BlockPlanks;
+import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public final class ModLeavesBlock extends LeavesBlock
 {
+    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
     public ModLeavesBlock(Iterable<? extends DefinesLeaves> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
         setCreativeTab(TheMod.INSTANCE.creativeTab());
+        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ModWoodBlock.EnumType.ACEMUS).withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.TRUE));
     }
 
     @Override
@@ -29,8 +37,13 @@ public final class ModLeavesBlock extends LeavesBlock
     }
 
     @Override
-    public BlockPlanks.EnumType getWoodType(int meta) {
-        return null; //unsupported
+    protected BlockState createBlockState(){
+        return new BlockState(this, new IProperty[]{VARIANT,CHECK_DECAY,DECAYABLE});
+    }
+
+    @Override
+    public ModWoodBlock.EnumType getWoodType(int meta) {
+       return ModWoodBlock.EnumType.fromId(meta);
     }
 
     @Override
@@ -38,6 +51,25 @@ public final class ModLeavesBlock extends LeavesBlock
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return null;
+        ArrayList<ItemStack> list=new ArrayList<ItemStack>();
+        list.add(new ItemStack(Item.getItemFromBlock(this),1,getMetaFromState(world.getBlockState(pos))));
+        return list;
     }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(VARIANT, ModWoodBlock.EnumType.fromId(meta));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        ModWoodBlock.EnumType type = (ModWoodBlock.EnumType) state.getValue(VARIANT);
+        return type.ordinal();
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return getMetaFromState(state);
+    }
+
 }

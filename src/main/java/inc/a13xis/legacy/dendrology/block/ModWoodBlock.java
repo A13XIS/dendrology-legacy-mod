@@ -4,12 +4,39 @@ import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.koresample.tree.DefinesWood;
 import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.IStringSerializable;
+
+import java.util.Collection;
 
 
 public final class ModWoodBlock extends WoodBlock
 {
-    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumType.class);
+    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
+
+    protected ModWoodBlock(Collection<? extends DefinesWood> subBlocks){
+        super(subBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.ACEMUS));
+    }
+
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, new IProperty[] { ModWoodBlock.VARIANT });
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(ModWoodBlock.VARIANT, EnumType.fromId(meta));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        EnumType type = (EnumType) state.getValue(ModWoodBlock.VARIANT);
+        return type.ordinal();
+    }
 
     public ModWoodBlock(Iterable<? extends DefinesWood> subBlocks)
     {
@@ -18,11 +45,60 @@ public final class ModWoodBlock extends WoodBlock
         setHardness(2.0f);
         setResistance(5.0f);
         setStepSound(soundTypeWood);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(ModWoodBlock.VARIANT, EnumType.ACEMUS));
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return getMetaFromState(state);
+    }
+
+
+    public IBlockState getBlockState(int id){
+       return ModWoodBlock.getStateById(id);
     }
 
     @Override
     protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
 
+    public enum EnumType implements IStringSerializable{
+        ACEMUS("acemus"),
+        CEDRUM("cedrum"),
+        CERASU("cerasu"),
+        DELNAS("delnas"),
+        EWCALY("ewcaly"),
+        HEKUR("hekur"),
+        KIPARIS("kiparis"),
+        KULIST("kulist"),
+        LATA("lata"),
+        NUCIS("nucis"),
+        PORFFOR("porffor"),
+        SALYX("salyx"),
+        TUOPA("tuopa");
 
+        private final String species;
+
+        EnumType(String name){
+            this.species=name;
+        }
+
+        public String getName(){
+            return species;
+        }
+
+        @Override
+        public String toString() {
+            return getName();
+        }
+
+        public static EnumType fromId(int id) {
+            if(id<0||id>EnumType.values().length){
+                return ACEMUS;
+            }
+            else{
+                return EnumType.values()[id];
+            }
+        }
+    }
 
 }
