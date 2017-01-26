@@ -13,5 +13,8 @@ public class ClientCommonProxy extends CommonProxy {
         ModItems.registerAllItemRenders();
         ModBlocks.registerAllRenders();
     }
+    public void initSubRenders(){
+        ModBlocks.initAllSubRenders();
+    }
 
 }
