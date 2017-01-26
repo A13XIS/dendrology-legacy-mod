@@ -1,0 +1,14 @@
+Type            |generates|leaves|branches
+ACEMUS("acemus"),   V        X       X
+CEDRUM("cedrum"),   V        V       X
+CERASU("cerasu"),   V        X       X
+DELNAS("delnas"),   V        V       X
+EWCALY("ewcaly"),   V    (ACEMUS) (TUOPA)
+HEKUR("hekur"),     X    
+KIPARIS("kiparis"), V    (CERASU)
+KULIST("kulist"),   V    (DELNAS) (ACEMUS)
+LATA("lata"),       V    (ACEMUS)(TUOPA/LATA)
+NUCIS("nucis"),     X    
+PORFFOR("porffor"), X    
+SALYX("salyx"),     V (CEDRUM/DELNAS)(SALYX/NUCIS)
+TUOPA("tuopa");     V    (ACEMUS)
