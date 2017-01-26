@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "dendrology:locks/sapling_kiparis"
+        "cross": "dendrology:blocks/sapling_kiparis"
     }
 }
