@@ -37,7 +37,7 @@ public enum ParcelManager
             add(new ItemStack(Blocks.sapling, 1, i), 10);
 
         for (final OverworldTreeSpecies species : OverworldTreeSpecies.values())
-            add(new ItemStack(species.saplingBlock(), 1, species.saplingSubBlockIndex()), 10);
+            add(new ItemStack(species.saplingBlock(), 1, species.saplingSubBlockVariant().ordinal()), 10);
     }
 
     @Override

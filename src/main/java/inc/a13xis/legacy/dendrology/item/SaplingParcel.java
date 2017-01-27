@@ -76,6 +76,6 @@ public class SaplingParcel extends Item
     //Clientside!
     public void registerModel()
     {
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(this,0,new ModelResourceLocation(TheMod.getResourcePrefix()+getUnlocalizedName().substring(getUnlocalizedName().indexOf('.') + 1)));
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(this,0,new ModelResourceLocation(getUnlocalizedName().substring(getUnlocalizedName().indexOf('.'))));
     }
 }

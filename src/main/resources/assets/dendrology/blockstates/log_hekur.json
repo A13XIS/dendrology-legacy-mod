@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "axis=y":    { "model": "dendrology:log_hekur" },
-    "axis=z":     { "model": "dendrology:log_hekur_side" },
-    "axis=x":     { "model": "dendrology:log_hekur_side", "y": 90 },
-    "axis=none":   { "model": "dendrology:log_hekur_bark"}
-  }
-}

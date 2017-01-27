@@ -9,5 +9,5 @@ public class LargeAcemusTree extends AbstractLargeVanillaTree
     public LargeAcemusTree(boolean fromSapling) { super(fromSapling); }
 
     @Override
-    protected int getUnmaskedLogMeta() { return ACEMUS.logSubBlockIndex(); }
+    protected int getUnmaskedLogMeta() { return ACEMUS.logSubBlockVariant().ordinal(); }
 }

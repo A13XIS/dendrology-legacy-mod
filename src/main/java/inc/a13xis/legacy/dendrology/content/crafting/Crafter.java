@@ -22,27 +22,27 @@ public final class Crafter
     {
         CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.dye, 1, 9),
                 new ItemStack(OverworldTreeSpecies.CERASU.saplingBlock(), 1,
-                        OverworldTreeSpecies.CERASU.saplingSubBlockIndex()));
+                        OverworldTreeSpecies.CERASU.saplingSubBlockVariant().ordinal()));
 
         CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.dye, 1, 10),
                 new ItemStack(OverworldTreeSpecies.EWCALY.saplingBlock(), 1,
-                        OverworldTreeSpecies.EWCALY.saplingSubBlockIndex()));
+                        OverworldTreeSpecies.EWCALY.saplingSubBlockVariant().ordinal()));
 
         CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.dye, 1, 5),
                 new ItemStack(OverworldTreeSpecies.PORFFOR.saplingBlock(), 1,
-                        OverworldTreeSpecies.PORFFOR.saplingSubBlockIndex()));
+                        OverworldTreeSpecies.PORFFOR.saplingSubBlockVariant().ordinal()));
 
         CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.dye, 1, 14),
                 new ItemStack(OverworldTreeSpecies.ACEMUS.saplingBlock(), 1,
-                        OverworldTreeSpecies.ACEMUS.saplingSubBlockIndex()));
+                        OverworldTreeSpecies.ACEMUS.saplingSubBlockVariant().ordinal()));
     }
 
     private void initLogRecipes()
     {
         for (final DefinesLog definition : ModBlocks.logDefinitions())
             CraftingManager.getInstance()
-                    .addRecipe(new ItemStack(definition.woodBlock(), 4, definition.woodSubBlockIndex()), "#", '#',
-                            new ItemStack(definition.logBlock(), 1, definition.logSubBlockIndex()));
+                    .addRecipe(new ItemStack(definition.woodBlock(), 4, definition.woodSubBlockVariant().ordinal()), "#", '#',
+                            new ItemStack(definition.logBlock(), 1, definition.logSubBlockVariant().ordinal()));
     }
 
     private void initPlankRecipes()
@@ -57,7 +57,7 @@ public final class Crafter
         for (final DefinesStairs definition : ModBlocks.stairsDefinitions())
             CraftingManager.getInstance()
                     .addRecipe(new ItemStack(definition.stairsBlock(), 4), "#  ", "## ", "###", '#',
-                            new ItemStack(definition.stairsModelBlock(), 1, definition.stairsModelSubBlockIndex()));
+                            new ItemStack(definition.stairsModelBlock(), 1, definition.stairsModelSubBlockVariant().ordinal()));
     }
 
     @SuppressWarnings("ObjectAllocationInLoop")
@@ -65,7 +65,7 @@ public final class Crafter
     {
         for (final DefinesSlab definition : ModBlocks.slabDefinitions())
             CraftingManager.getInstance()
-                    .addRecipe(new ItemStack(definition.singleSlabBlock(), 6, definition.slabSubBlockIndex()), "###",
-                            '#', new ItemStack(definition.slabModelBlock(), 1, definition.slabSubBlockIndex()));
+                    .addRecipe(new ItemStack(definition.singleSlabBlock(), 6, definition.slabSubBlockVariant().ordinal()), "###",
+                            '#', new ItemStack(definition.slabModelBlock(), 1, definition.slabSubBlockVariant().ordinal()));
     }
 }

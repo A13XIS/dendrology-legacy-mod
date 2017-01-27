@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "stage=0": { "model": "dendrology:sapling_lata" },
-        "stage=1": { "model": "dendrology:sapling_lata" }
-    }
-}

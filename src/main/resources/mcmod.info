@@ -20,15 +20,15 @@
   "parent":"",
   "requiredMods": [
     "Forge",
-    "koresample@[1.8-L1)"
+    "koresample@[1.8-L1]"
   ],
   "dependencies": [
     "Forge",
-    "koresample@[1.8-L1)",
+    "koresample@[1.8-L1]",
     "Forestry",
     "minechem",
-    "chisel@[2.4.0.38,)",
-    "StorageDrawers@[1.8)"
+    "chisel@[2.4.0.38]",
+    "StorageDrawers@[1.8]"
   ],
   "dependants": [
   ],

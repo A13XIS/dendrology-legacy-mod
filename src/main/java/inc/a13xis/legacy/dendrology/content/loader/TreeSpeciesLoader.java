@@ -39,7 +39,10 @@ public class TreeSpeciesLoader
         final List<DefinesLeaves> subBlocks = Lists.newArrayListWithCapacity(LeavesBlock.CAPACITY);
         for (final DefinesLeaves definition : taxonomy.leavesDefinitions())
         {
-            definition.assignLeavesSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
+            if(subBlocks.size()<=7)
+                    definition.assignLeavesSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
+            else
+                    definition.assignLeavesSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
 
             subBlocks.add(definition);
             if (subBlocks.size() == LeavesBlock.CAPACITY)
@@ -56,7 +59,10 @@ public class TreeSpeciesLoader
         final List<DefinesLog> subBlocks = Lists.newArrayListWithCapacity(LogBlock.CAPACITY);
         for (final DefinesLog definition : taxonomy.logDefinitions())
         {
-            definition.assignLogSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
+            if(subBlocks.size()<=7)
+                definition.assignLogSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
+            else
+                definition.assignLogSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
 
             subBlocks.add(definition);
             if (subBlocks.size() == LogBlock.CAPACITY)
@@ -73,7 +79,10 @@ public class TreeSpeciesLoader
         final List<DefinesSapling> subBlocks = Lists.newArrayListWithCapacity(SaplingBlock.CAPACITY);
         for (final DefinesSapling definition : taxonomy.saplingDefinitions())
         {
-            definition.assignSaplingSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
+            if(subBlocks.size()<=7)
+                definition.assignSaplingSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
+            else
+                definition.assignSaplingSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
 
             subBlocks.add(definition);
             if (subBlocks.size() == SaplingBlock.CAPACITY)
@@ -90,7 +99,10 @@ public class TreeSpeciesLoader
         final List<DefinesSlab> subBlocks = Lists.newArrayListWithCapacity(SlabBlock.CAPACITY);
         for (final DefinesSlab definition : taxonomy.slabDefinitions())
         {
-            definition.assignSlabSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
+            if(subBlocks.size()<=7)
+                definition.assignSlabSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
+            else
+                definition.assignSlabSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
 
             subBlocks.add(definition);
             if (subBlocks.size() == SlabBlock.CAPACITY)
@@ -121,7 +133,10 @@ public class TreeSpeciesLoader
         final List<DefinesWood> subBlocks = Lists.newArrayListWithCapacity(WoodBlock.CAPACITY);
         for (final DefinesWood definition : taxonomy.woodDefinitions())
         {
-            definition.assignWoodSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
+            if(subBlocks.size()<=7)
+                definition.assignWoodSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
+            else
+                definition.assignWoodSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
 
             subBlocks.add(definition);
             if (subBlocks.size() == WoodBlock.CAPACITY)

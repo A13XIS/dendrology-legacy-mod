@@ -27,15 +27,17 @@ public final class ModSlabBlock extends SlabBlock
     @Override
     protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
 
+    private static int mask(int metadata) {return metadata & (CAPACITY-1);}
+
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(VARIANT, ModWoodBlock.EnumType.fromId(meta));
+        return mask(meta)==meta?getDefaultState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.fromId(0,meta)):getDefaultState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.fromId(1,meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        ModWoodBlock.EnumType type = (ModWoodBlock.EnumType) state.getValue(VARIANT);
-        return type.ordinal();
+        ModWoodBlock.EnumType type = (ModWoodBlock.EnumType) state.getValue(ModWoodBlock.VARIANT);
+        return type.getId();
     }
 
     @Override

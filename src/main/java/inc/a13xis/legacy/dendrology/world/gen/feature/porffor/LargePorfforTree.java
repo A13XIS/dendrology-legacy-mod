@@ -9,5 +9,5 @@ public class LargePorfforTree extends AbstractLargeVanillaTree
     public LargePorfforTree(boolean fromSapling) { super(fromSapling); }
 
     @Override
-    protected int getUnmaskedLogMeta() { return PORFFOR.logSubBlockIndex(); }
+    protected int getUnmaskedLogMeta() { return PORFFOR.logSubBlockVariant().ordinal(); }
 }

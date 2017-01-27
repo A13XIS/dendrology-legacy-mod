@@ -18,7 +18,6 @@ public final class ModStairsBlock extends StairsBlock
         super(definition);
         variant=(ModWoodBlock.EnumType)definition.stairsModelSubBlockVariant();
         setCreativeTab(TheMod.INSTANCE.creativeTab());
-        this.setDefaultState(this.blockState.getBaseState());
     }
 
     @Override
@@ -44,6 +43,6 @@ public final class ModStairsBlock extends StairsBlock
 
     @Override
     public int damageDropped(IBlockState state) {
-        return getMetaFromState(state);
+        return 0;
     }
 }

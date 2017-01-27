@@ -98,27 +98,13 @@ public final class ModBlocks
     }
 
     public static void registerAllRenders() {
-        for(LogBlock block:logBlocks){
-            block.registerBlockModels();
-        }
-        for(WoodBlock block:woodBlocks){
-            block.registerBlockModels();
-        }
-        for(SlabBlock block:singleSlabBlocks){
-            block.registerBlockModels();
-        }
-        for(SlabBlock block:doubleSlabBlocks){
-            block.registerBlockModels();
-        }
-        for(StairsBlock block:stairsBlocks){
-            block.registerBlockModel();
-        }
-        for(SaplingBlock block:saplingBlocks){
-            block.registerBlockModels();
-        }
-        for(LeavesBlock block:leavesBlocks){
-            block.registerBlockModels();
-        }
+        for(LogBlock block:logBlocks) block.registerBlockModels();
+        for(WoodBlock block:woodBlocks) block.registerBlockModels();
+        for(SlabBlock block:singleSlabBlocks) block.registerBlockModels();
+        for(SlabBlock block:doubleSlabBlocks) block.registerBlockModels();
+        for(int i=0;i<stairsBlocks.size();i++) stairsBlocks.get(i).registerBlockModel(i);
+        for(SaplingBlock block:saplingBlocks) block.registerBlockModels();
+        for(LeavesBlock block:leavesBlocks) block.registerBlockModels();
     }
 
     private static void registerAllDoubleSlabBlocks()

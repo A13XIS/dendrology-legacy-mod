@@ -288,7 +288,7 @@ public enum OverworldTreeSpecies
     public Block slabModelBlock() { return woodBlock(); }
 
     @Override
-    public Enum slabModelSubBlockIndex() { return woodSubBlockVariant(); }
+    public Enum slabModelSubBlockVariant() { return woodSubBlockVariant(); }
 
     @Override
     public String slabName() { return speciesName(); }
