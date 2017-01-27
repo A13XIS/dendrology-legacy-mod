@@ -3,6 +3,7 @@ package inc.a13xis.legacy.dendrology.content.loader;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import inc.a13xis.legacy.dendrology.block.ModWoodBlock;
+import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeBlockFactory;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.util.slab.SingleDoubleSlab;
 import inc.a13xis.legacy.koresample.common.util.slab.TheSingleSlabRegistry;
@@ -24,7 +25,7 @@ public class TreeSpeciesLoader
         this.taxonomy = taxonomy;
     }
 
-    public void load(TreeBlockFactory factory)
+    public void load(OverworldTreeBlockFactory factory)
     {
         loadLogBlocks(factory);
         loadLeavesBlocks(factory);
@@ -39,10 +40,7 @@ public class TreeSpeciesLoader
         final List<DefinesLeaves> subBlocks = Lists.newArrayListWithCapacity(LeavesBlock.CAPACITY);
         for (final DefinesLeaves definition : taxonomy.leavesDefinitions())
         {
-            if(subBlocks.size()<=7)
-                    definition.assignLeavesSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
-            else
-                    definition.assignLeavesSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
+            definition.assignLeavesSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
 
             subBlocks.add(definition);
             if (subBlocks.size() == LeavesBlock.CAPACITY)
@@ -59,10 +57,7 @@ public class TreeSpeciesLoader
         final List<DefinesLog> subBlocks = Lists.newArrayListWithCapacity(LogBlock.CAPACITY);
         for (final DefinesLog definition : taxonomy.logDefinitions())
         {
-            if(subBlocks.size()<=7)
-                definition.assignLogSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
-            else
-                definition.assignLogSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
+            definition.assignLogSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
 
             subBlocks.add(definition);
             if (subBlocks.size() == LogBlock.CAPACITY)
@@ -79,10 +74,7 @@ public class TreeSpeciesLoader
         final List<DefinesSapling> subBlocks = Lists.newArrayListWithCapacity(SaplingBlock.CAPACITY);
         for (final DefinesSapling definition : taxonomy.saplingDefinitions())
         {
-            if(subBlocks.size()<=7)
-                definition.assignSaplingSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
-            else
-                definition.assignSaplingSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
+                definition.assignSaplingSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
 
             subBlocks.add(definition);
             if (subBlocks.size() == SaplingBlock.CAPACITY)
@@ -94,22 +86,18 @@ public class TreeSpeciesLoader
         if (!subBlocks.isEmpty()) factory.createSaplingBlock(subBlocks);
     }
 
-    private void loadSlabBlocks(TreeBlockFactory factory)
+    private void loadSlabBlocks(OverworldTreeBlockFactory factory)
     {
         final List<DefinesSlab> subBlocks = Lists.newArrayListWithCapacity(SlabBlock.CAPACITY);
         for (final DefinesSlab definition : taxonomy.slabDefinitions())
         {
-            if(subBlocks.size()<=7)
-                definition.assignSlabSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
-            else
-                definition.assignSlabSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
+            definition.assignSlabSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
 
             subBlocks.add(definition);
             if (subBlocks.size() == SlabBlock.CAPACITY)
             {
                 final SingleDoubleSlab slabs = factory.createSlabBlocks(subBlocks);
                 slabRegistry.add(slabs.singleSlab());
-
                 subBlocks.clear();
             }
         }
@@ -133,10 +121,7 @@ public class TreeSpeciesLoader
         final List<DefinesWood> subBlocks = Lists.newArrayListWithCapacity(WoodBlock.CAPACITY);
         for (final DefinesWood definition : taxonomy.woodDefinitions())
         {
-            if(subBlocks.size()<=7)
-                definition.assignWoodSubBlockVariant(ModWoodBlock.EnumType.fromId(0,subBlocks.size()));
-            else
-                definition.assignWoodSubBlockVariant(ModWoodBlock.EnumType.fromId(1,subBlocks.size()-8));
+                definition.assignWoodSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
 
             subBlocks.add(definition);
             if (subBlocks.size() == WoodBlock.CAPACITY)

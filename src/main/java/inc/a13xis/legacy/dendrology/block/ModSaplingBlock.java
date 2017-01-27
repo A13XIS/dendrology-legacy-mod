@@ -48,13 +48,15 @@ public final class ModSaplingBlock extends SaplingBlock
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return meta<8?getDefaultState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.fromId(0,meta)):getDefaultState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.fromId(1,meta-8));
+        ModWoodBlock.EnumType id=ModWoodBlock.EnumType.fromId(meta);
+        return getDefaultState().withProperty(VARIANT,ModWoodBlock.EnumType.fromId(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
         ModWoodBlock.EnumType type = (ModWoodBlock.EnumType) state.getValue(ModWoodBlock.VARIANT);
-        return type.getId();
+        int id = type.ordinal();
+        return type.ordinal();
     }
 
     @Override

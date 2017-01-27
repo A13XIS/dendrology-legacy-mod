@@ -5,7 +5,6 @@ import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
 import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
-import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
@@ -43,7 +42,7 @@ public final class ModLeavesBlock extends LeavesBlock
 
     @Override
     public ModWoodBlock.EnumType getWoodType(int meta) {
-       return meta<=0?ModWoodBlock.EnumType.fromId(0,meta): ModWoodBlock.EnumType.fromId(1,meta-8);
+       return ModWoodBlock.EnumType.fromId(meta);
     }
 
     @Override
@@ -58,13 +57,13 @@ public final class ModLeavesBlock extends LeavesBlock
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return meta<8?getDefaultState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.fromId(0,meta)):getDefaultState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.fromId(1,meta-8));
+        return getDefaultState().withProperty(VARIANT,ModWoodBlock.EnumType.fromId(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
         ModWoodBlock.EnumType type = (ModWoodBlock.EnumType) state.getValue(ModWoodBlock.VARIANT);
-        return type.getId();
+        return type.ordinal();
     }
 
     @Override

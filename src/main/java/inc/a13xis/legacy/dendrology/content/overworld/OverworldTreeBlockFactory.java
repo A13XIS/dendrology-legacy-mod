@@ -12,6 +12,12 @@ import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
 
 public final class OverworldTreeBlockFactory implements TreeBlockFactory
 {
+    private int slabbit;
+
+    //public void resetSlabBit(){
+    //    slabBit=0;
+    //}
+
 
     @Override
     public LeavesBlock createLeavesBlock(Iterable<DefinesLeaves> subBlocks)
@@ -49,8 +55,16 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
     @Override
     public SingleDoubleSlab createSlabBlocks(Iterable<DefinesSlab> subBlocks)
     {
-        final SlabBlock singleSlabBlock = new ModSlabBlock(subBlocks);
-        final SlabBlock doubleSlabBlock = new ModSlabBlock(subBlocks);
+        final SlabBlock singleSlabBlock;
+        final SlabBlock doubleSlabBlock;
+        if(slabbit>0){
+            singleSlabBlock = new ModSlab2Block(subBlocks);
+            doubleSlabBlock = new ModSlab2Block(subBlocks);
+        }
+        else {
+            singleSlabBlock = new ModSlabBlock(subBlocks);
+            doubleSlabBlock = new ModSlabBlock(subBlocks);
+        }
 
         for (final DefinesSlab subBlock : subBlocks)
         {
@@ -59,6 +73,7 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
         }
 
         ModBlocks.registerBlock(singleSlabBlock, doubleSlabBlock);
+        slabbit = 1;
         return new SingleDoubleSlab(singleSlabBlock, doubleSlabBlock);
     }
 

@@ -12,12 +12,15 @@ import inc.a13xis.legacy.dendrology.content.crafting.Smelter;
 import inc.a13xis.legacy.dendrology.content.fuel.FuelHandler;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeGenerator;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies;
-import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeTaxonomy;
 import inc.a13xis.legacy.dendrology.item.ModItems;
 import inc.a13xis.legacy.dendrology.proxy.Proxy;
 import inc.a13xis.legacy.koresample.common.util.log.Logger;
 import inc.a13xis.legacy.koresample.compat.Integrates;
 import inc.a13xis.legacy.koresample.config.ConfigEventHandler;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.LoaderState.ModState;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -27,10 +30,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
+
 import java.util.List;
 
 @SuppressWarnings({
@@ -45,7 +45,7 @@ public final class TheMod
 {
     public static final String MOD_ID = "dendrology";
     static final String MOD_NAME = "Ancient Trees";
-    static final String MOD_VERSION = "1.7.10-1.6.4";
+    static final String MOD_VERSION = "1.8L";
     static final String MOD_GUI_FACTORY = "inc.a13xis.legacy.dendrology.config.client.ModGuiFactory";
     private static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ':';
     @SuppressWarnings("PublicField")

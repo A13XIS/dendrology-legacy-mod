@@ -29,13 +29,13 @@ public final class ModWoodBlock extends WoodBlock
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return meta<8?getDefaultState().withProperty(ModWoodBlock.VARIANT, EnumType.fromId(0,meta)):getDefaultState().withProperty(ModWoodBlock.VARIANT, EnumType.fromId(1,meta-8));
+        return getDefaultState().withProperty(VARIANT,ModWoodBlock.EnumType.fromId(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
         EnumType type = (EnumType) state.getValue(ModWoodBlock.VARIANT);
-        return type.getId();
+        return type.ordinal();
     }
 
     public ModWoodBlock(Iterable<? extends DefinesWood> subBlocks)
@@ -62,27 +62,24 @@ public final class ModWoodBlock extends WoodBlock
     protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
 
     public enum EnumType implements IStringSerializable{
-        ACEMUS(0,"acemus"),
-        CEDRUM(1,"cedrum"),
-        CERASU(2,"cerasu"),
-        DELNAS(3,"delnas"),
-        EWCALY(4,"ewcaly"),
-        HEKUR(5,"hekur"),
-        KIPARIS(6,"kiparis"),
-        KULIST(7,"kulist"),
-        LATA(0,"lata"),
-        NUCIS(1,"nucis"),
-        PORFFOR(2,"porffor"),
-        SALYX(3,"salyx"),
-        TUOPA(4,"tuopa");
+        ACEMUS("acemus"),
+        CEDRUM("cedrum"),
+        CERASU("cerasu"),
+        DELNAS("delnas"),
+        EWCALY("ewcaly"),
+        HEKUR("hekur"),
+        KIPARIS("kiparis"),
+        KULIST("kulist"),
+        LATA("lata"),
+        NUCIS("nucis"),
+        PORFFOR("porffor"),
+        SALYX("salyx"),
+        TUOPA("tuopa");
 
         private final String species;
-        private final int ID;
-        private int id;
 
-        EnumType(int id,String name){
+        EnumType(String name){
             this.species=name;
-            this.ID=id;
         }
 
         public String getName(){
@@ -94,17 +91,17 @@ public final class ModWoodBlock extends WoodBlock
             return getName();
         }
 
-        public static EnumType fromId(int bidbit,int id) {
-            if(bidbit>1||id<0||(bidbit==0&&id>7)||(bidbit==1&&id>4)){
+        public static EnumType fromId(int id) {
+            if(id<0||id>12){
                 return ACEMUS;
             }
             else{
-                return EnumType.values()[(bidbit*8)+id];
+                return EnumType.values()[id];
             }
         }
 
         public int getId() {
-            return id;
+            return ordinal();
         }
     }
 

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
+import inc.a13xis.legacy.dendrology.content.loader.TreeSpeciesLoader;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeBlockFactory;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeTaxonomy;
 import inc.a13xis.legacy.dendrology.item.*;
@@ -17,10 +18,8 @@ import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
-import inc.a13xis.legacy.dendrology.content.loader.TreeSpeciesLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockSapling;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -260,17 +259,31 @@ public final class ModBlocks
             for (WoodBlock block : woodBlocks) {
                 ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
             }
-            for (SlabBlock block : singleSlabBlocks) {
-                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
-            }
-            for (SlabBlock block : doubleSlabBlocks) {
-                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
-            }
             for (SaplingBlock block : saplingBlocks) {
                 ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
             }
             for (LeavesBlock block : leavesBlocks) {
                 ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+            }
+        }
+        for(ModSlabBlock.EnumType type : ModSlabBlock.EnumType.values()) {
+            for (SlabBlock block : singleSlabBlocks) {
+                if(block instanceof  ModSlabBlock)
+                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+            }
+            for (SlabBlock block : doubleSlabBlocks) {
+                if(block instanceof  ModSlabBlock)
+                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+            }
+        }
+        for(ModSlab2Block.EnumType type : ModSlab2Block.EnumType.values()) {
+            for (SlabBlock block : singleSlabBlocks) {
+                if(block instanceof  ModSlab2Block)
+                    ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+            }
+            for (SlabBlock block : doubleSlabBlocks) {
+                if(block instanceof  ModSlab2Block)
+                    ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
             }
         }
     }

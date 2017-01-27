@@ -16,6 +16,6 @@
         "half=top,variant=hekur": { "model": "dendrology:planks_hekur" },
         "half=top,variant=kiparis": { "model": "dendrology:planks_kiparis" },
         "half=top,variant=kulist": { "model": "dendrology:planks_kulist" },
-        "half=top,variant=lata": { "model": "dendrology:planks_lata" }
+        "half=bottom,variant=lata": { "model": "dendrology:planks_lata" }
     }
 }

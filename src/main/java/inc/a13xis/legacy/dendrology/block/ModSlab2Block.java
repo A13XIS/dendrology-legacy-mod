@@ -12,17 +12,17 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
-public final class ModSlabBlock extends SlabBlock
+public final class ModSlab2Block extends SlabBlock
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumType.class);
-    public ModSlabBlock(Iterable<? extends DefinesSlab> subBlocks)
+    public ModSlab2Block(Iterable<? extends DefinesSlab> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
         setCreativeTab(TheMod.INSTANCE.creativeTab());
         setHardness(2.0F);
         setResistance(5.0F);
         setStepSound(soundTypeWood);
-        setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.ACEMUS));
+        setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.LATA));
     }
 
     @Override
@@ -65,7 +65,7 @@ public final class ModSlabBlock extends SlabBlock
 
     @Override
     public Object getVariant(ItemStack stack) {
-        if(stack.getItem() instanceof ItemBlock && ((ItemBlock)stack.getItem()).getBlock() instanceof ModSlabBlock){
+        if(stack.getItem() instanceof ItemBlock && ((ItemBlock)stack.getItem()).getBlock() instanceof ModSlab2Block){
             return getStateFromMeta(stack.getItemDamage()).getValue(VARIANT);
         }
         else
@@ -73,14 +73,11 @@ public final class ModSlabBlock extends SlabBlock
     }
 
     public enum EnumType implements IStringSerializable {
-        ACEMUS("acemus"),
-        CEDRUM("cedrum"),
-        CERASU("cerasu"),
-        DELNAS("delnas"),
-        EWCALY("ewcaly"),
-        HEKUR("hekur"),
-        KIPARIS("kiparis"),
-        KULIST("kulist");
+        LATA("lata"),
+        NUCIS("nucis"),
+        PORFFOR("porffor"),
+        SALYX("salyx"),
+        TUOPA("tuopa");
 
         private final String species;
 
@@ -98,8 +95,8 @@ public final class ModSlabBlock extends SlabBlock
         }
 
         public static EnumType fromId(int id) {
-            if(id<0||id>7){
-                return ACEMUS;
+            if(id<0||id>4){
+                return LATA;
             }
             else{
                 return EnumType.values()[id];
