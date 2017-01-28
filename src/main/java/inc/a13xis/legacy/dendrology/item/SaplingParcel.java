@@ -73,9 +73,9 @@ public class SaplingParcel extends Item
     @Override
     public String getUnlocalizedName(ItemStack unused) { return getUnlocalizedName(); }
 
-    //Clientside!
     public void registerModel()
     {
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(this,0,new ModelResourceLocation(getUnlocalizedName().substring(getUnlocalizedName().indexOf('.'))));
+        String test = getUnlocalizedName().substring(getUnlocalizedName().indexOf('.')+1);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(this,0,new ModelResourceLocation(getUnlocalizedName().substring(getUnlocalizedName().indexOf('.')+1),"inventory"));
     }
 }

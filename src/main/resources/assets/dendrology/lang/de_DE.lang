@@ -43,19 +43,19 @@ tile.dendrology:leaves.salyx.name=Salyxlaub
 tile.dendrology:leaves.tuopa.name=Tuopalaub
 
 ### Planks
-tile.dendrology:wood.acemus.name=Acemusholzbretter
-tile.dendrology:wood.cedrum.name=Cedrumholzbretter
-tile.dendrology:wood.cerasu.name=Cerasuholzbretter
-tile.dendrology:wood.delnas.name=Delnasholzbretter
-tile.dendrology:wood.ewcaly.name=Ewcalyholzbretter
-tile.dendrology:wood.hekur.name=Hekurholzbretter
-tile.dendrology:wood.kiparis.name=Kiparisholzbretter
-tile.dendrology:wood.kulist.name=Kulistholzbretter
-tile.dendrology:wood.lata.name=Lataholzbretter
-tile.dendrology:wood.nucis.name=Nucisholzbretter
-tile.dendrology:wood.porffor.name=Porfforholzbretter
-tile.dendrology:wood.salyx.name=Salyxholzbretter
-tile.dendrology:wood.tuopa.name=Tuopaholzbretter
+tile.dendrology:planks.acemus.name=Acemusholzbretter
+tile.dendrology:planks.cedrum.name=Cedrumholzbretter
+tile.dendrology:planks.cerasu.name=Cerasuholzbretter
+tile.dendrology:planks.delnas.name=Delnasholzbretter
+tile.dendrology:planks.ewcaly.name=Ewcalyholzbretter
+tile.dendrology:planks.hekur.name=Hekurholzbretter
+tile.dendrology:planks.kiparis.name=Kiparisholzbretter
+tile.dendrology:planks.kulist.name=Kulistholzbretter
+tile.dendrology:planks.lata.name=Lataholzbretter
+tile.dendrology:planks.nucis.name=Nucisholzbretter
+tile.dendrology:planks.porffor.name=Porfforholzbretter
+tile.dendrology:planks.salyx.name=Salyxholzbretter
+tile.dendrology:planks.tuopa.name=Tuopaholzbretter
 
 ### Saplings
 tile.dendrology:sapling.acemus.name=Acemussetzling

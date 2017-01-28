@@ -3,7 +3,6 @@ package inc.a13xis.legacy.dendrology.content.loader;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import inc.a13xis.legacy.dendrology.block.ModWoodBlock;
-import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeBlockFactory;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.util.slab.SingleDoubleSlab;
 import inc.a13xis.legacy.koresample.common.util.slab.TheSingleSlabRegistry;
@@ -25,7 +24,7 @@ public class TreeSpeciesLoader
         this.taxonomy = taxonomy;
     }
 
-    public void load(OverworldTreeBlockFactory factory)
+    public void load(TreeBlockFactory factory)
     {
         loadLogBlocks(factory);
         loadLeavesBlocks(factory);
@@ -50,6 +49,7 @@ public class TreeSpeciesLoader
             }
         }
         if (!subBlocks.isEmpty()) factory.createLeavesBlock(subBlocks);
+        factory.resetTypeBit();
     }
 
     private void loadLogBlocks(TreeBlockFactory factory)
@@ -67,6 +67,7 @@ public class TreeSpeciesLoader
             }
         }
         if (!subBlocks.isEmpty()) factory.createLogBlock(subBlocks);
+        factory.resetTypeBit();
     }
 
     private void loadSaplingBlocks(TreeBlockFactory factory)
@@ -84,9 +85,10 @@ public class TreeSpeciesLoader
             }
         }
         if (!subBlocks.isEmpty()) factory.createSaplingBlock(subBlocks);
+        factory.resetTypeBit();
     }
 
-    private void loadSlabBlocks(OverworldTreeBlockFactory factory)
+    private void loadSlabBlocks(TreeBlockFactory factory)
     {
         final List<DefinesSlab> subBlocks = Lists.newArrayListWithCapacity(SlabBlock.CAPACITY);
         for (final DefinesSlab definition : taxonomy.slabDefinitions())
@@ -106,6 +108,7 @@ public class TreeSpeciesLoader
             final SingleDoubleSlab slabs = factory.createSlabBlocks(subBlocks);
             slabRegistry.add(slabs.singleSlab());
         }
+        factory.resetTypeBit();
     }
 
     private void loadStairsBlocks(TreeBlockFactory factory)

@@ -1,3 +1,4 @@
+
 package inc.a13xis.legacy.dendrology.block;
 
 import com.google.common.collect.ImmutableList;
@@ -18,14 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public final class ModLeavesBlock extends LeavesBlock
+public final class ModLeaves3Block extends LeavesBlock
 {
-    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModLogBlock.EnumType.class);
-    public ModLeavesBlock(Iterable<? extends DefinesLeaves> subBlocks)
+    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModLog3Block.EnumType.class);
+    public ModLeaves3Block(Iterable<? extends DefinesLeaves> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
         setCreativeTab(TheMod.INSTANCE.creativeTab());
-        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ModLogBlock.EnumType.ACEMUS).withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.TRUE));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ModLog3Block.EnumType.LATA).withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.TRUE));
     }
 
     @Override
@@ -41,8 +42,8 @@ public final class ModLeavesBlock extends LeavesBlock
     }
 
     @Override
-    public ModLogBlock.EnumType getWoodType(int meta) {
-       return ModLogBlock.EnumType.fromId(meta);
+    public ModLog3Block.EnumType getWoodType(int meta) {
+       return ModLog3Block.EnumType.fromId(meta);
     }
 
     @Override
@@ -72,13 +73,13 @@ public final class ModLeavesBlock extends LeavesBlock
                 state = state.withProperty(CHECK_DECAY,false).withProperty(DECAYABLE,false);
             break;
         }
-        state = state.withProperty(VARIANT,ModLogBlock.EnumType.fromId(meta%4));
+        state = state.withProperty(VARIANT,ModLog3Block.EnumType.fromId(meta%4));
         return state;
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        ModLogBlock.EnumType type = (ModLogBlock.EnumType) state.getValue(ModLogBlock.VARIANT);
+        ModLog3Block.EnumType type = (ModLog3Block.EnumType) state.getValue(ModLog3Block.VARIANT);
         boolean check = (Boolean) state.getValue(CHECK_DECAY);
         boolean dcable = (Boolean) state.getValue(CHECK_DECAY);
         int par = check?dcable?0:1:dcable?2:3;

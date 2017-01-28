@@ -61,9 +61,10 @@ public abstract class AbstractTree extends WorldGenAbstractTree
 
     protected LogBlock getLogBlock() { return tree.logBlock(); }
 
-    protected int getLogMetadata() { return tree.leavesSubBlockVariant().ordinal(); }
+    protected int getLogMetadata() { return tree.logSubBlockVariant().ordinal(); }
 
-    protected SaplingBlock getSaplingBlock() { return tree.saplingBlock(); }
+    protected SaplingBlock getSaplingBlock() {
+        return tree.saplingBlock(); }
 
     protected void placeLeaves(World world, BlockPos pos)
     {

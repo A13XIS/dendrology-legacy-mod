@@ -15,16 +15,16 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public final class ModSaplingBlock extends SaplingBlock
+public final class ModSapling2Block extends SaplingBlock
 {
-    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModSlabBlock.EnumType.class);
-    public ModSaplingBlock(Iterable<? extends DefinesSapling> subBlocks)
+    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModSlab2Block.EnumType.class);
+    public ModSapling2Block(Iterable<? extends DefinesSapling> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
         setCreativeTab(TheMod.INSTANCE.creativeTab());
         setHardness(0.0F);
         setStepSound(soundTypeGrass);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ModSlabBlock.EnumType.ACEMUS));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ModSlab2Block.EnumType.LATA).withProperty(STAGE, 0) );
     }
 
     @Override
@@ -32,7 +32,7 @@ public final class ModSaplingBlock extends SaplingBlock
 
     @Override
     public boolean isTypeAt(World worldIn, BlockPos pos, Enum type) {
-        return type instanceof ModSlabBlock.EnumType && type.equals(worldIn.getBlockState(pos).getValue(VARIANT));
+        return type instanceof ModSlab2Block.EnumType && type.equals(worldIn.getBlockState(pos).getValue(VARIANT));
     }
 
     @SuppressWarnings("ReturnOfNull")
@@ -49,15 +49,15 @@ public final class ModSaplingBlock extends SaplingBlock
     @Override
     public IBlockState getStateFromMeta(int meta) {
         ModSlabBlock.EnumType id=ModSlabBlock.EnumType.fromId(meta);
-        return meta<8?getDefaultState().withProperty(VARIANT,ModSlabBlock.EnumType.fromId(meta)).withProperty(STAGE,0):getDefaultState().withProperty(VARIANT,ModSlabBlock.EnumType.fromId(meta)).withProperty(STAGE,1);
+        return meta<5?getDefaultState().withProperty(VARIANT,ModSlab2Block.EnumType.fromId(meta)).withProperty(STAGE,0):getDefaultState().withProperty(VARIANT,ModSlab2Block.EnumType.fromId(meta)).withProperty(STAGE,1);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        ModSlabBlock.EnumType type = (ModSlabBlock.EnumType) state.getValue(VARIANT);
+        ModSlab2Block.EnumType type = (ModSlab2Block.EnumType) state.getValue(VARIANT);
         int stage = (Integer)state.getValue(STAGE);
         int id = type.ordinal();
-        return stage*8+type.ordinal();
+        return stage*5+type.ordinal();
     }
 
     @Override

@@ -13,12 +13,10 @@ public final class ModItems
 {
     private static final SaplingParcel parcel = new SaplingParcel();
 
-    @SuppressWarnings("MethodMayBeStatic")
     public void loadContent()
     {
         GameRegistry.registerItem(parcel, "parcel");
-
-        addParcelToChests();
+         addParcelToChests();
     }
 
     private static void addParcelToChests()

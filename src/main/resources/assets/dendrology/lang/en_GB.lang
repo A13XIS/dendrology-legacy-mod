@@ -38,19 +38,19 @@ tile.dendrology:leaves.salyx.name=Salyx Leaves
 tile.dendrology:leaves.tuopa.name=Tuopa Leaves
 
 ### Planks
-tile.dendrology:wood.acemus.name=Acemus Wood Planks
-tile.dendrology:wood.cedrum.name=Cedrum Wood Planks
-tile.dendrology:wood.cerasu.name=Cerasu Wood Planks
-tile.dendrology:wood.delnas.name=Delnas Wood Planks
-tile.dendrology:wood.ewcaly.name=Ewcaly Wood Planks
-tile.dendrology:wood.hekur.name=Hekur Wood Planks
-tile.dendrology:wood.kiparis.name=Kiparis Wood Planks
-tile.dendrology:wood.kulist.name=Kulist Wood Planks
-tile.dendrology:wood.lata.name=Lata Wood Planks
-tile.dendrology:wood.nucis.name=Nucis Wood Planks
-tile.dendrology:wood.porffor.name=Porffor Wood Planks
-tile.dendrology:wood.salyx.name=Salyx Wood Planks
-tile.dendrology:wood.tuopa.name=Tuopa Wood Planks
+tile.dendrology:planks.acemus.name=Acemus Wood Planks
+tile.dendrology:planks.cedrum.name=Cedrum Wood Planks
+tile.dendrology:planks.cerasu.name=Cerasu Wood Planks
+tile.dendrology:planks.delnas.name=Delnas Wood Planks
+tile.dendrology:planks.ewcaly.name=Ewcaly Wood Planks
+tile.dendrology:planks.hekur.name=Hekur Wood Planks
+tile.dendrology:planks.kiparis.name=Kiparis Wood Planks
+tile.dendrology:planks.kulist.name=Kulist Wood Planks
+tile.dendrology:planks.lata.name=Lata Wood Planks
+tile.dendrology:planks.nucis.name=Nucis Wood Planks
+tile.dendrology:planks.porffor.name=Porffor Wood Planks
+tile.dendrology:planks.salyx.name=Salyx Wood Planks
+tile.dendrology:planks.tuopa.name=Tuopa Wood Planks
 
 ### Saplings
 tile.dendrology:sapling.acemus.name=Acemus Sapling

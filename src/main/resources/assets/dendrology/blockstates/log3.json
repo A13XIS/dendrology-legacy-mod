@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y,variant=tuopa": { "model": "dendrology:log_tuopa" },
+        "axis=x,variant=tuopa": { "model": "dendrology:log_tuopa_side","y":90},
+        "axis=z,variant=tuopa": { "model": "dendrology:log_tuopa_side" },
+        "axis=none,variant=tuopa": { "model": "dendrology:log_tuopa_bark" }
+    }
+}

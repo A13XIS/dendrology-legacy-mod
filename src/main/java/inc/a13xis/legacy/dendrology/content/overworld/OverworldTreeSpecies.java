@@ -52,10 +52,10 @@ public enum OverworldTreeSpecies
     private final String potionEffect;
 
     private ModWoodBlock.EnumType leavesVariant;
-    private ModWoodBlock.EnumType logVariant;
+    private Enum logVariant;
     private ModWoodBlock.EnumType planksVariant;
-    private ModWoodBlock.EnumType saplingVariant;
-    private ModWoodBlock.EnumType slabVariant;
+    private Enum saplingVariant;
+    private Enum slabVariant;
 
     private SlabBlock doubleSlabBlock = null;
     private LeavesBlock leavesBlock = null;
@@ -164,7 +164,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignLogSubBlockVariant(Enum variant) { this.logVariant = (ModWoodBlock.EnumType)variant; }
+    public void assignLogSubBlockVariant(Enum variant) { this.logVariant = variant; }
 
     @Override
     public LogBlock logBlock()
@@ -228,7 +228,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignSaplingSubBlockVariant(Enum type) { this.saplingVariant = (ModWoodBlock.EnumType)type; }
+    public void assignSaplingSubBlockVariant(Enum type) { this.saplingVariant = type; }
 
     @Override
     public SaplingBlock saplingBlock()
@@ -265,7 +265,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignSlabSubBlockVariant(Enum slabMetadata) { this.slabVariant = (ModWoodBlock.EnumType)slabMetadata; }
+    public void assignSlabSubBlockVariant(Enum slabMetadata) { this.slabVariant = slabMetadata; }
 
     @Override
     public SlabBlock doubleSlabBlock()

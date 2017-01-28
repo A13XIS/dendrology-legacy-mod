@@ -97,7 +97,7 @@ public final class ModBlocks
     }
 
     public static void registerAllRenders() {
-        for(LogBlock block:logBlocks) block.registerBlockModels();
+        for(LogBlock block:logBlocks)block.registerBlockModels();
         for(WoodBlock block:woodBlocks) block.registerBlockModels();
         for(SlabBlock block:singleSlabBlocks) block.registerBlockModels();
         for(SlabBlock block:doubleSlabBlocks) block.registerBlockModels();
@@ -253,19 +253,55 @@ public final class ModBlocks
 
     public static void initAllSubRenders() {
         for(ModWoodBlock.EnumType type : ModWoodBlock.EnumType.values()) {
-            for (LogBlock block : logBlocks) {
-                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
-            }
             for (WoodBlock block : woodBlocks) {
                 ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
             }
-            for (SaplingBlock block : saplingBlocks) {
+        }
+
+        for(ModLogBlock.EnumType type : ModLogBlock.EnumType.values()){
+            for (LogBlock block : logBlocks) {
+                if(block instanceof  ModLogBlock)
                 ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
             }
             for (LeavesBlock block : leavesBlocks) {
-                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+                if(block instanceof  ModLeavesBlock)
+                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName().toLowerCase());
             }
         }
+
+        for(ModLog2Block.EnumType type : ModLog2Block.EnumType.values()){
+            for (LogBlock block : logBlocks) {
+                if(block instanceof  ModLog2Block)
+                    ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+            }
+            for (LeavesBlock block : leavesBlocks) {
+                if(block instanceof  ModLeaves2Block)
+                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName().toLowerCase());
+            }
+        }
+
+        for(ModLog3Block.EnumType type : ModLog3Block.EnumType.values()){
+            for (LogBlock block : logBlocks) {
+                if(block instanceof  ModLog3Block)
+                    ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+            }
+            for (LeavesBlock block : leavesBlocks) {
+                if(block instanceof  ModLeaves3Block)
+                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName().toLowerCase());
+            }
+        }
+
+        for(ModLog4Block.EnumType type : ModLog4Block.EnumType.values()){
+            for (LogBlock block : logBlocks) {
+                if(block instanceof  ModLog4Block)
+                    ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+            }
+            for (LeavesBlock block : leavesBlocks) {
+                if(block instanceof  ModLeaves4Block)
+                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName().toLowerCase());
+            }
+        }
+
         for(ModSlabBlock.EnumType type : ModSlabBlock.EnumType.values()) {
             for (SlabBlock block : singleSlabBlocks) {
                 if(block instanceof  ModSlabBlock)
@@ -273,6 +309,10 @@ public final class ModBlocks
             }
             for (SlabBlock block : doubleSlabBlocks) {
                 if(block instanceof  ModSlabBlock)
+                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+            }
+            for (SaplingBlock block : saplingBlocks) {
+                if(block instanceof  ModSaplingBlock)
                 ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
             }
         }
@@ -284,6 +324,10 @@ public final class ModBlocks
             for (SlabBlock block : doubleSlabBlocks) {
                 if(block instanceof  ModSlab2Block)
                     ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
+            }
+            for (SaplingBlock block : saplingBlocks) {
+                if(block instanceof  ModSapling2Block)
+                ModelBakery.addVariantName(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(block.getUnlocalizedName().indexOf('.')+1) + "_" + type.getName());
             }
         }
     }

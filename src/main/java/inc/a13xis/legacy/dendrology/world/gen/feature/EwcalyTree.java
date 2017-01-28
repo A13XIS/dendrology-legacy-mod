@@ -39,7 +39,8 @@ public class EwcalyTree extends AbstractTree
     @Override
     public boolean generate(World world, Random rand, BlockPos pos)
     {
-        if (rand.nextInt(7) > 1) return treeGen.generate(world, rand, pos);
+        if (rand.nextInt(7) > 1)
+            return treeGen.generate(world, rand, pos);
 
         return largeTreeGen.generate(world, rand, pos);
     }

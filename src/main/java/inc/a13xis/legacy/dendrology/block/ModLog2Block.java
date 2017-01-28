@@ -10,13 +10,13 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;
 
-public final class ModLogBlock extends LogBlock
+public final class ModLog2Block extends LogBlock
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumType.class);
-    public ModLogBlock(Iterable<? extends DefinesLog> subBlocks)
+    public ModLog2Block(Iterable<? extends DefinesLog> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
-        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.ACEMUS));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.EWCALY));
         setCreativeTab(TheMod.INSTANCE.creativeTab());
     }
 
@@ -29,17 +29,17 @@ public final class ModLogBlock extends LogBlock
         switch(meta/4){
             case 0:
                 state = state.withProperty(LOG_AXIS,EnumAxis.Y);
-            break;
+                break;
             case 1:
                 state = state.withProperty(LOG_AXIS,EnumAxis.X);
-            break;
+                break;
             case 2:
                 state = state.withProperty(LOG_AXIS,EnumAxis.Z);
-            break;
+                break;
             case 3:
                 state = state.withProperty(LOG_AXIS,EnumAxis.NONE);
         }
-        return state.withProperty(VARIANT,EnumType.fromId(meta%4));
+        return state.withProperty(VARIANT, EnumType.fromId(meta%4));
     }
 
     @Override
@@ -60,10 +60,10 @@ public final class ModLogBlock extends LogBlock
     }
 
     public enum EnumType implements IStringSerializable {
-        ACEMUS("acemus"),
-        CEDRUM("cedrum"),
-        CERASU("cerasu"),
-        DELNAS("delnas");
+        EWCALY("ewcaly"),
+        HEKUR("hekur"),
+        KIPARIS("kiparis"),
+        KULIST("kulist");
 
         private final String species;
 
@@ -82,7 +82,7 @@ public final class ModLogBlock extends LogBlock
 
         public static EnumType fromId(int id) {
             if(id<0||id>3){
-                return ACEMUS;
+                return EWCALY;
             }
             else{
                 return EnumType.values()[id];

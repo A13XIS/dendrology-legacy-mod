@@ -10,13 +10,13 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;
 
-public final class ModLogBlock extends LogBlock
+public final class ModLog3Block extends LogBlock
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumType.class);
-    public ModLogBlock(Iterable<? extends DefinesLog> subBlocks)
+    public ModLog3Block(Iterable<? extends DefinesLog> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
-        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.ACEMUS));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.LATA));
         setCreativeTab(TheMod.INSTANCE.creativeTab());
     }
 
@@ -29,13 +29,13 @@ public final class ModLogBlock extends LogBlock
         switch(meta/4){
             case 0:
                 state = state.withProperty(LOG_AXIS,EnumAxis.Y);
-            break;
+                break;
             case 1:
                 state = state.withProperty(LOG_AXIS,EnumAxis.X);
-            break;
+                break;
             case 2:
                 state = state.withProperty(LOG_AXIS,EnumAxis.Z);
-            break;
+                break;
             case 3:
                 state = state.withProperty(LOG_AXIS,EnumAxis.NONE);
         }
@@ -48,7 +48,6 @@ public final class ModLogBlock extends LogBlock
         int par = state.getValue(LOG_AXIS).equals(EnumAxis.Y)?0:state.getValue(LOG_AXIS).equals(EnumAxis.X)?1:state.getValue(LOG_AXIS).equals(EnumAxis.Z)?2:3;
         return par*4+type.ordinal();
     }
-
     @Override
     public int damageDropped(IBlockState state) {
         return getMetaFromState(state.withProperty(LOG_AXIS,EnumAxis.Y));
@@ -60,10 +59,10 @@ public final class ModLogBlock extends LogBlock
     }
 
     public enum EnumType implements IStringSerializable {
-        ACEMUS("acemus"),
-        CEDRUM("cedrum"),
-        CERASU("cerasu"),
-        DELNAS("delnas");
+        LATA("lata"),
+        NUCIS("nucis"),
+        PORFFOR("porffor"),
+        SALYX("salyx");
 
         private final String species;
 
@@ -82,7 +81,7 @@ public final class ModLogBlock extends LogBlock
 
         public static EnumType fromId(int id) {
             if(id<0||id>3){
-                return ACEMUS;
+                return LATA;
             }
             else{
                 return EnumType.values()[id];

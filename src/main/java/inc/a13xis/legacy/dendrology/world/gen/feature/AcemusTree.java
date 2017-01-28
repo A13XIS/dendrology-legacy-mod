@@ -39,7 +39,8 @@ public class AcemusTree extends AbstractTree
     @Override
     public boolean generate(World world, Random rand, BlockPos pos)
     {
-        if (rand.nextInt(10) < 9) return treeGen.generate(world, rand, pos);
+        if (rand.nextInt(10) < 9)
+            return treeGen.generate(world, rand, pos); //repair Vanilla Trees
 
         return largeTreeGen.generate(world, rand, pos);
     }

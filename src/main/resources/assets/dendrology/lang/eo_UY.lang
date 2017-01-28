@@ -38,19 +38,19 @@ tile.dendrology:leaves.salyx.name=Salyx Folioj
 tile.dendrology:leaves.tuopa.name=Tuopa Folioj
 
 ### Planks
-tile.dendrology:wood.acemus.name=Acemus Ligno Tabuloj
-tile.dendrology:wood.cedrum.name=Cedrum Ligno Tabuloj
-tile.dendrology:wood.cerasu.name=Cerasu Ligno Tabuloj
-tile.dendrology:wood.delnas.name=Delnas Ligno Tabuloj
-tile.dendrology:wood.ewcaly.name=Ewcaly Ligno Tabuloj
-tile.dendrology:wood.hekur.name=Hekur Ligno Tabuloj
-tile.dendrology:wood.kiparis.name=Kiparis Ligno Tabuloj
-tile.dendrology:wood.kulist.name=Kulist Ligno Tabuloj
-tile.dendrology:wood.lata.name=Lata Ligno Tabuloj
-tile.dendrology:wood.nucis.name=Nucis Ligno Tabuloj
-tile.dendrology:wood.porffor.name=Porffor Ligno Tabuloj
-tile.dendrology:wood.salyx.name=Salyx Ligno Tabuloj
-tile.dendrology:wood.tuopa.name=Tuopa Ligno Tabuloj
+tile.dendrology:planks.acemus.name=Acemus Ligno Tabuloj
+tile.dendrology:planks.cedrum.name=Cedrum Ligno Tabuloj
+tile.dendrology:planks.cerasu.name=Cerasu Ligno Tabuloj
+tile.dendrology:planks.delnas.name=Delnas Ligno Tabuloj
+tile.dendrology:planks.ewcaly.name=Ewcaly Ligno Tabuloj
+tile.dendrology:planks.hekur.name=Hekur Ligno Tabuloj
+tile.dendrology:planks.kiparis.name=Kiparis Ligno Tabuloj
+tile.dendrology:planks.kulist.name=Kulist Ligno Tabuloj
+tile.dendrology:planks.lata.name=Lata Ligno Tabuloj
+tile.dendrology:planks.nucis.name=Nucis Ligno Tabuloj
+tile.dendrology:planks.porffor.name=Porffor Ligno Tabuloj
+tile.dendrology:planks.salyx.name=Salyx Ligno Tabuloj
+tile.dendrology:planks.tuopa.name=Tuopa Ligno Tabuloj
 
 ### Saplings
 tile.dendrology:sapling.acemus.name=Acemus Arbidon

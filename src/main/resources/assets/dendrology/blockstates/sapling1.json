@@ -1,0 +1,14 @@
+{
+    "variants": {
+        "stage=0,variant=lata": { "model": "dendrology:sapling_lata" },
+        "stage=0,variant=nucis": { "model": "dendrology:sapling_nucis" },
+        "stage=0,variant=porffor": { "model": "dendrology:sapling_porffor" },
+        "stage=0,variant=salyx": { "model": "dendrology:sapling_salyx" },
+        "stage=0,variant=tuopa": { "model": "dendrology:sapling_tuopa" },
+        "stage=1,variant=lata": { "model": "dendrology:sapling_lata" },
+        "stage=1,variant=nucis": { "model": "dendrology:sapling_nucis" },
+        "stage=1,variant=porffor": { "model": "dendrology:sapling_porffor" },
+        "stage=1,variant=salyx": { "model": "dendrology:sapling_salyx" },
+        "stage=1,variant=tuopa": { "model": "dendrology:sapling_tuopa" }
+    }
+}

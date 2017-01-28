@@ -1,7 +1,7 @@
-Type            |generates|leaves|branches
-ACEMUS("acemus"),   V        X       X
-CEDRUM("cedrum"),   V        V       X
-CERASU("cerasu"),   V        X       X
+Type            |generates|leaves|branches   |Details
+ACEMUS("acemus"),   V        V   (EWCALY/LATA)Both types are generated with the same frequencies. Nothing suspicous
+CEDRUM("cedrum"),   V        V   (HEKUR/NUCIS)North-South Branches are Nucis, East-West Branches are Hekur
+CERASU("cerasu"),   V        X       ?
 DELNAS("delnas"),   V        V       X
 EWCALY("ewcaly"),   V    (ACEMUS) (TUOPA)
 HEKUR("hekur"),     X    

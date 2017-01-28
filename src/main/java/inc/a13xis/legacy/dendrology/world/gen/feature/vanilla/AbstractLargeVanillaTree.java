@@ -104,7 +104,7 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
         return true;
     }
 
-    @SuppressWarnings("FinalMethod")
+
     @Override
     protected final int getLogMetadata()
     {
@@ -222,6 +222,12 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
     }
 
     protected abstract int getUnmaskedLogMeta();
+
+    protected void placeLog(World world, BlockPos pos)
+    {
+        if (canBeReplacedByLog(world, pos))
+            func_175905_a(world, pos, getLogBlock(), getLogMetadata());
+    }
 
     private void generateLeaves(World world)
     {

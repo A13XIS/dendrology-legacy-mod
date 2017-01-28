@@ -53,11 +53,11 @@ public class VanillaTree extends AbstractTree
             final int distanceToTopOfTrunk = pos1.getY() - (pos.up(height).getY());
             final int radius = 1 - distanceToTopOfTrunk / 2;
 
-            for (pos1 = pos1.east(radius-pos.getX()-pos1.getX()); pos1.getX() <= pos.east(radius).getX(); pos1 = pos1.east())
+            for (pos1 = new BlockPos(pos.getX()-radius,pos1.getY(),pos1.getZ()); pos1.getX() <= pos.east(radius).getX(); pos1 = pos1.east())
             {
                 final int dX = pos1.getX()-pos.getX();
 
-                for (pos1 = pos1.south(radius-pos.getZ()-pos1.getZ()); pos1.getZ() <= pos.south(radius).getZ(); pos1 = pos1.south())
+                for (pos1 = new BlockPos(pos1.getX(),pos1.getY(),pos.getZ()-radius); pos1.getZ() <= pos.south(radius).getZ(); pos1 = pos1.south())
                 {
                     final int dZ = pos1.getZ()-pos.getZ();
 
