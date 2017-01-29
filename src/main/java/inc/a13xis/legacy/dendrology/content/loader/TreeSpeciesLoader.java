@@ -6,6 +6,7 @@ import inc.a13xis.legacy.dendrology.block.ModWoodBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.util.slab.SingleDoubleSlab;
 import inc.a13xis.legacy.koresample.common.util.slab.TheSingleSlabRegistry;
+import inc.a13xis.legacy.koresample.loader.ITreeSpeciesLoader;
 import inc.a13xis.legacy.koresample.tree.*;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
@@ -14,7 +15,7 @@ import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
 
 import java.util.List;
 
-public class TreeSpeciesLoader
+public class TreeSpeciesLoader implements ITreeSpeciesLoader
 {
     private final TreeTaxonomy taxonomy;
     private final TheSingleSlabRegistry slabRegistry = TheSingleSlabRegistry.REFERENCE;
@@ -34,7 +35,7 @@ public class TreeSpeciesLoader
         loadStairsBlocks(factory);
     }
 
-    private void loadLeavesBlocks(TreeBlockFactory factory)
+    public void loadLeavesBlocks(TreeBlockFactory factory)
     {
         final List<DefinesLeaves> subBlocks = Lists.newArrayListWithCapacity(LeavesBlock.CAPACITY);
         for (final DefinesLeaves definition : taxonomy.leavesDefinitions())
@@ -52,7 +53,7 @@ public class TreeSpeciesLoader
         factory.resetTypeBit();
     }
 
-    private void loadLogBlocks(TreeBlockFactory factory)
+    public void loadLogBlocks(TreeBlockFactory factory)
     {
         final List<DefinesLog> subBlocks = Lists.newArrayListWithCapacity(LogBlock.CAPACITY);
         for (final DefinesLog definition : taxonomy.logDefinitions())
@@ -70,7 +71,7 @@ public class TreeSpeciesLoader
         factory.resetTypeBit();
     }
 
-    private void loadSaplingBlocks(TreeBlockFactory factory)
+    public void loadSaplingBlocks(TreeBlockFactory factory)
     {
         final List<DefinesSapling> subBlocks = Lists.newArrayListWithCapacity(SaplingBlock.CAPACITY);
         for (final DefinesSapling definition : taxonomy.saplingDefinitions())
@@ -88,7 +89,7 @@ public class TreeSpeciesLoader
         factory.resetTypeBit();
     }
 
-    private void loadSlabBlocks(TreeBlockFactory factory)
+    public void loadSlabBlocks(TreeBlockFactory factory)
     {
         final List<DefinesSlab> subBlocks = Lists.newArrayListWithCapacity(SlabBlock.CAPACITY);
         for (final DefinesSlab definition : taxonomy.slabDefinitions())
@@ -111,7 +112,7 @@ public class TreeSpeciesLoader
         factory.resetTypeBit();
     }
 
-    private void loadStairsBlocks(TreeBlockFactory factory)
+    public void loadStairsBlocks(TreeBlockFactory factory)
     {
         for (final DefinesStairs definition : taxonomy.stairsDefinitions())
         {
@@ -119,7 +120,7 @@ public class TreeSpeciesLoader
         }
     }
 
-    private void loadWoodBlocks(TreeBlockFactory factory)
+    public void loadWoodBlocks(TreeBlockFactory factory)
     {
         final List<DefinesWood> subBlocks = Lists.newArrayListWithCapacity(WoodBlock.CAPACITY);
         for (final DefinesWood definition : taxonomy.woodDefinitions())

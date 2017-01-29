@@ -62,7 +62,7 @@ public final class TheMod
             return new ItemStack(ICON.saplingBlock(), 1, ICON.saplingSubBlockVariant().ordinal());
         }
 
-        @SuppressWarnings("ReturnOfNull")
+
         @SideOnly(Side.CLIENT)
         @Override
         public Item getTabIconItem() { return null; }
