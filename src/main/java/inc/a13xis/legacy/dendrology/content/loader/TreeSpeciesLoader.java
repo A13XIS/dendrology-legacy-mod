@@ -2,7 +2,7 @@ package inc.a13xis.legacy.dendrology.content.loader;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
-import inc.a13xis.legacy.dendrology.block.ModWoodBlock;
+import inc.a13xis.legacy.dendrology.block.*;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.util.slab.SingleDoubleSlab;
 import inc.a13xis.legacy.koresample.common.util.slab.TheSingleSlabRegistry;
@@ -37,15 +37,24 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
 
     public void loadLeavesBlocks(TreeBlockFactory factory)
     {
+        int typebit=0;
         final List<DefinesLeaves> subBlocks = Lists.newArrayListWithCapacity(LeavesBlock.CAPACITY);
         for (final DefinesLeaves definition : taxonomy.leavesDefinitions())
         {
-            definition.assignLeavesSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
+            if(typebit==0)
+                definition.assignLeavesSubBlockVariant(ModLogBlock.EnumType.fromId(subBlocks.size()));
+            else if(typebit==1)
+                definition.assignLeavesSubBlockVariant(ModLog2Block.EnumType.fromId(subBlocks.size()));
+            else if(typebit==2)
+                definition.assignLeavesSubBlockVariant(ModLog3Block.EnumType.fromId(subBlocks.size()));
+            else if(typebit==3)
+                definition.assignLeavesSubBlockVariant(ModLog4Block.EnumType.getTuopa());
 
             subBlocks.add(definition);
             if (subBlocks.size() == LeavesBlock.CAPACITY)
             {
                 factory.createLeavesBlock(subBlocks);
+                typebit++;
                 subBlocks.clear();
             }
         }
@@ -55,16 +64,25 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
 
     public void loadLogBlocks(TreeBlockFactory factory)
     {
+        int typebit = 0;
         final List<DefinesLog> subBlocks = Lists.newArrayListWithCapacity(LogBlock.CAPACITY);
         for (final DefinesLog definition : taxonomy.logDefinitions())
         {
-            definition.assignLogSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
+            if(typebit==0)
+                definition.assignLogSubBlockVariant(ModLogBlock.EnumType.fromId(subBlocks.size()));
+            else if(typebit==1)
+                definition.assignLogSubBlockVariant(ModLog2Block.EnumType.fromId(subBlocks.size()));
+            else if(typebit==2)
+                definition.assignLogSubBlockVariant(ModLog3Block.EnumType.fromId(subBlocks.size()));
+            else if(typebit==3)
+                definition.assignLogSubBlockVariant(ModLog4Block.EnumType.getTuopa());
 
             subBlocks.add(definition);
             if (subBlocks.size() == LogBlock.CAPACITY)
             {
                 factory.createLogBlock(subBlocks);
                 subBlocks.clear();
+                typebit++;
             }
         }
         if (!subBlocks.isEmpty()) factory.createLogBlock(subBlocks);
@@ -73,16 +91,21 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
 
     public void loadSaplingBlocks(TreeBlockFactory factory)
     {
+        int typebit = 0;
         final List<DefinesSapling> subBlocks = Lists.newArrayListWithCapacity(SaplingBlock.CAPACITY);
         for (final DefinesSapling definition : taxonomy.saplingDefinitions())
         {
-                definition.assignSaplingSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
+            if(typebit==0)
+                definition.assignSaplingSubBlockVariant(ModSlabBlock.EnumType.fromId(subBlocks.size()));
+            else if(typebit==1)
+                definition.assignSaplingSubBlockVariant(ModSlab2Block.EnumType.fromId(subBlocks.size()));
 
             subBlocks.add(definition);
             if (subBlocks.size() == SaplingBlock.CAPACITY)
             {
                 factory.createSaplingBlock(subBlocks);
                 subBlocks.clear();
+                typebit++;
             }
         }
         if (!subBlocks.isEmpty()) factory.createSaplingBlock(subBlocks);
@@ -92,9 +115,13 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
     public void loadSlabBlocks(TreeBlockFactory factory)
     {
         final List<DefinesSlab> subBlocks = Lists.newArrayListWithCapacity(SlabBlock.CAPACITY);
+        int typebit = 0;
         for (final DefinesSlab definition : taxonomy.slabDefinitions())
         {
-            definition.assignSlabSubBlockVariant(ModWoodBlock.EnumType.fromId(subBlocks.size()));
+            if(typebit==0)
+                definition.assignSlabSubBlockVariant(ModSlabBlock.EnumType.fromId(subBlocks.size()));
+            else if(typebit==1)
+                definition.assignSlabSubBlockVariant(ModSlab2Block.EnumType.fromId(subBlocks.size()));
 
             subBlocks.add(definition);
             if (subBlocks.size() == SlabBlock.CAPACITY)
@@ -102,6 +129,7 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
                 final SingleDoubleSlab slabs = factory.createSlabBlocks(subBlocks);
                 slabRegistry.add(slabs.singleSlab());
                 subBlocks.clear();
+                typebit++;
             }
         }
         if (!subBlocks.isEmpty())

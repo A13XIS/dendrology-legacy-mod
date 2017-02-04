@@ -16,6 +16,6 @@ public class ModLeavesItem extends LeavesItem {
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        return super.getUnlocalizedName() + "." + ((LeavesBlock)leaves).getWoodType(stack.getMetadata()).name();
+        return super.getUnlocalizedName() + "." + ((LeavesBlock)leaves).getWoodType(stack.getMetadata()).name().toLowerCase();
     }
 }

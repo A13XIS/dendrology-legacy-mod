@@ -226,7 +226,7 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
     protected void placeLog(World world, BlockPos pos)
     {
         if (canBeReplacedByLog(world, pos))
-            func_175905_a(world, pos, getLogBlock(), getLogMetadata());
+            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()));
     }
 
     private void generateLeaves(World world)

@@ -49,7 +49,7 @@ public class NormalEwcalyTree extends AbstractTree
                         if (size == 3 &&
                                 (Math.abs(dX) == 3 && Math.abs(dZ) == 2 || Math.abs(dX) == 2 && Math.abs(dZ) == 3))
                         {
-                            func_175905_a(world, new BlockPos(pos.getX() + dX, y1, pos.getZ() + dZ), Blocks.air, 0);
+                            setBlockAndNotifyAdequately(world, new BlockPos(pos.getX() + dX, y1, pos.getZ() + dZ), Blocks.air.getDefaultState());
                         }
 
                         if (y1 == pos.getY() + height && Math.abs(dX) < 3 && Math.abs(dZ) < 3 &&

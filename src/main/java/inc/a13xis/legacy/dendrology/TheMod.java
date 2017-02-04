@@ -45,7 +45,7 @@ public final class TheMod
 {
     public static final String MOD_ID = "dendrology";
     static final String MOD_NAME = "Ancient Trees";
-    static final String MOD_VERSION = "1.8L";
+    static final String MOD_VERSION = "1.8.9-L1";
     static final String MOD_GUI_FACTORY = "inc.a13xis.legacy.dendrology.config.client.ModGuiFactory";
     private static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ':';
     @SuppressWarnings("PublicField")
@@ -110,8 +110,11 @@ public final class TheMod
         configEventHandler.get().activate();
 
         new ModBlocks().loadContent();
-        new ModItems().loadContent();
-        Proxy.common.initSubRenders();
+        ModItems mi = new ModItems();
+        mi.loadContent();
+        Proxy.common.registerRenders();
+
+        //Proxy.common.initSubRenders();
         //initIntegrators();
         integrateMods(event.getModState());
     }
@@ -124,7 +127,6 @@ public final class TheMod
         new Crafter().writeRecipes();
         new Smelter().registerSmeltings();
         integrateMods(event.getModState());
-        Proxy.common.registerRenders();
     }
 
     @EventHandler

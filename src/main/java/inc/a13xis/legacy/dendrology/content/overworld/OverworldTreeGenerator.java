@@ -55,6 +55,6 @@ public class OverworldTreeGenerator implements IWorldGenerator
         int chunkX = x >> 4;
         int chunkZ = z >> 4;
 
-        return world.getChunkFromChunkCoords(chunkX, chunkZ).getHeight(x & 15, z & 15);
+        return world.getChunkFromChunkCoords(chunkX, chunkZ).getHeight(new BlockPos(x & 15, Integer.MIN_VALUE,z & 15));
     }
 }

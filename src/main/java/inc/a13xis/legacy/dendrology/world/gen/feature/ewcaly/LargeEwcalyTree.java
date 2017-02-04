@@ -50,7 +50,7 @@ public class LargeEwcalyTree extends AbstractTree
 
                         if (size == 3 &&
                                 (Math.abs(dX) == 3 && Math.abs(dZ) == 2 || Math.abs(dX) == 2 && Math.abs(dZ) == 3))
-                            func_175905_a(world, new BlockPos(pos.getX() + dX, pos1.getY(), pos.getZ() + dZ), Blocks.air, 0);
+                            setBlockAndNotifyAdequately(world, new BlockPos(pos.getX() + dX, pos1.getY(), pos.getZ() + dZ), Blocks.air.getDefaultState());
 
                         if (pos1.getY() == pos.getY() + height && Math.abs(dX) < 3 && Math.abs(dZ) < 3 &&
                                 (Math.abs(dX) != 2 || Math.abs(dZ) != 2))

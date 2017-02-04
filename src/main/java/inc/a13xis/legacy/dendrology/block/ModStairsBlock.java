@@ -10,11 +10,9 @@ import net.minecraft.util.EnumFacing;
 
 public final class ModStairsBlock extends StairsBlock
 {
-    private ModWoodBlock.EnumType variant;
     public ModStairsBlock(DefinesStairs definition)
     {
         super(definition);
-        variant=(ModWoodBlock.EnumType)definition.stairsModelSubBlockVariant();
         setCreativeTab(TheMod.INSTANCE.creativeTab());
     }
 

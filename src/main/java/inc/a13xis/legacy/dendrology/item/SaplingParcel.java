@@ -11,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 
@@ -73,9 +75,11 @@ public class SaplingParcel extends Item
     @Override
     public String getUnlocalizedName(ItemStack unused) { return getUnlocalizedName(); }
 
-    public void registerModel()
+    public final void registerItemModel()
     {
-        String test = getUnlocalizedName().substring(getUnlocalizedName().indexOf('.')+1);
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(this,0,new ModelResourceLocation(getUnlocalizedName().substring(getUnlocalizedName().indexOf('.')+1),"inventory"));
+        String[] test = getUnlocalizedName().substring(getUnlocalizedName().indexOf('.')+1).split(":");
+        Item sp = GameRegistry.findItem(test[0],test[1]);
+        ModelResourceLocation rloc = new ModelResourceLocation(test[0]+":"+test[1],"inventory");
+        ModelLoader.setCustomModelResourceLocation(sp, 0, rloc);
     }
 }

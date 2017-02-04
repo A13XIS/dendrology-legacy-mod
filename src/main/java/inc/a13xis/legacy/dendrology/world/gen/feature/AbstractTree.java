@@ -69,13 +69,13 @@ public abstract class AbstractTree extends WorldGenAbstractTree
     protected void placeLeaves(World world, BlockPos pos)
     {
         if (world.getBlockState(pos).getBlock().canBeReplacedByLeaves(world, pos))
-            func_175905_a(world, pos, getLeavesBlock(), getLeavesMetadata());
+            setBlockAndNotifyAdequately(world, pos, getLeavesBlock().getStateFromMeta(getLeavesMetadata()));
     }
 
     protected void placeLog(World world, BlockPos pos)
     {
         if (canBeReplacedByLog(world, pos))
-            func_175905_a(world, pos, getLogBlock(), getLogMetadata());
+            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()));
     }
 
     @Override

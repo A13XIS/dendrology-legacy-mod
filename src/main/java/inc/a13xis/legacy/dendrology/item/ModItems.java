@@ -15,9 +15,11 @@ public final class ModItems
 
     public void loadContent()
     {
-        GameRegistry.registerItem(parcel, "parcel");
+         GameRegistry.registerItem(parcel, parcel.getUnlocalizedName().substring(parcel.getUnlocalizedName().indexOf(":")+1));
          addParcelToChests();
     }
+
+
 
     private static void addParcelToChests()
     {
@@ -38,6 +40,6 @@ public final class ModItems
     }
 
     public static void registerAllItemRenders(){
-        parcel.registerModel();
+        parcel.registerItemModel();
     }
 }

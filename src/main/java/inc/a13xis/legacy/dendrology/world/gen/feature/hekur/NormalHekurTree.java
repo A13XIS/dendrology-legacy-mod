@@ -109,7 +109,7 @@ public class NormalHekurTree extends AbstractTree
     {
         if (canBeReplacedByRoot(world, pos))
         {
-            func_175905_a(world, pos, getLogBlock(), getLogMetadata());
+            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()));
             return true;
         }
         return false;

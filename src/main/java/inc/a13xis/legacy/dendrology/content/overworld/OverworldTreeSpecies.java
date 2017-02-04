@@ -1,7 +1,6 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
 
-import inc.a13xis.legacy.dendrology.block.ModWoodBlock;
 import inc.a13xis.legacy.dendrology.content.ProvidesPotionEffect;
 import inc.a13xis.legacy.dendrology.world.AcemusColorizer;
 import inc.a13xis.legacy.dendrology.world.CerasuColorizer;
@@ -51,9 +50,9 @@ public enum OverworldTreeSpecies
     private final Colorizer colorizer;
     private final String potionEffect;
 
-    private ModWoodBlock.EnumType leavesVariant;
+    private Enum leavesVariant;
     private Enum logVariant;
-    private ModWoodBlock.EnumType planksVariant;
+    private Enum planksVariant;
     private Enum saplingVariant;
     private Enum slabVariant;
 
@@ -137,7 +136,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignLeavesSubBlockVariant(Enum variant) { this.leavesVariant = (ModWoodBlock.EnumType)variant; }
+    public void assignLeavesSubBlockVariant(Enum variant) { this.leavesVariant = variant; }
 
     @Override
     public LeavesBlock leavesBlock()
@@ -184,7 +183,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public ModWoodBlock.EnumType woodSubBlockVariant() { return planksVariant; }
+    public Enum woodSubBlockVariant() { return planksVariant; }
 
     @Override
     public void assignWoodBlock(WoodBlock woodBlock)
@@ -194,7 +193,7 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    public void assignWoodSubBlockVariant(Enum type) { this.planksVariant = (ModWoodBlock.EnumType)type; }
+    public void assignWoodSubBlockVariant(Enum type) { this.planksVariant = type; }
 
     @Override
     public void assignStairsBlock(StairsBlock stairsBlock)

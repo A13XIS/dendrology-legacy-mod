@@ -8,7 +8,11 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraft.util.IStringSerializable;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Collection;
 
@@ -20,6 +24,16 @@ public final class ModWoodBlock extends WoodBlock
     protected ModWoodBlock(Collection<? extends DefinesWood> subBlocks){
         super(subBlocks);
         this.setDefaultState(this.blockState.getBaseState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.ACEMUS));
+    }
+
+    protected static String getUnwrappedUnprefixedUnlocalizedName(String unlocalizedName)
+    {
+        return unlocalizedName.substring(unlocalizedName.indexOf(':') + 1);
+    }
+
+    @Override
+    public String getUnlocalizedName() {
+        return String.format("tile.%s%s", resourcePrefix(), getUnwrappedUnprefixedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
