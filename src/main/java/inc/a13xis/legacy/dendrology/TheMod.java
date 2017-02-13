@@ -12,16 +12,19 @@ import inc.a13xis.legacy.dendrology.content.crafting.Smelter;
 import inc.a13xis.legacy.dendrology.content.fuel.FuelHandler;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeGenerator;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies;
+import inc.a13xis.legacy.dendrology.events.GenerationEvents;
 import inc.a13xis.legacy.dendrology.item.ModItems;
 import inc.a13xis.legacy.dendrology.proxy.Proxy;
 import inc.a13xis.legacy.koresample.common.util.lang.LangMap;
 import inc.a13xis.legacy.koresample.common.util.log.Logger;
 import inc.a13xis.legacy.koresample.compat.Integrates;
 import inc.a13xis.legacy.koresample.config.ConfigEventHandler;
+import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.LanguageMap;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.LoaderState.ModState;
 import net.minecraftforge.fml.common.Mod;
@@ -49,7 +52,7 @@ public final class TheMod
     static final String MOD_NAME = "Ancient Trees";
     static final String MOD_VERSION = "1.9.4-L1";
     static final String MOD_GUI_FACTORY = "inc.a13xis.legacy.dendrology.config.client.ModGuiFactory";
-    private static Optional<LangMap> fallback;
+    private static Optional<LangMap> fallback = Optional.absent();
     private static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ':';
     @SuppressWarnings("PublicField")
     @Instance(MOD_ID)
@@ -124,9 +127,9 @@ public final class TheMod
         }
         configEventHandler = Optional.of(new ConfigEventHandler(MOD_ID, event.getSuggestedConfigurationFile(), Settings.INSTANCE, Settings.CONFIG_VERSION));
         configEventHandler.get().activate();
+        MinecraftForge.EVENT_BUS.register(new GenerationEvents());
         new ModBlocks().loadContent();
         Proxy.common.registerRenders();
-        //Proxy.common.initSubRenders();
         //initIntegrators();
         //integrateMods(event.getModState());
     }
@@ -134,6 +137,7 @@ public final class TheMod
     @EventHandler
     public void onFMLInitialization(FMLInitializationEvent event)
     {
+        Proxy.common.registerColorMultiplier(ModBlocks.taxonomyInstance().leavesDefinitions());
         Logger.forMod(MOD_ID).info("Adding recipes.");
         new OreDictHandler().registerBlocksWithOreDictinary();
         new Crafter().writeRecipes();

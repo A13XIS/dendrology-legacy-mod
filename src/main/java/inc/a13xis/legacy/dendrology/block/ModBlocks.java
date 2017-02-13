@@ -75,12 +75,12 @@ public final class ModBlocks
     }
 
     public static void registerAllBlockRenders() {
-        for(int i=0;i<logBlocks.size();i++) logBlocks.get(i).registerBlockModels();
-        for(int i=0;i<woodBlocks.size();i++) woodBlocks.get(i).registerBlockModels();
-        for(int i=0;i<singleSlabBlocks.size();i++) singleSlabBlocks.get(i).registerBlockModels();
-        for(int i=0;i<stairsBlocks.size();i++) stairsBlocks.get(i).registerBlockModel();
-        for(int i=0;i<saplingBlocks.size();i++) saplingBlocks.get(i).registerBlockModels();
-        for(int i=0;i<leavesBlocks.size();i++) leavesBlocks.get(i).registerBlockModels();
+        for (LogBlock logBlock : logBlocks) logBlock.registerBlockModels();
+        for (WoodBlock woodBlock : woodBlocks) woodBlock.registerBlockModels();
+        for (SlabBlock singleSlabBlock : singleSlabBlocks) singleSlabBlock.registerBlockModels();
+        for (StairsBlock stairsBlock : stairsBlocks) stairsBlock.registerBlockModel();
+        for (SaplingBlock saplingBlock : saplingBlocks) saplingBlock.registerBlockModels();
+        for (LeavesBlock leavesBlock : leavesBlocks) leavesBlock.registerBlockModels();
     }
 
     private static void registerAllDoubleSlabBlocks()
@@ -88,7 +88,7 @@ public final class ModBlocks
         int slabCount = 0;
         for (final SlabBlock slab : doubleSlabBlocks)
         {
-            registerSlabBlock(slab, String.format("dslab%d", slabCount), singleSlabBlocks.get(slabCount), slab, true);
+            registerDSlabBlock(slab, String.format("dslab%d", slabCount));
             slabCount++;
         }
     }
@@ -129,7 +129,7 @@ public final class ModBlocks
         int slabCount = 0;
         for (final SlabBlock slab : singleSlabBlocks)
         {
-            registerSlabBlock(slab, String.format("sslab%d", slabCount), slab, doubleSlabBlocks.get(slabCount), false);
+            registerSlabBlock(slab, String.format("sslab%d", slabCount), slab, doubleSlabBlocks.get(slabCount));
             slabCount++;
         }
     }
@@ -212,8 +212,7 @@ public final class ModBlocks
         }
     }
 
-    private static void registerSlabBlock(Block block, String name, SlabBlock singleSlab, SlabBlock doubleSlab,
-                                          boolean unused)
+    private static void registerSlabBlock(Block block, String name, SlabBlock singleSlab, SlabBlock doubleSlab)
     {
         block.setRegistryName(name);
         GameRegistry.register(block);
@@ -224,6 +223,11 @@ public final class ModBlocks
             GameRegistry.register(new ModSlabItem(block,(ModSlab2Block) singleSlab,(ModSlab2Block) doubleSlab).setRegistryName(block.getRegistryName()));
         }
         Blocks.FIRE.setFireInfo(block, DEFAULT_STAIRS_FIRE_ENCOURAGEMENT, DEFAULT_STAIRS_FLAMMABILITY);
+    }
+
+    private static void registerDSlabBlock(Block b,String name){
+        b.setRegistryName(name);
+        GameRegistry.register(b);
     }
 
     private static void registerStairsBlock(Block block, String name)

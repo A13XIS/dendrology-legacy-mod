@@ -2,7 +2,6 @@ package inc.a13xis.legacy.dendrology.block;
 
 import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.dendrology.TheMod;
-import inc.a13xis.legacy.dendrology.content.ProvidesPotionEffect;
 import inc.a13xis.legacy.koresample.tree.DefinesSapling;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import net.minecraft.block.SoundType;
@@ -10,7 +9,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -34,17 +32,6 @@ public final class ModSaplingBlock extends SaplingBlock
     @Override
     public boolean isTypeAt(World worldIn, BlockPos pos, Enum type) {
         return type instanceof ModSlabBlock.EnumType && type.equals(worldIn.getBlockState(pos).getValue(VARIANT));
-    }
-
-    @SuppressWarnings("ReturnOfNull")
-    public String getPotionEffect(ItemStack itemStack)
-    {
-        final List<DefinesSapling> subBlocks = subBlocks();
-        final int itemDamage = itemStack.getItemDamage();
-        if (itemDamage < 0 || itemDamage >= subBlocks.size()) return null;
-
-        final DefinesSapling subBlock = subBlocks.get(itemDamage);
-        return subBlock instanceof ProvidesPotionEffect ? ((ProvidesPotionEffect) subBlock).potionEffect() : null;
     }
 
     @Override

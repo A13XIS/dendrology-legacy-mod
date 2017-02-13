@@ -40,7 +40,9 @@ public final class ModLeavesBlock extends LeavesBlock
 
     @Override
     protected BlockStateContainer createBlockState(){
-        return new BlockStateContainer(this, new IProperty[]{VARIANT,CHECK_DECAY,DECAYABLE});
+        BlockStateContainer bs = new BlockStateContainer(this, new IProperty[]{VARIANT,CHECK_DECAY,DECAYABLE});
+
+        return bs;
     }
 
     @Override
