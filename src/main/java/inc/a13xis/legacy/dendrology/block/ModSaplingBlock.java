@@ -5,12 +5,13 @@ import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.content.ProvidesPotionEffect;
 import inc.a13xis.legacy.koresample.tree.DefinesSapling;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public final class ModSaplingBlock extends SaplingBlock
         super(ImmutableList.copyOf(subBlocks));
         setCreativeTab(TheMod.INSTANCE.creativeTab());
         setHardness(0.0F);
-        setStepSound(soundTypeGrass);
+        setSoundType(SoundType.PLANT);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ModSlabBlock.EnumType.ACEMUS));
     }
 
@@ -66,7 +67,7 @@ public final class ModSaplingBlock extends SaplingBlock
     }
 
     @Override
-    protected BlockState createBlockState(){
-        return new BlockState(this, new IProperty[] {VARIANT, STAGE});
+    protected BlockStateContainer createBlockState(){
+        return new BlockStateContainer(this, new IProperty[] {VARIANT, STAGE});
     }
 }

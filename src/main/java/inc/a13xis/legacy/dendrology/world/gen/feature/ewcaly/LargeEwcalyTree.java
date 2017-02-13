@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -25,7 +25,7 @@ public class LargeEwcalyTree extends AbstractTree
         if (isPoorGrowthConditions(world, pos, height, getSaplingBlock())) return false;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, new BlockPos(pos.down()), pos);
+        block.onPlantGrow(world.getBlockState(pos.down()),world, pos.down(), pos);
 
         for (int dy = 0; dy <= height; dy++)
             placeLog(world, pos.up(dy));
@@ -50,7 +50,7 @@ public class LargeEwcalyTree extends AbstractTree
 
                         if (size == 3 &&
                                 (Math.abs(dX) == 3 && Math.abs(dZ) == 2 || Math.abs(dX) == 2 && Math.abs(dZ) == 3))
-                            setBlockAndNotifyAdequately(world, new BlockPos(pos.getX() + dX, pos1.getY(), pos.getZ() + dZ), Blocks.air.getDefaultState());
+                            setBlockAndNotifyAdequately(world, new BlockPos(pos.getX() + dX, pos1.getY(), pos.getZ() + dZ), Blocks.AIR.getDefaultState());
 
                         if (pos1.getY() == pos.getY() + height && Math.abs(dX) < 3 && Math.abs(dZ) < 3 &&
                                 (Math.abs(dX) != 2 || Math.abs(dZ) != 2))

@@ -4,8 +4,8 @@ import com.google.common.base.Objects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -24,7 +24,7 @@ public class NormalHekurTree extends AbstractTree
     protected boolean isPoorGrowthConditions(World world, BlockPos pos, int unused, IPlantable plantable)
     {
         final Block block = world.getBlockState(pos.down()).getBlock();
-        return !block.canSustainPlant(world, pos.down(), EnumFacing.UP, plantable);
+        return !block.canSustainPlant(world.getBlockState(pos.down()),world, pos.down(), EnumFacing.UP, plantable);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class NormalHekurTree extends AbstractTree
         if (isPoorGrowthConditions(world, pos, 0, getSaplingBlock())) return false;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, pos.down(), pos);
+        block.onPlantGrow(world.getBlockState(pos),world, pos.down(), pos);
 
         genRoots(world, random, pos);
         growTrunk(world, random, pos);
@@ -98,10 +98,9 @@ public class NormalHekurTree extends AbstractTree
 
     private boolean canBeReplacedByRoot(World world, BlockPos pos)
     {
-        final Block block = world.getBlockState(pos).getBlock();
-        final Material material = block.getMaterial();
+        final Material material = world.getBlockState(pos).getMaterial();
 
-        return canBeReplacedByLog(world, pos) || material.equals(Material.sand) || material.equals(Material.ground);
+        return canBeReplacedByLog(world, pos) || material.equals(Material.SAND) || material.equals(Material.GROUND);
     }
 
     @SuppressWarnings("UnusedReturnValue")

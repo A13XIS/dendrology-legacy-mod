@@ -3,9 +3,9 @@ package inc.a13xis.legacy.dendrology.world.gen.feature.vanilla;
 import com.google.common.base.Objects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
@@ -84,7 +84,7 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
         if (pos.getY() < 1 || pos.getY() + height + 1 > world.getHeight()) return true;
 
         final Block block = world.getBlockState(new BlockPos(basePos[0], basePos[1] - 1, basePos[2])).getBlock();
-        return !block.canSustainPlant(world, pos.down(), EnumFacing.UP, plantable) || !hasRoomToGrow(world, pos, height);
+        return !block.canSustainPlant(world.getBlockState(pos.down()), world, pos.down(), EnumFacing.UP, plantable) || !hasRoomToGrow(world, pos, height);
 
     }
 
@@ -280,7 +280,8 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
                     var11[var9] = var10[var9] + var13;
                     final Block block = world.getBlockState(new BlockPos(var11[0], var11[1], var11[2])).getBlock();
 
-                    if (block != null && block.isLeaves(world, new BlockPos(var11[0], var11[1], var11[2]))) ++var13;
+                    BlockPos tmp=new BlockPos(var11[0], var11[1], var11[2]);
+                    if (block != null && block.isLeaves(world.getBlockState(tmp),world, tmp)) ++var13;
                     else
                     {
                         placeLeaves(world, new BlockPos(var11[0], var11[1], var11[2]));

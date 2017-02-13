@@ -1,7 +1,7 @@
 package inc.a13xis.legacy.dendrology.world.gen.feature;
 
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -23,7 +23,7 @@ public class DelnasTree extends AbstractTree
         if (isPoorGrowthConditions(world, pos, height, getSaplingBlock())) return false;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, pos.down(), pos);
+        block.onPlantGrow(world.getBlockState(pos.down()),world, pos.down(), pos);
 
         if (rng.nextInt(10) > 0) for (int dY = 0; dY <= height; dY++)
         {

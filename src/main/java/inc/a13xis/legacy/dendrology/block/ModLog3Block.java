@@ -6,7 +6,7 @@ import inc.a13xis.legacy.koresample.tree.DefinesLog;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;
 
@@ -54,8 +54,8 @@ public final class ModLog3Block extends LogBlock
     }
 
     @Override
-    protected BlockState createBlockState(){
-        return new BlockState(this, new IProperty[]{VARIANT,LOG_AXIS});
+    protected BlockStateContainer createBlockState(){
+        return new BlockStateContainer(this, new IProperty[]{VARIANT,LOG_AXIS});
     }
 
     public enum EnumType implements IStringSerializable {

@@ -20,14 +20,14 @@ import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.common.ChestGenHooks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ModBlocks
@@ -48,29 +48,7 @@ public final class ModBlocks
     private static final List<SaplingBlock> saplingBlocks = Lists.newArrayList();
     private static final List<LeavesBlock> leavesBlocks = Lists.newArrayList();
     private static final OverworldTreeTaxonomy overworldTaxonomy = new OverworldTreeTaxonomy();
-
-    @SuppressWarnings("MethodWithMultipleLoops")
-    private static void addAllSaplingsToChests()
-    {
-        TheMod.logger().info("Hiding saplings in chests.");
-        final Settings settings = Settings.INSTANCE;
-
-        for (final DefinesSapling saplingDefinition : overworldTaxonomy.saplingDefinitions())
-            for (final String chestType : Settings.chestTypes())
-                addSaplingToChest(saplingDefinition, chestType, settings.chestRarity(chestType));
-    }
-
-    private static void addSaplingToChest(DefinesSapling saplingDefinition, String chestType, int rarity)
-    {
-        if (rarity <= 0) return;
-
-        final ItemStack sapling =
-                new ItemStack(saplingDefinition.saplingBlock(), 1, saplingDefinition.saplingSubBlockVariant().ordinal());
-        final WeightedRandomChestContent chestContent = new WeightedRandomChestContent(sapling, 1, 2, rarity);
-
-        final ChestGenHooks chestGenInfo = ChestGenHooks.getInfo(chestType);
-        chestGenInfo.addItem(chestContent);
-    }
+    private static ArrayList<ItemBlock> registered = new ArrayList<ItemBlock>();
 
     public static Iterable<? extends LeavesBlock> leavesBlocks() { return ImmutableList.copyOf(leavesBlocks); }
 
@@ -96,13 +74,13 @@ public final class ModBlocks
         registerAllDoubleSlabBlocks();
     }
 
-    public static void registerAllRenders() {
-        for(int i=0;i<logBlocks.size();i++) logBlocks.get(i).registerBlockModels(i);
-        for(int i=0;i<woodBlocks.size();i++) woodBlocks.get(i).registerBlockModels(i);
-        for(int i=0;i<singleSlabBlocks.size();i++) singleSlabBlocks.get(i).registerBlockModels(i);
-        for(int i=0;i<stairsBlocks.size();i++) stairsBlocks.get(i).registerBlockModel(i);
-        for(int i=0;i<saplingBlocks.size();i++) saplingBlocks.get(i).registerBlockModels(i);
-        for(int i=0;i<leavesBlocks.size();i++) leavesBlocks.get(i).registerBlockModels(i);
+    public static void registerAllBlockRenders() {
+        for(int i=0;i<logBlocks.size();i++) logBlocks.get(i).registerBlockModels();
+        for(int i=0;i<woodBlocks.size();i++) woodBlocks.get(i).registerBlockModels();
+        for(int i=0;i<singleSlabBlocks.size();i++) singleSlabBlocks.get(i).registerBlockModels();
+        for(int i=0;i<stairsBlocks.size();i++) stairsBlocks.get(i).registerBlockModel();
+        for(int i=0;i<saplingBlocks.size();i++) saplingBlocks.get(i).registerBlockModels();
+        for(int i=0;i<leavesBlocks.size();i++) leavesBlocks.get(i).registerBlockModels();
     }
 
     private static void registerAllDoubleSlabBlocks()
@@ -117,10 +95,10 @@ public final class ModBlocks
 
     private static void registerAllLeavesBlock()
     {
-        int leavesCount = 0;
-        for (final Block block : leavesBlocks)
+        int leavesCount = 3;
+        for (final LeavesBlock leaves : leavesBlocks)
         {
-            registerLeavesBlock(block, String.format("leaves%d", leavesCount));
+            registerLeavesBlock(leaves, String.format(LeavesBlock.getRawUnlocalizedName(leaves)+"%d", leavesCount));
             leavesCount++;
         }
     }
@@ -166,15 +144,18 @@ public final class ModBlocks
         }
     }
 
+
     private static void registerAllWoodBlocks()
+
     {
         int woodBlockCount = 0;
         for (final WoodBlock wood : woodBlocks)
         {
-            registerWoodBlock(wood, String.format("planks%d", woodBlockCount), wood.getSubBlockNames());
+            registerWoodBlock(wood, String.format(WoodBlock.getRawUnlocalizedName(wood)+"%d", woodBlockCount), wood.getSubBlockNames());
             woodBlockCount++;
         }
     }
+
 
     public static void registerBlock(LeavesBlock leavesBlock) { leavesBlocks.add(leavesBlock); }
 
@@ -194,37 +175,71 @@ public final class ModBlocks
 
     private static void registerLeavesBlock(Block block, String name)
     {
-        GameRegistry.registerBlock(block, ModLeavesItem.class, name);
-        Blocks.fire.setFireInfo(block, DEFAULT_LEAVES_FIRE_ENCOURAGEMENT, DEFAULT_LEAVES_FLAMMABILITY);
+        block.setRegistryName(name);
+        GameRegistry.register(block);
+        GameRegistry.register(new ModLeavesItem(block).setRegistryName(block.getRegistryName()));
+        Blocks.FIRE.setFireInfo(block, DEFAULT_LEAVES_FIRE_ENCOURAGEMENT, DEFAULT_LEAVES_FLAMMABILITY);
     }
 
     private static void registerLogBlock(Block block, String name, ImmutableList<String> subblockNames)
     {
-        GameRegistry.registerBlock(block, ModLogItem.class, name, block, subblockNames.toArray(new String[subblockNames.size()]));
-        Blocks.fire.setFireInfo(block, DEFAULT_LOG_FIRE_ENCOURAGEMENT, DEFAULT_LOG_FLAMMABILITY);
+        block.setRegistryName(name);
+        GameRegistry.register(block);
+        if(block instanceof  ModLogBlock){
+            GameRegistry.register(new ModLogItem(block,(ModLogBlock)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(block.getRegistryName()));
+        }
+        else if(block instanceof  ModLog2Block){
+            GameRegistry.register(new ModLogItem(block,(ModLog2Block)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(block.getRegistryName()));
+        }
+        else if(block instanceof  ModLog3Block){
+            GameRegistry.register(new ModLogItem(block,(ModLog3Block)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(block.getRegistryName()));
+        }
+        else{
+            GameRegistry.register(new ModLogItem(block,(ModLog4Block)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(block.getRegistryName()));
+        }
+        Blocks.FIRE.setFireInfo(block, DEFAULT_LOG_FIRE_ENCOURAGEMENT, DEFAULT_LOG_FLAMMABILITY);
     }
 
     private static void registerSaplingBlock(Block block, String name, List<String> subblockNames)
     {
-        GameRegistry.registerBlock(block, ModSaplingItem.class, name, block, subblockNames.toArray(new String[subblockNames.size()]));
+        block.setRegistryName(name);
+        GameRegistry.register(block);
+        if(block instanceof  ModSaplingBlock){
+            GameRegistry.register(new ModSaplingItem(block,(ModSaplingBlock)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(block.getRegistryName()));
+        }
+        else{
+            GameRegistry.register(new ModSaplingItem(block,(ModSapling2Block)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(block.getRegistryName()));
+        }
     }
 
     private static void registerSlabBlock(Block block, String name, SlabBlock singleSlab, SlabBlock doubleSlab,
                                           boolean unused)
     {
-        GameRegistry.registerBlock(block, ModSlabItem.class, name, singleSlab, doubleSlab);
+        block.setRegistryName(name);
+        GameRegistry.register(block);
+        if(block instanceof  ModSlabBlock){
+            GameRegistry.register(new ModSlabItem(block,(ModSlabBlock) singleSlab,(ModSlabBlock) doubleSlab).setRegistryName(block.getRegistryName()));
+        }
+        else{
+            GameRegistry.register(new ModSlabItem(block,(ModSlab2Block) singleSlab,(ModSlab2Block) doubleSlab).setRegistryName(block.getRegistryName()));
+        }
+        Blocks.FIRE.setFireInfo(block, DEFAULT_STAIRS_FIRE_ENCOURAGEMENT, DEFAULT_STAIRS_FLAMMABILITY);
     }
 
     private static void registerStairsBlock(Block block, String name)
     {
-        GameRegistry.registerBlock(block, name);
-        Blocks.fire.setFireInfo(block, DEFAULT_STAIRS_FIRE_ENCOURAGEMENT, DEFAULT_STAIRS_FLAMMABILITY);
+        block.setRegistryName(name);
+        GameRegistry.register(block);
+        GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        Blocks.FIRE.setFireInfo(block, DEFAULT_STAIRS_FIRE_ENCOURAGEMENT, DEFAULT_STAIRS_FLAMMABILITY);
     }
 
     private static void registerWoodBlock(Block block, String name, ImmutableList<String> subblockNames)
     {
-        GameRegistry.registerBlock(block, ModWoodItem.class, name, block, subblockNames.toArray(new String[subblockNames.size()]));
-        Blocks.fire.setFireInfo(block, DEFAULT_PLANKS_FIRE_ENCOURAGEMENT, DEFAULT_PLANKS_FLAMMABILITY);
+        block.setRegistryName(name);
+        GameRegistry.register(block);
+        GameRegistry.register(new ModWoodItem(block,(ModWoodBlock)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(block.getRegistryName()));
+        Blocks.FIRE.setFireInfo(block, DEFAULT_PLANKS_FIRE_ENCOURAGEMENT, DEFAULT_PLANKS_FLAMMABILITY);
     }
 
     public static Iterable<? extends SaplingBlock> saplingBlocks() { return ImmutableList.copyOf(saplingBlocks); }
@@ -240,6 +255,10 @@ public final class ModBlocks
         return overworldTaxonomy.stairsDefinitions();
     }
 
+    public static OverworldTreeTaxonomy taxonomyInstance(){
+        return overworldTaxonomy;
+    }
+
     public static Iterable<? extends Block> woodBlocks() { return ImmutableList.copyOf(woodBlocks); }
 
     @SuppressWarnings("MethodMayBeStatic")
@@ -247,6 +266,5 @@ public final class ModBlocks
     {
         loadOverWorldContent();
         registerAllBlocks();
-        addAllSaplingsToChests();
     }
 }

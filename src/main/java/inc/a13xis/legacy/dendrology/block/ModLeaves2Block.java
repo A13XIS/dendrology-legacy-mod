@@ -4,16 +4,20 @@ package inc.a13xis.legacy.dendrology.block;
 import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
+import inc.a13xis.legacy.dendrology.item.ModLeavesItem;
 import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +41,8 @@ public final class ModLeaves2Block extends LeavesBlock
     }
 
     @Override
-    protected BlockState createBlockState(){
-        return new BlockState(this, new IProperty[]{VARIANT,CHECK_DECAY,DECAYABLE});
+    protected BlockStateContainer createBlockState(){
+        return new BlockStateContainer(this, new IProperty[]{VARIANT,CHECK_DECAY,DECAYABLE});
     }
 
     @Override

@@ -2,7 +2,7 @@ package inc.a13xis.legacy.dendrology.world.gen.feature;
 
 import com.google.common.base.Objects;
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -56,7 +56,7 @@ public class SalyxTree extends AbstractTree
         if (isPoorGrowthConditions(world, pos, 6 + size / 2, getSaplingBlock())) return false;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, pos.down(), pos);
+        block.onPlantGrow(world.getBlockState(pos.down()), world, pos.down(), pos);
 
         for (int dX = -1; dX <= 1; dX++)
             for (int dZ = -1; dZ <= 1; dZ++)

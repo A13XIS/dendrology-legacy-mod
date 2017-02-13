@@ -4,7 +4,7 @@ import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
 import inc.a13xis.legacy.koresample.tree.DefinesStairs;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 
@@ -23,8 +23,8 @@ public final class ModStairsBlock extends StairsBlock
     }
 
     @Override
-    protected BlockState createBlockState(){
-        return new BlockState(this, new IProperty[] {FACING,HALF,SHAPE});
+    protected BlockStateContainer createBlockState(){
+        return new BlockStateContainer(this, new IProperty[] {FACING,HALF,SHAPE});
     }
 
     @Override

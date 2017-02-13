@@ -4,9 +4,10 @@ import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.tree.DefinesSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,7 @@ public final class ModSlab2Block extends SlabBlock
         setCreativeTab(TheMod.INSTANCE.creativeTab());
         setHardness(2.0F);
         setResistance(5.0F);
-        setStepSound(soundTypeWood);
+        setSoundType(SoundType.WOOD);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.LATA));
     }
 
@@ -54,8 +55,8 @@ public final class ModSlab2Block extends SlabBlock
     }
 
     @Override
-    protected BlockState createBlockState(){
-        return new BlockState(this, new IProperty[] { VARIANT , HALF});
+    protected BlockStateContainer createBlockState(){
+        return new BlockStateContainer(this, new IProperty[] { VARIANT , HALF});
     }
 
     @Override
@@ -64,7 +65,7 @@ public final class ModSlab2Block extends SlabBlock
     }
 
     @Override
-    public Object getVariant(ItemStack stack) {
+    public Comparable getTypeForItem(ItemStack stack) {
         if(stack.getItem() instanceof ItemBlock && ((ItemBlock)stack.getItem()).getBlock() instanceof ModSlab2Block){
             return getStateFromMeta(stack.getItemDamage()).getValue(VARIANT);
         }

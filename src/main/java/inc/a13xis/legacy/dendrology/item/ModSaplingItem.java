@@ -28,12 +28,6 @@ public final class ModSaplingItem extends SaplingItem
     }
 
     @Override
-    public String getPotionEffect(ItemStack itemStack)
-    {
-        return sapling instanceof ModSaplingBlock?((ModSaplingBlock)sapling).getPotionEffect(itemStack):((ModSapling2Block)sapling).getPotionEffect(itemStack);
-    }
-
-    @Override
     public String toString()
     {
         return Objects.toStringHelper(this).add("sapling", sapling).toString();

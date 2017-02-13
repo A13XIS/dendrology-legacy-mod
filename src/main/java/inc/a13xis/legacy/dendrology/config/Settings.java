@@ -4,23 +4,25 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.koresample.config.ConfigSyncable;
-import net.minecraft.util.StatCollector;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
 import java.util.Map;
 
-import static net.minecraftforge.common.ChestGenHooks.*;
+import static net.minecraft.world.storage.loot.LootTableList.*;
+
 
 public enum Settings implements ConfigSyncable
 {
     INSTANCE;
-    public static final String CONFIG_VERSION = "2";
+    public static final String CONFIG_VERSION = "3";
     private static final int MAX_OVERWORLD_TREE_GEN_RARITY = 10000;
-    private static final int DEFAULT_OVER_WORLD_TREE_GEN_RARITY = 1;
-    private static final ImmutableMap<String, Integer> DEFAULT_CHEST_RARITIES =
+    private static final int DEFAULT_OVER_WORLD_TREE_GEN_RARITY = 5;
+    private static final ImmutableMap<ResourceLocation, Integer> DEFAULT_CHEST_RARITIES =
             ImmutableMap.copyOf(defaultChestRarities());
-    private static final ImmutableMap<String, String> CHEST_CONFIG_NAMES = chestConfigNames();
-    private final Map<String, Integer> chestRarities = defaultChestRarities();
+    private static final ImmutableMap<ResourceLocation, String> CHEST_CONFIG_NAMES = chestConfigNames();
+    private final Map<ResourceLocation, Integer> chestRarities = defaultChestRarities();
 
     private int overworldTreeGenRarity = DEFAULT_OVER_WORLD_TREE_GEN_RARITY;
     private int saplingDropRarity = 200;
@@ -31,35 +33,42 @@ public enum Settings implements ConfigSyncable
     private boolean integrateMinechem = true;
     private boolean integrateStorageDrawers = true;
 
-    private static ImmutableMap<String, String> chestConfigNames()
+    private static ImmutableMap<ResourceLocation, String> chestConfigNames()
     {
-        final Map<String, String> map = Maps.newHashMap();
-        map.put(VILLAGE_BLACKSMITH, "blacksmithRarity");
-        map.put(BONUS_CHEST, "bonusChestRarity");
-        map.put(PYRAMID_DESERT_CHEST, "desertTempleRarity");
-        map.put(DUNGEON_CHEST, "dungeonRarity");
-        map.put(PYRAMID_JUNGLE_CHEST, "jungleTempleRarity");
-        map.put(PYRAMID_JUNGLE_DISPENSER, "jungleTempleDispenserRarity");
-        map.put(MINESHAFT_CORRIDOR, "mineshaftCorridorRarity");
-        map.put(STRONGHOLD_CORRIDOR, "strongholdCorridorRarity");
-        map.put(STRONGHOLD_CROSSING, "strongholdCrossingRarity");
-        map.put(STRONGHOLD_LIBRARY, "strongholdLibraryRarity");
+        final Map<ResourceLocation, String> map = Maps.newHashMap();
+        map.put(CHESTS_VILLAGE_BLACKSMITH, "blacksmithRarity");
+        map.put(CHESTS_SPAWN_BONUS_CHEST, "bonusChestRarity");
+        map.put(CHESTS_DESERT_PYRAMID, "desertTempleRarity");
+        map.put(CHESTS_SIMPLE_DUNGEON, "dungeonRarity");
+        map.put(CHESTS_JUNGLE_TEMPLE, "jungleTempleRarity");
+        map.put(CHESTS_JUNGLE_TEMPLE_DISPENSER, "jungleTempleDispenserRarity");
+        map.put(CHESTS_ABANDONED_MINESHAFT, "mineshaftCorridorRarity");
+        map.put(CHESTS_STRONGHOLD_CORRIDOR, "strongholdCorridorRarity");
+        map.put(CHESTS_STRONGHOLD_CROSSING, "strongholdCrossingRarity");
+        map.put(CHESTS_STRONGHOLD_LIBRARY, "strongholdLibraryRarity");
+        map.put(CHESTS_END_CITY_TREASURE, "endTreasureRarity");
+        map.put(CHESTS_NETHER_BRIDGE, "netherBridgeRarity");
+        map.put(CHESTS_IGLOO_CHEST, "iglooRarity");
         return ImmutableMap.copyOf(map);
     }
 
-    private static Map<String, Integer> defaultChestRarities()
+    //Rarities are percentages now!
+    private static Map<ResourceLocation, Integer> defaultChestRarities()
     {
-        Map<String, Integer> map = Maps.newHashMap();
-        map.put(VILLAGE_BLACKSMITH, 0);
-        map.put(BONUS_CHEST, 0);
-        map.put(PYRAMID_DESERT_CHEST, 1);
-        map.put(DUNGEON_CHEST, 1);
-        map.put(PYRAMID_JUNGLE_CHEST, 1);
-        map.put(PYRAMID_JUNGLE_DISPENSER, 0);
-        map.put(MINESHAFT_CORRIDOR, 1);
-        map.put(STRONGHOLD_CORRIDOR, 1);
-        map.put(STRONGHOLD_CROSSING, 1);
-        map.put(STRONGHOLD_LIBRARY, 1);
+        final Map<ResourceLocation, Integer> map = Maps.newHashMap();
+        map.put(CHESTS_VILLAGE_BLACKSMITH, 0);
+        map.put(CHESTS_SPAWN_BONUS_CHEST, 0);
+        map.put(CHESTS_DESERT_PYRAMID, 1);
+        map.put(CHESTS_SIMPLE_DUNGEON, 1);
+        map.put(CHESTS_JUNGLE_TEMPLE, 1);
+        map.put(CHESTS_JUNGLE_TEMPLE_DISPENSER, 0);
+        map.put(CHESTS_ABANDONED_MINESHAFT, 1);
+        map.put(CHESTS_STRONGHOLD_CORRIDOR, 1);
+        map.put(CHESTS_STRONGHOLD_CROSSING, 1);
+        map.put(CHESTS_STRONGHOLD_LIBRARY, 1);
+        map.put(CHESTS_END_CITY_TREASURE, 5);
+        map.put(CHESTS_NETHER_BRIDGE, 5);
+        map.put(CHESTS_IGLOO_CHEST, 1);
         return map;
     }
 
@@ -93,15 +102,15 @@ public enum Settings implements ConfigSyncable
 
     private static String getLocalizedComment(String settingName)
     {
-        return StatCollector.translateToLocal("config." + TheMod.MOD_ID + ':' + settingName);
+        return TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeTranslate(null,"config." + TheMod.MOD_ID + ':' + settingName): I18n.format("config." + TheMod.MOD_ID + ':' + settingName);
     }
 
-    public static Iterable<String> chestTypes()
+    public static Iterable<ResourceLocation> chestTypes()
     {
         return DEFAULT_CHEST_RARITIES.keySet();
     }
 
-    private void loadChestRarity(Configuration config, String category, String chestType)
+    private void loadChestRarity(Configuration config, String category, ResourceLocation chestType)
     {
         final int defaultRarity = DEFAULT_CHEST_RARITIES.get(chestType);
         final String settingName = CHEST_CONFIG_NAMES.get(chestType);
@@ -109,7 +118,7 @@ public enum Settings implements ConfigSyncable
         chestRarities.put(chestType, rarity);
     }
 
-    public int chestRarity(String chestType)
+    public int chestRarity(ResourceLocation chestType)
     {
         final Integer rarity = chestRarities.get(chestType);
         return rarity == null ? 0 : rarity;
@@ -124,7 +133,7 @@ public enum Settings implements ConfigSyncable
     {
         if ("1".equals(oldConfig.getLoadedConfigVersion()))
         {
-            for (final String chestType : DEFAULT_CHEST_RARITIES.keySet())
+            for (final ResourceLocation chestType : DEFAULT_CHEST_RARITIES.keySet())
             {
                 loadChestRarity(oldConfig, Configuration.CATEGORY_GENERAL, chestType);
             }
@@ -142,7 +151,7 @@ public enum Settings implements ConfigSyncable
         saplingDropRarity = get(config, "saplingDropRarity", Configuration.CATEGORY_GENERAL, saplingDropRarity);
 
         final String chestsCategory = Configuration.CATEGORY_GENERAL + ".chests";
-        for (final String chestType : chestRarities.keySet())
+        for (final ResourceLocation chestType : chestRarities.keySet())
         {
             loadChestRarity(config, chestsCategory, chestType);
         }
