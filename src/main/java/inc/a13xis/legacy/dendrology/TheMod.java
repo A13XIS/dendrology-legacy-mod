@@ -137,12 +137,12 @@ public final class TheMod
     @EventHandler
     public void onFMLInitialization(FMLInitializationEvent event)
     {
-        Proxy.common.registerColorMultiplier(ModBlocks.taxonomyInstance().leavesDefinitions());
+        Proxy.render.init(ModBlocks.taxonomyInstance().leavesDefinitions());
         Logger.forMod(MOD_ID).info("Adding recipes.");
         new OreDictHandler().registerBlocksWithOreDictinary();
         new Crafter().writeRecipes();
         new Smelter().registerSmeltings();
-        integrateMods(event.getModState());
+        //integrateMods(event.getModState());
     }
 
     @EventHandler
@@ -150,7 +150,7 @@ public final class TheMod
     {
         Proxy.render.postInit();
         FuelHandler.postInit();
-        integrateMods(event.getModState());
+        //integrateMods(event.getModState());
         integrators.clear();
         ParcelManager.INSTANCE.init();
 

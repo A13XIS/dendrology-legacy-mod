@@ -29,9 +29,9 @@ public class SaplingParcel extends Item
     public SaplingParcel()
     {
         setCreativeTab(TheMod.INSTANCE.creativeTab());
-        //setRegistryName("parcel");
         setUnlocalizedName("parcel");
-        //GameRegistry.register(this);
+        setRegistryName("parcel");
+        GameRegistry.register(this);
     }
 
     @Override
@@ -66,7 +66,6 @@ public class SaplingParcel extends Item
 
     public final void registerItemModel()
     {
-        setRegistryName("parcel");
         ModelResourceLocation rloc = new ModelResourceLocation(getRegistryName(),"inventory");
         ModelLoader.setCustomModelResourceLocation(this, 0, rloc);
     }

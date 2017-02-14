@@ -24,13 +24,6 @@ public class ClientCommonProxy extends CommonProxy {
         ModBlocks.registerAllBlockRenders();
     }
 
-    public void registerColorMultiplier(Iterable<? extends DefinesLeaves> subblocks){
-        for(DefinesLeaves define:subblocks){
-            Colorizer.registerBlockColor(define.leavesBlock());
-            Colorizer.registerItemBlockColor(define.leavesBlock());
-        }
-    }
-
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         if (!world.isRemote)
