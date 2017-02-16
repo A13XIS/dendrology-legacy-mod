@@ -19,12 +19,6 @@ import java.util.Iterator;
 public class ClientCommonProxy extends CommonProxy {
 
     @Override
-    public void registerRenders(){
-        ModItems.registerAllItemRenders();
-        ModBlocks.registerAllBlockRenders();
-    }
-
-    @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         if (!world.isRemote)
         {

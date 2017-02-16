@@ -9,10 +9,6 @@ public final class ModItems
 {
     private static final SaplingParcel parcel = new SaplingParcel();
 
-    public static void registerAllItemRenders(){
-        parcel.registerItemModel();
-    }
-
     public static SaplingParcel parcelInstance(){
         return parcel;
     }

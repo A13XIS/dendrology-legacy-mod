@@ -14,10 +14,6 @@ public final class ClientRenderProxy extends RenderProxy
     @Override
     public void postInit()
     {
-        for(DefinesLeaves define:subblocks){
-            Colorizer.registerBlockColor(define.leavesBlock());
-            Colorizer.registerItemBlockColor(define.leavesBlock());
-        }
         final IResourceManager resourceManager = Minecraft.getMinecraft().getResourceManager();
         if (resourceManager instanceof IReloadableResourceManager)
         {

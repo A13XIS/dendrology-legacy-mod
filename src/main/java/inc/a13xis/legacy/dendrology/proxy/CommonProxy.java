@@ -9,9 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class CommonProxy {
-    public void registerRenders(){
-
-    }
 
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         EntityItem entityItem = player.dropItem(ParcelManager.INSTANCE.randomItem(),false);
@@ -23,8 +20,5 @@ public class CommonProxy {
         return itemStack;
     }
 
-    public void registerColorMultiplier(Iterable<? extends DefinesLeaves> subblocks){
-
-    }
 
 }
