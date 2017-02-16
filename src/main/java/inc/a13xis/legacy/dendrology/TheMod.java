@@ -137,6 +137,7 @@ public final class TheMod
     @EventHandler
     public void onFMLInitialization(FMLInitializationEvent event)
     {
+        ModBlocks.registerPotionEffects();
         Proxy.render.init(ModBlocks.taxonomyInstance().leavesDefinitions());
         Logger.forMod(MOD_ID).info("Adding recipes.");
         new OreDictHandler().registerBlocksWithOreDictinary();
@@ -149,6 +150,7 @@ public final class TheMod
     public void onFMLPostInitialization(FMLPostInitializationEvent event)
     {
         Proxy.render.postInit();
+        ModBlocks.registerPotionEffects();
         FuelHandler.postInit();
         //integrateMods(event.getModState());
         integrators.clear();

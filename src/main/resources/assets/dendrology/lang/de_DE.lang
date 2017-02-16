@@ -58,19 +58,19 @@ tile.dendrology:planks.salyx.name=Salyxholzbretter
 tile.dendrology:planks.tuopa.name=Tuopaholzbretter
 
 ### Saplings
-tile.dendrology:sapling.acemus.name=Acemussetzling
-tile.dendrology:sapling.cedrum.name=Cedrumsetzling
-tile.dendrology:sapling.cerasu.name=Cerasusetzling
+tile.dendrology:sapling.acemus.name=Acemussetzling //Loorbeerbaum
+tile.dendrology:sapling.cedrum.name=Cedrumsetzling //Ceder
+tile.dendrology:sapling.cerasu.name=Cerasusetzling //Sauerkirsch
 tile.dendrology:sapling.delnas.name=Delnassetzling
-tile.dendrology:sapling.ewcaly.name=Ewcalysetzling
+tile.dendrology:sapling.ewcaly.name=Ewcalysetzling //Eukalyptus
 tile.dendrology:sapling.hekur.name=Hekursetzling
 tile.dendrology:sapling.kiparis.name=Kiparissetzling
 tile.dendrology:sapling.kulist.name=Kulistsetzling
 tile.dendrology:sapling.lata.name=Latasetzling
-tile.dendrology:sapling.nucis.name=Nucissetzling
-tile.dendrology:sapling.porffor.name=Porfforsetzling
-tile.dendrology:sapling.salyx.name=Salyxsetzling
-tile.dendrology:sapling.tuopa.name=Tuopasetzling
+tile.dendrology:sapling.nucis.name=Nucissetzling //generischer Nussbaum
+tile.dendrology:sapling.porffor.name=Porfforsetzling //Purpur
+tile.dendrology:sapling.salyx.name=Salyxsetzling // (Zier)Weide
+tile.dendrology:sapling.tuopa.name=Tuopasetzling //Pappelbaum
 
 ### Slabs
 tile.dendrology:slab.acemus.name=Acemusholzstufe

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
+import inc.a13xis.legacy.dendrology.content.PotionBrewingRecipe;
 import inc.a13xis.legacy.dendrology.content.loader.TreeSpeciesLoader;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeBlockFactory;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeTaxonomy;
@@ -21,10 +22,19 @@ import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionHelper;
+import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.datafix.fixes.PotionItems;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
@@ -48,7 +58,7 @@ public final class ModBlocks
     private static final List<SaplingBlock> saplingBlocks = Lists.newArrayList();
     private static final List<LeavesBlock> leavesBlocks = Lists.newArrayList();
     private static final OverworldTreeTaxonomy overworldTaxonomy = new OverworldTreeTaxonomy();
-    private static ArrayList<ItemBlock> registered = new ArrayList<ItemBlock>();
+    private static final List<MixRecipe> recipes = new ArrayList<>();
 
     public static Iterable<? extends LeavesBlock> leavesBlocks() { return ImmutableList.copyOf(leavesBlocks); }
 
@@ -270,5 +280,74 @@ public final class ModBlocks
     {
         loadOverWorldContent();
         registerAllBlocks();
+    }
+
+    public static void registerPotionEffects() {
+        ArrayList<MixRecipe> list = new ArrayList<>();
+        for(DefinesSapling define:overworldTaxonomy.saplingDefinitions()){
+            if(define.saplingBlock() instanceof ModSaplingBlock){
+                switch(((ModSlabBlock.EnumType)define.saplingSubBlockVariant())){
+                    case EWCALY:{
+                        ItemStack sapling = new ItemStack(Item.getItemFromBlock(define.saplingBlock()),1,define.saplingSubBlockVariant().ordinal());
+                        ItemStack frompotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.WATER);
+                        ItemStack topotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.MUNDANE);
+                        list.add(new MixRecipe(frompotion,sapling,topotion));
+                        frompotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.AWKWARD);
+                        topotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.POISON);
+                        list.add(new MixRecipe(frompotion,sapling,topotion));
+                    break;}
+                    case KIPARIS:{
+                        ItemStack sapling = new ItemStack(Item.getItemFromBlock(define.saplingBlock()),1,define.saplingSubBlockVariant().ordinal());
+                        ItemStack frompotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.WATER);
+                        ItemStack topotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.MUNDANE);
+                        list.add(new MixRecipe(frompotion,sapling,topotion));
+                        frompotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.AWKWARD);
+                        topotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.SWIFTNESS);
+                        list.add(new MixRecipe(frompotion,sapling,topotion));
+                    break;}
+                }
+            }
+        }
+        for(MixRecipe mr:list) {
+            if (!recipes.contains(mr)){
+                BrewingRecipeRegistry.addRecipe(new PotionBrewingRecipe(PotionUtils.getPotionFromItem(mr.getFrom()), mr.getConversator(), PotionUtils.getPotionFromItem(mr.getTo())));
+                recipes.add(mr);
+            }
+        }
+    }
+
+    private static class MixRecipe {
+        private final ItemStack from, to, conversator;
+        MixRecipe(ItemStack from, ItemStack conversator, ItemStack to){
+            if(!(from.getItem() instanceof ItemPotion)||!(to.getItem() instanceof ItemPotion)){
+                throw new IllegalArgumentException("Both \"from\" and \"to\" have to be an item potion stack");
+            }
+            this.from=from;
+            this.to=to;
+            this.conversator=conversator;
+        }
+
+        public ItemStack getFrom() {
+            return from;
+        }
+
+        public ItemStack getTo() {
+            return to;
+        }
+
+        public ItemStack getConversator() {
+            return conversator;
+        }
+
+        @Override
+        public boolean equals(Object other){
+            if(!(other instanceof MixRecipe)){
+                return false;
+            }
+            MixRecipe omr=(MixRecipe)other;
+            boolean test = from.getItem()==omr.from.getItem()&&conversator.getItem()==omr.conversator.getItem()&&to.getItem()==omr.to.getItem();
+            boolean test2 = PotionUtils.getPotionFromItem(from)==PotionUtils.getPotionFromItem(omr.from)&&conversator.getItemDamage()==omr.conversator.getItemDamage()&&PotionUtils.getPotionFromItem(to)==PotionUtils.getPotionFromItem(omr.to);
+            return test && test2;
+        }
     }
 }
