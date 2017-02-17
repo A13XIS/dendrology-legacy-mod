@@ -12,21 +12,20 @@ import inc.a13xis.legacy.dendrology.content.crafting.Smelter;
 import inc.a13xis.legacy.dendrology.content.fuel.FuelHandler;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeGenerator;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies;
-import inc.a13xis.legacy.dendrology.events.BlockLoadEvent;
 import inc.a13xis.legacy.dendrology.events.GenerationEvents;
-import inc.a13xis.legacy.dendrology.events.ItemLoadEvent;
-import inc.a13xis.legacy.dendrology.events.ModelLoadEvent;
+import inc.a13xis.legacy.dendrology.item.ModItems;
 import inc.a13xis.legacy.dendrology.proxy.Proxy;
 import inc.a13xis.legacy.koresample.common.util.lang.LangMap;
 import inc.a13xis.legacy.koresample.common.util.log.Logger;
 import inc.a13xis.legacy.koresample.compat.Integrates;
 import inc.a13xis.legacy.koresample.config.ConfigEventHandler;
+import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.translation.LanguageMap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.LoaderState.ModState;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -36,7 +35,10 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.codec.language.bm.Lang;
 
+import javax.annotation.Nullable;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -48,7 +50,7 @@ public final class TheMod
 {
     public static final String MOD_ID = "dendrology";
     static final String MOD_NAME = "Ancient Trees";
-    static final String MOD_VERSION = "1.9.4-L1";
+    static final String MOD_VERSION = "1.10.2-L1";
     static final String MOD_GUI_FACTORY = "inc.a13xis.legacy.dendrology.config.client.ModGuiFactory";
     private static Optional<LangMap> fallback = Optional.absent();
     private static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ':';
@@ -116,20 +118,18 @@ public final class TheMod
             if(test.getLocation().toString().startsWith("jar:"))
             fallback = Optional.of(new LangMap(TheMod.class.getResourceAsStream("/assets/dendrology/lang/en_US.lang")));
             else{
-            String pathToCode = "../out/production/Ancienttrees_main";
+            String pathToCode = "../Ancienttrees/build/resources/main";
             File test2 = new File(pathToCode);
             fallback = Optional.of(new LangMap(new FileInputStream(pathToCode+"/assets/dendrology/lang/en_US.lang")));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        MinecraftForge.EVENT_BUS.register(new GenerationEvents());
-        MinecraftForge.EVENT_BUS.register(new ItemLoadEvent());
-        MinecraftForge.EVENT_BUS.register(new BlockLoadEvent());
-        MinecraftForge.EVENT_BUS.register(new ModelLoadEvent());
         configEventHandler = Optional.of(new ConfigEventHandler(MOD_ID, event.getSuggestedConfigurationFile(), Settings.INSTANCE, Settings.CONFIG_VERSION));
         configEventHandler.get().activate();
+        MinecraftForge.EVENT_BUS.register(new GenerationEvents());
         new ModBlocks().loadContent();
+        Proxy.common.registerRenders();
         //initIntegrators();
         //integrateMods(event.getModState());
     }
@@ -137,9 +137,12 @@ public final class TheMod
     @EventHandler
     public void onFMLInitialization(FMLInitializationEvent event)
     {
+        ModBlocks.registerPotionEffects();
         Proxy.render.init(ModBlocks.taxonomyInstance().leavesDefinitions());
         Logger.forMod(MOD_ID).info("Adding recipes.");
+        new OreDictHandler().registerBlocksWithOreDictinary();
         new Crafter().writeRecipes();
+        new Smelter().registerSmeltings();
         //integrateMods(event.getModState());
     }
 
@@ -147,6 +150,7 @@ public final class TheMod
     public void onFMLPostInitialization(FMLPostInitializationEvent event)
     {
         Proxy.render.postInit();
+        ModBlocks.registerPotionEffects();
         FuelHandler.postInit();
         //integrateMods(event.getModState());
         integrators.clear();

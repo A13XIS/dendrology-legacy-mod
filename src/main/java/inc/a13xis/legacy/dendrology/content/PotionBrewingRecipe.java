@@ -14,9 +14,6 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.datafix.fixes.PotionItems;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
 
-/**
- * Created by Lexis on 16.02.2017.
- */
 public class PotionBrewingRecipe implements IBrewingRecipe{
 
     private PotionType input;

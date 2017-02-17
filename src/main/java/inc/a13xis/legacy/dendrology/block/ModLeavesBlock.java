@@ -9,12 +9,10 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,7 @@ import java.util.Random;
 public final class ModLeavesBlock extends LeavesBlock
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModLogBlock.EnumType.class);
-    private static int id = -1;
+
     public ModLeavesBlock(Iterable<? extends DefinesLeaves> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
@@ -93,16 +91,6 @@ public final class ModLeavesBlock extends LeavesBlock
     @Override
     public int damageDropped(IBlockState state) {
         return getMetaFromState(state.withProperty(CHECK_DECAY,true).withProperty(DECAYABLE,true));
-    }
-
-
-
-    public static int getId() {
-        return id;
-    }
-
-    public static void setId(int id) {
-        ModLeavesBlock.id = id;
     }
 
 }

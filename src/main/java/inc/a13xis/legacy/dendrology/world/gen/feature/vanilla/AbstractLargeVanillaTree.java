@@ -84,6 +84,7 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
         if (pos.getY() < 1 || pos.getY() + height + 1 > world.getHeight()) return true;
 
         final Block block = world.getBlockState(new BlockPos(basePos[0], basePos[1] - 1, basePos[2])).getBlock();
+
         return !block.canSustainPlant(world.getBlockState(pos.down()), world, pos.down(), EnumFacing.UP, plantable) || !hasRoomToGrow(world, pos, height);
 
     }

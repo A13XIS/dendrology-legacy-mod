@@ -23,7 +23,6 @@ public enum FuelHandler implements IFuelHandler
         final Item fuelItem = fuel.getItem();
         final Material fuelMaterial = Block.getBlockFromItem(fuelItem).getDefaultState().getMaterial();
         if (fuelMaterial.equals(Material.WOOD) && SlabBlock.isSingleSlab(fuelItem)) return 150;
-
         return 0;
     }
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.koresample.config.ConfigSyncable;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;

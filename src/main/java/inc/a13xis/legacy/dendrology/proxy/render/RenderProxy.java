@@ -8,6 +8,5 @@ public class RenderProxy
     public void init(Iterable<? extends DefinesLeaves> subblocks){
         this.subblocks=subblocks;
     }
-
     public void postInit() { }
 }

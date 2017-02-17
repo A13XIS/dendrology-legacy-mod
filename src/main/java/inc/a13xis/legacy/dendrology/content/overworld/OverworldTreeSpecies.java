@@ -1,6 +1,5 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
-
 import inc.a13xis.legacy.dendrology.world.AcemusColorizer;
 import inc.a13xis.legacy.dendrology.world.CerasuColorizer;
 import inc.a13xis.legacy.dendrology.world.KulistColorizer;
@@ -98,6 +97,7 @@ public enum OverworldTreeSpecies
                 return KulistColorizer.getInventoryColor();
             default:
                 return 0xffffff;
+
         }
     }
 
@@ -117,6 +117,7 @@ public enum OverworldTreeSpecies
                 return KulistColorizer.getColor(pos);
             default:
                 return blockAccess.getBlockState(pos).getMapColor().colorValue;
+
         }
     }
 

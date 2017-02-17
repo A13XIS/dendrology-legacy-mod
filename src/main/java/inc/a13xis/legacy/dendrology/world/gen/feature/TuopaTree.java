@@ -1,6 +1,7 @@
 package inc.a13xis.legacy.dendrology.world.gen.feature;
 
 import net.minecraft.block.Block;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

@@ -2,7 +2,6 @@ package inc.a13xis.legacy.dendrology.block;
 
 import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.dendrology.TheMod;
-import inc.a13xis.legacy.dendrology.item.ModWoodItem;
 import inc.a13xis.legacy.koresample.tree.DefinesWood;
 import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
 import net.minecraft.block.SoundType;
@@ -10,13 +9,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Collection;
 
@@ -24,7 +17,6 @@ import java.util.Collection;
 public final class ModWoodBlock extends WoodBlock
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
-
 
     protected ModWoodBlock(Collection<? extends DefinesWood> subBlocks){
         super(subBlocks);

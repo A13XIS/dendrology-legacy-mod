@@ -35,7 +35,7 @@ public class OverworldTreeGenerator implements IWorldGenerator
             final int x = (chunkX << 4) + 8 + random.nextInt(16);
             final int z = (chunkZ << 4) + 8 + random.nextInt(16);
 
-            final Biome biome = world.getBiomeGenForCoords(new BlockPos(x,0,z));                              //Y!!!
+            final Biome biome = world.getBiome(new BlockPos(x,0,z));                              //Y!!!
             final List<Type> biomeTypes = ImmutableList.copyOf(BiomeDictionary.getTypesForBiome(biome));
 
             if (!(biomeTypes.contains(Type.NETHER) || biomeTypes.contains(Type.END)))

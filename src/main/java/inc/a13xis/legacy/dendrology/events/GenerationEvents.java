@@ -27,9 +27,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Lexis on 08.02.2017.
- */
 public class GenerationEvents {
 
     @SubscribeEvent
