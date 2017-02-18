@@ -1,30 +1,33 @@
 package inc.a13xis.legacy.dendrology.proxy;
 
 
-import inc.a13xis.legacy.dendrology.content.ParcelManager;
-import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
-import net.minecraft.entity.item.EntityItem;
+import inc.a13xis.legacy.dendrology.TheMod;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class CommonProxy {
-    public void registerRenders(){
+    public void registerRenders(){}
 
-    }
-
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-        EntityItem entityItem = player.dropItem(ParcelManager.INSTANCE.randomItem(),false);
-        if (entityItem != null)
+    public void onItemRightClick(ItemStack content, World world, EntityPlayer player){
+        final String message;
+        if (content == null)
+            message = TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeServerTranslate(null,TheMod.MOD_ID+":parcel.empty"): I18n.translateToFallback(TheMod.MOD_ID+":parcel.empty");
+        else
         {
-            entityItem.setPickupDelay(0);
-            entityItem.setOwner(player.getCommandSenderEntity().getName());
+            final String itemName = TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeServerTranslate(null,content.getItem().getUnlocalizedName(content) + ".name"):I18n.translateToFallback(content.getItem().getUnlocalizedName(content) + ".name");
+            message = TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeServerTranslate(null,TheMod.MOD_ID+":parcel.full",itemName):I18n.translateToFallback(TheMod.MOD_ID+":parcel.full");
+
         }
-        return itemStack;
+
+        player.addChatMessage(new TextComponentString(message));
     }
 
-    public void registerColorMultiplier(Iterable<? extends DefinesLeaves> subblocks){
 
+    public String safeTranslate(String settingName) {
+        String val=I18n.translateToLocal(settingName);
+        return val==settingName?I18n.translateToFallback(settingName):val;
     }
-
 }

@@ -3,8 +3,8 @@ package inc.a13xis.legacy.dendrology.config;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import inc.a13xis.legacy.dendrology.TheMod;
+import inc.a13xis.legacy.dendrology.proxy.Proxy;
 import inc.a13xis.legacy.koresample.config.ConfigSyncable;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
@@ -102,7 +102,7 @@ public enum Settings implements ConfigSyncable
 
     private static String getLocalizedComment(String settingName)
     {
-        return TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeTranslate(null,"config." + TheMod.MOD_ID + ':' + settingName): I18n.format("config." + TheMod.MOD_ID + ':' + settingName);
+        return Proxy.common.safeTranslate(settingName);
     }
 
     public static Iterable<ResourceLocation> chestTypes()
