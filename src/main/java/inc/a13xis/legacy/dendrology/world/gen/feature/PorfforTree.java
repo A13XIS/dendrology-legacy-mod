@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.porffor.LargePorfforTree;
 import inc.a13xis.legacy.dendrology.world.gen.feature.vanilla.VanillaTree;
 import inc.a13xis.legacy.koresample.tree.DefinesTree;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;

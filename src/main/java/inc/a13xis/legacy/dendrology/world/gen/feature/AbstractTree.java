@@ -7,8 +7,8 @@ import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.common.IPlantable;
@@ -29,7 +29,7 @@ public abstract class AbstractTree extends WorldGenAbstractTree
     {
         final Block block = world.getBlockState(pos).getBlock();
 
-        return block.isAir(world, pos) || block.isLeaves(world, pos);
+        return block.isAir(world.getBlockState(pos),world, pos) || block.isLeaves(world.getBlockState(pos),world, pos);
     }
 
     public void setTree(DefinesTree tree)
@@ -44,7 +44,7 @@ public abstract class AbstractTree extends WorldGenAbstractTree
         if (!hasRoomToGrow(world, pos, height)) return true;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        return !block.canSustainPlant(world, pos.down(), EnumFacing.UP, plantable);
+        return !block.canSustainPlant(world.getBlockState(pos.down()),world, pos.down(), EnumFacing.UP, plantable);
     }
 
     protected boolean hasRoomToGrow(World world, BlockPos pos, int height)
@@ -57,24 +57,25 @@ public abstract class AbstractTree extends WorldGenAbstractTree
 
     LeavesBlock getLeavesBlock() { return tree.leavesBlock(); }
 
-    private int getLeavesMetadata() { return tree.leavesSubBlockIndex(); }
+    private int getLeavesMetadata() { return tree.leavesSubBlockVariant().ordinal(); }
 
     protected LogBlock getLogBlock() { return tree.logBlock(); }
 
-    protected int getLogMetadata() { return tree.leavesSubBlockIndex(); }
+    protected int getLogMetadata() { return tree.logSubBlockVariant().ordinal(); }
 
-    protected SaplingBlock getSaplingBlock() { return tree.saplingBlock(); }
+    protected SaplingBlock getSaplingBlock() {
+        return tree.saplingBlock(); }
 
     protected void placeLeaves(World world, BlockPos pos)
     {
-        if (world.getBlockState(pos).getBlock().canBeReplacedByLeaves(world, pos))
-            func_175905_a(world, pos, getLeavesBlock(), getLeavesMetadata());
+        if (world.getBlockState(pos).getBlock().canBeReplacedByLeaves(world.getBlockState(pos),world, pos))
+            setBlockAndNotifyAdequately(world, pos, getLeavesBlock().getStateFromMeta(getLeavesMetadata()));
     }
 
     protected void placeLog(World world, BlockPos pos)
     {
         if (canBeReplacedByLog(world, pos))
-            func_175905_a(world, pos, getLogBlock(), getLogMetadata());
+            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()));
     }
 
     @Override

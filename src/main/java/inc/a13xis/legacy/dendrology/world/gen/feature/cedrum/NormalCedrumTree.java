@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -19,7 +19,7 @@ public class NormalCedrumTree extends AbstractTree
     @Override
     protected boolean canBeReplacedByLog(World world, BlockPos pos)
     {
-        return super.canBeReplacedByLog(world, pos) || world.getBlockState(pos).getBlock().getMaterial().equals(Material.water);
+        return super.canBeReplacedByLog(world, pos) || world.getBlockState(pos).getMaterial().equals(Material.WATER);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class NormalCedrumTree extends AbstractTree
     @Override
     public boolean isReplaceable(World world, BlockPos pos)
     {
-        return super.isReplaceable(world,pos) || world.getBlockState(pos).getBlock().getMaterial().equals(Material.water);
+        return super.isReplaceable(world,pos) || world.getBlockState(pos).getMaterial().equals(Material.WATER);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class NormalCedrumTree extends AbstractTree
         if (!isPoorGrowthConditions(world, pos, height, getSaplingBlock())) {
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, pos.down(),pos);
+        block.onPlantGrow(world.getBlockState(pos.down()),world, pos.down(),pos);
 
         for (int level = 0; level <= height; level++)
         {

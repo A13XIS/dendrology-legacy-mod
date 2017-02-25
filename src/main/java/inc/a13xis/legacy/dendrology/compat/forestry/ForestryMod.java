@@ -3,12 +3,11 @@ package inc.a13xis.legacy.dendrology.compat.forestry;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies;
-import com.scottkillen.mod.koresample.compat.Integrator;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.LoaderState.ModState;
-import cpw.mods.fml.common.Optional.Method;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.registry.GameRegistry;
+import inc.a13xis.legacy.koresample.compat.Integrator;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.LoaderState.ModState;
+import net.minecraftforge.fml.common.Optional.Method;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import forestry.api.core.ForestryAPI;
 import forestry.api.recipes.RecipeManagers;
 import net.minecraft.item.Item;
@@ -18,8 +17,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public final class ForestryMod extends Integrator
 {
-    private static final String MOD_ID = "Forestry";
-    private static final String MOD_NAME = MOD_ID;
+    private static final String MOD_ID = "forestry";
+    private static final String MOD_NAME = "Forestry";
 
     private static void addBackpackItem(String backpack, ItemStack stack)
     {
@@ -30,7 +29,7 @@ public final class ForestryMod extends Integrator
 
     private static void addBackpackItem(String backpack, Item item, int damage)
     {
-        sendBackpackMessage(String.format("%s@%s:%d", backpack, GameRegistry.findUniqueIdentifierFor(item), damage));
+        sendBackpackMessage(String.format("%s@%s:%d", backpack, Item.REGISTRY.getNameForObject(item).getResourcePath(), damage));
     }
 
     private static void addBackpackItems()
@@ -39,15 +38,15 @@ public final class ForestryMod extends Integrator
         for (final OverworldTreeSpecies tree : OverworldTreeSpecies.values())
         {
             //noinspection ObjectAllocationInLoop
-            final ItemStack sapling = new ItemStack(tree.saplingBlock(), 1, tree.saplingSubBlockIndex());
+            final ItemStack sapling = new ItemStack(tree.saplingBlock(), 1, tree.saplingSubBlockVariant().ordinal());
             addBackpackItem("forester", sapling);
 
             //noinspection ObjectAllocationInLoop
-            final ItemStack log = new ItemStack(tree.logBlock(), 1, tree.logSubBlockIndex());
+            final ItemStack log = new ItemStack(tree.logBlock(), 1, tree.logSubBlockVariant().ordinal());
             addBackpackItem("forester", log);
 
             //noinspection ObjectAllocationInLoop
-            final ItemStack leaves = new ItemStack(tree.leavesBlock(), 1, tree.leavesSubBlockIndex());
+            final ItemStack leaves = new ItemStack(tree.leavesBlock(), 1, tree.leavesSubBlockVariant().ordinal());
             addBackpackItem("forester", leaves);
 
             //noinspection ObjectAllocationInLoop
@@ -62,7 +61,7 @@ public final class ForestryMod extends Integrator
         for (final OverworldTreeSpecies tree : OverworldTreeSpecies.values())
         {
             //noinspection ObjectAllocationInLoop
-            final ItemStack sapling = new ItemStack(tree.saplingBlock(), 1, tree.saplingSubBlockIndex());
+            final ItemStack sapling = new ItemStack(tree.saplingBlock(), 1, tree.saplingSubBlockVariant().ordinal());
             addFarmableSapling(sapling);
         }
     }
@@ -76,7 +75,7 @@ public final class ForestryMod extends Integrator
 
     private static void addFarmableSapling(Item item, int damage)
     {
-        sendFarmableMessage(String.format("farmArboreal@%s:%d", GameRegistry.findUniqueIdentifierFor(item), damage));
+        sendFarmableMessage(String.format("farmArboreal@%s:%d", Item.REGISTRY.getNameForObject(item).getResourcePath(), damage));
     }
 
     @Method(modid = MOD_ID)
@@ -88,13 +87,13 @@ public final class ForestryMod extends Integrator
         for (final OverworldTreeSpecies tree : OverworldTreeSpecies.values())
         {
             //noinspection ObjectAllocationInLoop
-            final ItemStack sapling = new ItemStack(tree.saplingBlock(), 1, tree.saplingSubBlockIndex());
+            final ItemStack sapling = new ItemStack(tree.saplingBlock(), 1, tree.saplingSubBlockVariant().ordinal());
             RecipeManagers.fermenterManager
                     .addRecipe(sapling, fermentationValue, 1.0f, fluidStack("biomass"), fluidStack("water"));
             RecipeManagers.fermenterManager
                     .addRecipe(sapling, fermentationValue, 1.5f, fluidStack("biomass"), fluidStack("juice"));
             RecipeManagers.fermenterManager
-                    .addRecipe(sapling, fermentationValue, 1.5f, fluidStack("biomass"), fluidStack("honey"));
+                    .addRecipe(sapling, fermentationValue, 1.5f, fluidStack("biomass"), fluidStack("for.honey"));
         }
     }
 

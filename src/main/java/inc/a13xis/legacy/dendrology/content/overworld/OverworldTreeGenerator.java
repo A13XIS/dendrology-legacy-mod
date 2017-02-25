@@ -2,9 +2,10 @@ package inc.a13xis.legacy.dendrology.content.overworld;
 
 import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.dendrology.config.Settings;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
@@ -25,7 +26,7 @@ public class OverworldTreeGenerator implements IWorldGenerator
     }
 
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator,
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
                          IChunkProvider chunkProvider)
     {
         final Settings settings = Settings.INSTANCE;
@@ -34,7 +35,7 @@ public class OverworldTreeGenerator implements IWorldGenerator
             final int x = (chunkX << 4) + 8 + random.nextInt(16);
             final int z = (chunkZ << 4) + 8 + random.nextInt(16);
 
-            final BiomeGenBase biome = world.getBiomeGenForCoords(new BlockPos(x,0,z));                              //Y!!!
+            final Biome biome = world.getBiomeGenForCoords(new BlockPos(x,0,z));                              //Y!!!
             final List<Type> biomeTypes = ImmutableList.copyOf(BiomeDictionary.getTypesForBiome(biome));
 
             if (!(biomeTypes.contains(Type.NETHER) || biomeTypes.contains(Type.END)))
@@ -55,6 +56,6 @@ public class OverworldTreeGenerator implements IWorldGenerator
         int chunkX = x >> 4;
         int chunkZ = z >> 4;
 
-        return world.getChunkFromChunkCoords(chunkX, chunkZ).getHeight(x & 15, z & 15);
+        return world.getChunkFromChunkCoords(chunkX, chunkZ).getHeight(new BlockPos(x & 15, Integer.MIN_VALUE,z & 15));
     }
 }

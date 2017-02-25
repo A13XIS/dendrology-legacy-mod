@@ -2,15 +2,20 @@ package inc.a13xis.legacy.dendrology.item;
 
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.content.ParcelManager;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import inc.a13xis.legacy.dendrology.proxy.Proxy;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -20,13 +25,17 @@ public class SaplingParcel extends Item
     {
         setCreativeTab(TheMod.INSTANCE.creativeTab());
         setUnlocalizedName("parcel");
+        setRegistryName("parcel");
+        GameRegistry.register(this);
     }
 
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List information, boolean unused)
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> information, boolean unused)
     {
-        //noinspection unchecked
-        information.add(StatCollector.translateToLocal(String.format("%s%s", TheMod.getResourcePrefix(), "parcel.tooltip")));
+        String test = String.format("%s%s", TheMod.getResourcePrefix(), "parcel.tooltip");
+        String text = TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeTranslate(null,test): net.minecraft.client.resources.I18n.format(test);
+        information.add(text);
     }
 
     private static String getUnwrappedUnlocalizedName(String unlocalizedName)
@@ -42,21 +51,16 @@ public class SaplingParcel extends Item
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand)
     {
         if (!world.isRemote)
         {
             final ItemStack content = ParcelManager.INSTANCE.randomItem();
 
-            final String message;
-            if (content == null)
-                message = StatCollector.translateToLocal("dendrology:parcel.empty");
-            else
+            if (content != null)
             {
-                final String itemName = StatCollector.translateToLocal(content.getItem().getUnlocalizedName(content) + ".name");
-                message = StatCollector.translateToLocalFormatted("dendrology:parcel.full", itemName);
-
-                final EntityItem entityItem = player.dropPlayerItemWithRandomChoice(content, false);
+                content.stackSize=1;
+                final EntityItem entityItem = player.dropItem(content,true,true);
                 if (entityItem != null)
                 {
                     entityItem.setPickupDelay(0);
@@ -64,18 +68,19 @@ public class SaplingParcel extends Item
                 }
             }
 
-            player.addChatMessage(new ChatComponentText(message));
             itemStack.stackSize--;
+            Proxy.common.onItemRightClick(content,world,player);
         }
-        return itemStack;
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS,itemStack);
     }
 
     @Override
     public String getUnlocalizedName(ItemStack unused) { return getUnlocalizedName(); }
 
-    //Clientside!
-    public void registerModel()
+    public final void registerItemModel()
     {
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(this,0,new ModelResourceLocation(TheMod.getResourcePrefix()+getUnlocalizedName().substring(getUnlocalizedName().indexOf('.') + 1)));
+        ModelResourceLocation rloc = new ModelResourceLocation(getRegistryName(),"inventory");
+        ModelLoader.setCustomModelResourceLocation(this, 0, rloc);
     }
+
 }

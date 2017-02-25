@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -25,7 +25,7 @@ public class NormalEwcalyTree extends AbstractTree
         if (isPoorGrowthConditions(world, pos, height, getSaplingBlock())) return false;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, pos.down(), pos);
+        block.onPlantGrow(world.getBlockState(pos.down()),world, pos.down(), pos);
 
         for (int dY = 0; dY <= height; dY++)
             placeLog(world, pos.up(dY));
@@ -49,7 +49,7 @@ public class NormalEwcalyTree extends AbstractTree
                         if (size == 3 &&
                                 (Math.abs(dX) == 3 && Math.abs(dZ) == 2 || Math.abs(dX) == 2 && Math.abs(dZ) == 3))
                         {
-                            func_175905_a(world, new BlockPos(pos.getX() + dX, y1, pos.getZ() + dZ), Blocks.air, 0);
+                            setBlockAndNotifyAdequately(world, new BlockPos(pos.getX() + dX, y1, pos.getZ() + dZ), Blocks.AIR.getDefaultState());
                         }
 
                         if (y1 == pos.getY() + height && Math.abs(dX) < 3 && Math.abs(dZ) < 3 &&

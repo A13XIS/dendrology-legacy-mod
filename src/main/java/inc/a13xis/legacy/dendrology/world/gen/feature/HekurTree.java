@@ -5,7 +5,7 @@ import inc.a13xis.legacy.dendrology.world.gen.feature.hekur.LargeHekurTree;
 import inc.a13xis.legacy.dendrology.world.gen.feature.hekur.NormalHekurTree;
 import inc.a13xis.legacy.koresample.tree.DefinesTree;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -40,7 +40,7 @@ public class HekurTree extends AbstractTree
     @Override
     public boolean generate(World world, Random rand, BlockPos pos)
     {
-        while (world.getBlockState(pos.down()).getBlock().getMaterial().equals(Material.water)) pos = pos.down();
+        while (world.getBlockState(pos.down()).getMaterial().equals(Material.WATER)) pos = pos.down();
 
         if (rand.nextInt(10) < 9) return treeGen.generate(world, rand, pos);
 

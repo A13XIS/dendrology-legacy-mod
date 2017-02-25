@@ -1,7 +1,7 @@
 package inc.a13xis.legacy.dendrology.world.gen.feature.cedrum;
 
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -21,7 +21,7 @@ public class LargeCedrumTree extends NormalCedrumTree
         if (isPoorGrowthConditions(world, pos, height, getSaplingBlock())) return false;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, pos.down(), pos);
+        block.onPlantGrow(world.getBlockState(pos.down()),world, pos.down(), pos);
 
         for (int level = height; level >= 0; level--)
         {

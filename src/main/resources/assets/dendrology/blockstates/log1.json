@@ -1,0 +1,21 @@
+
+{
+    "variants": {
+        "axis=y,variant=ewcaly": { "model": "dendrology:log_ewcaly" },
+        "axis=y,variant=hekur": { "model": "dendrology:log_hekur" },
+        "axis=y,variant=kiparis": { "model": "dendrology:log_kiparis" },
+        "axis=y,variant=kulist": { "model": "dendrology:log_kulist" },
+        "axis=x,variant=ewcaly": { "model": "dendrology:log_ewcaly_side", "y":90},
+        "axis=x,variant=hekur": { "model": "dendrology:log_hekur_side", "y":90},
+        "axis=x,variant=kiparis": { "model": "dendrology:log_kiparis_side", "y":90},
+        "axis=x,variant=kulist": { "model": "dendrology:log_kulist_side", "y":90},
+        "axis=z,variant=ewcaly": { "model": "dendrology:log_ewcaly_side" },
+        "axis=z,variant=hekur": { "model": "dendrology:log_hekur_side" },
+        "axis=z,variant=kiparis": { "model": "dendrology:log_kiparis_side" },
+        "axis=z,variant=kulist": { "model": "dendrology:log_kulist_side" },
+        "axis=none,variant=ewcaly": { "model": "dendrology:log_ewcaly_bark" },
+        "axis=none,variant=hekur": { "model": "dendrology:log_hekur_bark" },
+        "axis=none,variant=kiparis": { "model": "dendrology:log_kiparis_bark" },
+        "axis=none,variant=kulist": { "model": "dendrology:log_kulist_bark" }
+    }
+}
