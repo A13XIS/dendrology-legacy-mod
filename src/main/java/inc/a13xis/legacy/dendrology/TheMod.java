@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import inc.a13xis.legacy.dendrology.block.ModBlocks;
+import inc.a13xis.legacy.dendrology.compat.forestry.ForestryMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
 import inc.a13xis.legacy.dendrology.content.ParcelManager;
 import inc.a13xis.legacy.dendrology.content.crafting.Crafter;
@@ -12,14 +13,16 @@ import inc.a13xis.legacy.dendrology.content.crafting.Smelter;
 import inc.a13xis.legacy.dendrology.content.fuel.FuelHandler;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeGenerator;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies;
-import inc.a13xis.legacy.dendrology.item.ModItems;
+import inc.a13xis.legacy.dendrology.events.GenerationEvents;
 import inc.a13xis.legacy.dendrology.proxy.Proxy;
+import inc.a13xis.legacy.koresample.common.util.lang.LangMap;
 import inc.a13xis.legacy.koresample.common.util.log.Logger;
 import inc.a13xis.legacy.koresample.compat.Integrates;
 import inc.a13xis.legacy.koresample.config.ConfigEventHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.LoaderState.ModState;
 import net.minecraftforge.fml.common.Mod;
@@ -31,22 +34,20 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.security.CodeSource;
 import java.util.List;
 
-@SuppressWarnings({
-        "AnonymousInnerClass",
-        "StaticNonFinalField",
-        "WeakerAccess",
-        "StaticVariableMayNotBeInitialized",
-        "NonConstantFieldWithUpperCaseName"
-})
 @Mod(modid = TheMod.MOD_ID, name = TheMod.MOD_NAME, version = TheMod.MOD_VERSION, useMetadata = true, guiFactory = TheMod.MOD_GUI_FACTORY)
 public final class TheMod
 {
     public static final String MOD_ID = "dendrology";
     static final String MOD_NAME = "Ancient Trees";
-    static final String MOD_VERSION = "1.8.9-L1";
+    static final String MOD_VERSION = "1.9.4-L1.1";
     static final String MOD_GUI_FACTORY = "inc.a13xis.legacy.dendrology.config.client.ModGuiFactory";
+    private static Optional<LangMap> fallback = Optional.absent();
     private static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ':';
     @SuppressWarnings("PublicField")
     @Instance(MOD_ID)
@@ -74,17 +75,17 @@ public final class TheMod
 
     public static Logger logger() { return Logger.forMod(MOD_ID); }
 
-//    private void initIntegrators()
-//    {
-//        Logger.forMod(MOD_ID).info("Preparing integration with other mods.");
+   private void initIntegrators()
+    {
+        Logger.forMod(MOD_ID).info("Preparing integration with other mods.");
 //        integrators.add(new MinechemMod());
-//        integrators.add(new ForestryMod());
+        integrators.add(new ForestryMod());
 //        integrators.add(new GardenCoreMod());
 //        integrators.add(new GardenTreesMod());
 //        integrators.add(new ChiselMod());
 //        integrators.add(new MineFactoryReloadedMod());
 //        integrators.add(new StorageDrawersMod());
-//   }
+   }
 
     public Configuration configuration()
     {
@@ -106,22 +107,33 @@ public final class TheMod
     @EventHandler
     public void onFMLPreInitialization(FMLPreInitializationEvent event)
     {
+
+        try {
+            CodeSource test = TheMod.class.getProtectionDomain().getCodeSource();
+            if(test.getLocation().toString().startsWith("jar:"))
+            fallback = Optional.of(new LangMap(TheMod.class.getResourceAsStream("/assets/dendrology/lang/en_US.lang")));
+            else{
+            String pathToCode = "../build/resources/main";
+            File test2 = new File(pathToCode);
+            fallback = Optional.of(new LangMap(new FileInputStream(pathToCode+"/assets/dendrology/lang/en_US.lang")));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         configEventHandler = Optional.of(new ConfigEventHandler(MOD_ID, event.getSuggestedConfigurationFile(), Settings.INSTANCE, Settings.CONFIG_VERSION));
         configEventHandler.get().activate();
-
+        MinecraftForge.EVENT_BUS.register(new GenerationEvents());
         new ModBlocks().loadContent();
-        ModItems mi = new ModItems();
-        mi.loadContent();
         Proxy.common.registerRenders();
-
-        //Proxy.common.initSubRenders();
-        //initIntegrators();
+        initIntegrators();
         integrateMods(event.getModState());
     }
 
     @EventHandler
     public void onFMLInitialization(FMLInitializationEvent event)
     {
+        ModBlocks.registerPotionEffects();
+        Proxy.render.init(ModBlocks.taxonomyInstance().leavesDefinitions());
         Logger.forMod(MOD_ID).info("Adding recipes.");
         new OreDictHandler().registerBlocksWithOreDictinary();
         new Crafter().writeRecipes();
@@ -133,11 +145,11 @@ public final class TheMod
     public void onFMLPostInitialization(FMLPostInitializationEvent event)
     {
         Proxy.render.postInit();
+        ModBlocks.registerPotionEffects();
         FuelHandler.postInit();
         integrateMods(event.getModState());
         integrators.clear();
         ParcelManager.INSTANCE.init();
-
         new OverworldTreeGenerator().install();
     }
 
@@ -147,4 +159,13 @@ public final class TheMod
         return Objects.toStringHelper(this).add("creativeTab", creativeTab).add("integrators", integrators)
                 .add("configEventHandler", configEventHandler).toString();
     }
+
+    public static boolean fallBackExsists(){
+        return fallback.isPresent();
+    }
+
+    public static LangMap getFallBack(){
+        return !fallback.isPresent()?null:fallback.get();
+    }
+
 }
