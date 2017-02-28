@@ -22,7 +22,7 @@ public enum ParcelManager
         else
         {
             element = itemStack.copy();
-            element.stackSize = 1;
+            element.setCount(1);
         }
         potentialContent.setWeight(element, weight);
     }

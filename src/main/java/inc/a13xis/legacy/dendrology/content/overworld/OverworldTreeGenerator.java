@@ -35,11 +35,12 @@ public class OverworldTreeGenerator implements IWorldGenerator
             final int x = (chunkX << 4) + 8 + random.nextInt(16);
             final int z = (chunkZ << 4) + 8 + random.nextInt(16);
 
-            final Biome biome = world.getBiome(new BlockPos(x,0,z));                              //Y!!!
-            final List<Type> biomeTypes = ImmutableList.copyOf(BiomeDictionary.getTypesForBiome(biome));
+            final Biome biome = world.getBiome(new BlockPos(x,0,z));
+            final List<Type> biomeTypes = ImmutableList.copyOf(BiomeDictionary.getTypes(biome));
 
-            if (!(biomeTypes.contains(Type.NETHER) || biomeTypes.contains(Type.END)))
-                if (random.nextInt(settings.overworldTreeGenRarity()) == 0)
+            if (!(biomeTypes.contains(Type.NETHER) || biomeTypes.contains(Type.END))){
+                int ri = random.nextInt(settings.overworldTreeGenRarity());
+                if (ri == 0)
                 {
                     final OverworldTreeSpecies species =
                             OverworldTreeSpecies.values()[random.nextInt(OverworldTreeSpecies.values().length)];
@@ -48,6 +49,7 @@ public class OverworldTreeGenerator implements IWorldGenerator
                     final int y = maxY > 0 ? random.nextInt(maxY) : 0;
                     tree.generate(world, random, new BlockPos(x, y, z));
                 }
+            }
         }
     }
 

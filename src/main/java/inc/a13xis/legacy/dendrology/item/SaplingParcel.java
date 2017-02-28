@@ -51,7 +51,7 @@ public class SaplingParcel extends Item
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand)
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
     {
         if (!world.isRemote)
         {
@@ -59,7 +59,7 @@ public class SaplingParcel extends Item
 
             if (content != null)
             {
-                content.stackSize=1;
+                content.setCount(1);
                 final EntityItem entityItem = player.dropItem(content,true,true);
                 if (entityItem != null)
                 {
@@ -68,10 +68,9 @@ public class SaplingParcel extends Item
                 }
             }
 
-            itemStack.stackSize--;
             Proxy.common.onItemRightClick(content,world,player);
         }
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS,itemStack);
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS,player.getHeldItem(hand));
     }
 
     @Override

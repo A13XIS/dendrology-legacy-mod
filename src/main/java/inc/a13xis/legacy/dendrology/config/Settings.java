@@ -7,7 +7,6 @@ import inc.a13xis.legacy.dendrology.proxy.Proxy;
 import inc.a13xis.legacy.koresample.config.ConfigSyncable;
 
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.config.Configuration;
 
 

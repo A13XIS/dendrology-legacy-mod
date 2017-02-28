@@ -65,8 +65,8 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
         while (dX != xLimit)
         {
             coord[xIndex] = start[xIndex] + dX;
-            coord[yIndex] = MathHelper.floor_double(start[yIndex] + dX * ySlope);
-            coord[zindex] = MathHelper.floor_double(start[zindex] + dX * zSlope);
+            coord[yIndex] = MathHelper.floor(start[yIndex] + dX * ySlope);
+            coord[zindex] = MathHelper.floor(start[zindex] + dX * zSlope);
 
             if (!isReplaceable(world, new BlockPos(coord[0], coord[1], coord[2])))
             {
@@ -205,9 +205,9 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
             final int j = aint2[b1] + b4;
             while (i != j)
             {
-                aint3[b1] = MathHelper.floor_double((start[b1] + i) + 0.5D);
-                aint3[b2] = MathHelper.floor_double(start[b2] + i * d0 + 0.5D);
-                aint3[b3] = MathHelper.floor_double(start[b3] + i * d1 + 0.5D);
+                aint3[b1] = MathHelper.floor((start[b1] + i) + 0.5D);
+                aint3[b2] = MathHelper.floor(start[b2] + i * d0 + 0.5D);
+                aint3[b3] = MathHelper.floor(start[b3] + i * d1 + 0.5D);
                 final int xDistance = Math.abs(aint3[0] - start[0]);
                 final int zDistance = Math.abs(aint3[2] - start[2]);
                 final int distance = Math.max(xDistance, zDistance);
@@ -332,8 +332,8 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
                 {
                     final double var11 = SCALE_WIDTH * var8 * (rng.nextFloat() + 0.328D);
                     final double var13 = rng.nextFloat() * 2.0D * Math.PI;
-                    final int var15 = MathHelper.floor_double(var11 * StrictMath.sin(var13) + basePos[0] + var9);
-                    final int var16 = MathHelper.floor_double(var11 * StrictMath.cos(var13) + basePos[2] + var9);
+                    final int var15 = MathHelper.floor(var11 * StrictMath.sin(var13) + basePos[0] + var9);
+                    final int var16 = MathHelper.floor(var11 * StrictMath.cos(var13) + basePos[2] + var9);
                     final int[] var17 = { var15, leafLimit, var16 };
                     final int[] var18 = { var15, leafLimit + LEAF_DISTANCE_LIMIT, var16 };
 

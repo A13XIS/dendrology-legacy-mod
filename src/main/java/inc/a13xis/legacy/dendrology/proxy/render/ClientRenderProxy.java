@@ -8,6 +8,7 @@ import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourceManager;
+import net.minecraftforge.event.entity.minecart.MinecartEvent;
 
 public final class ClientRenderProxy extends RenderProxy
 {

@@ -29,7 +29,7 @@ public enum AcemusColorizer implements IResourceManagerReloadListener
     public static int getColor(BlockPos pos)
     {
         int day = 0;
-        final World world = Minecraft.getMinecraft().theWorld;
+        final World world = Minecraft.getMinecraft().world;
         if (world != null)
         {
             final WorldInfo info = world.getWorldInfo();

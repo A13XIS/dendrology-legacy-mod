@@ -6,6 +6,7 @@ import inc.a13xis.legacy.dendrology.item.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class ClientCommonProxy extends CommonProxy {
@@ -30,11 +31,12 @@ public class ClientCommonProxy extends CommonProxy {
 
             }
 
-            player.addChatMessage(new TextComponentString(message));
+            player.sendMessage(new TextComponentString(message));
     }
 
     @Override
     public String safeTranslate(String settingName) {
-        return TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeTranslate(null,"config." + TheMod.MOD_ID + ':' + settingName): net.minecraft.client.resources.I18n.format("config." + TheMod.MOD_ID + ':' + settingName);
+        return TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeTranslate(null,settingName): net.minecraft.client.resources.I18n.format(settingName);
     }
+
 }

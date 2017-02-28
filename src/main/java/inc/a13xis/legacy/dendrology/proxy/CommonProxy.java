@@ -22,12 +22,10 @@ public class CommonProxy {
 
         }
 
-        player.addChatMessage(new TextComponentString(message));
+        player.sendMessage(new TextComponentString(message));
     }
 
-
     public String safeTranslate(String settingName) {
-        String val=I18n.translateToLocal(settingName);
-        return val==settingName?I18n.translateToFallback(settingName):val;
+        return TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeServerTranslate(null,settingName):I18n.translateToFallback(settingName);
     }
 }
