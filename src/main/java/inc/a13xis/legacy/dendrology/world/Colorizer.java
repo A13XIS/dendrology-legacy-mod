@@ -1,9 +1,6 @@
 package inc.a13xis.legacy.dendrology.world;
 
-import inc.a13xis.legacy.dendrology.block.ModLeaves2Block;
-import inc.a13xis.legacy.dendrology.block.ModLeavesBlock;
-import inc.a13xis.legacy.dendrology.block.ModLog2Block;
-import inc.a13xis.legacy.dendrology.block.ModLogBlock;
+import inc.a13xis.legacy.dendrology.block.*;
 import inc.a13xis.legacy.dendrology.item.ModLeavesItem;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import net.minecraft.block.state.IBlockState;
@@ -38,10 +35,26 @@ public class Colorizer {
                         if (val.equals("KULIST")){
                             return KulistColorizer.getColor(pos);
                         }
+                        if (val.equals("HEKUR")){
+                            return BiomeColorHelper.getFoliageColorAtPos(access,pos);
+                        }
+                    }
+                    else if(block instanceof ModLeaves3Block){
+                        String val = ((ModLog3Block.EnumType)access.getBlockState(pos).getValue(ModLeaves3Block.VARIANT)).name();
+                        if (val.equals("LATA")){
+                            return BiomeColorHelper.getFoliageColorAtPos(access,pos);
+                        }
+                        if (val.equals("NUCIS")){
+                            return BiomeColorHelper.getFoliageColorAtPos(access,pos);
+                        }
+                    }
+                    else if(block instanceof ModLeaves4Block){
+                        return BiomeColorHelper.getFoliageColorAtPos(access,pos);
                     }
 
+
                 }
-                return BiomeColorHelper.getFoliageColorAtPos(access,pos);
+                return 0xFFFFFF;
             }
         }, block);
     }
@@ -54,7 +67,7 @@ public class Colorizer {
                 if(block instanceof ModLeavesBlock){
                     String val = ((ModLogBlock.EnumType)((ModLeavesItem)stack.getItem()).getBlock().getStateFromMeta(stack.getItemDamage()).getValue(ModLeavesBlock.VARIANT)).name();
                     switch (val){
-                       case "ACEMUS":
+                        case "ACEMUS":
                             return AcemusColorizer.getInventoryColor();
                         case "CERASU":
                             return CerasuColorizer.getInventoryColor();
@@ -64,10 +77,25 @@ public class Colorizer {
                 else if(block instanceof ModLeaves2Block){
                     String val = ((ModLog2Block.EnumType)((ModLeavesItem)stack.getItem()).getBlock().getStateFromMeta(stack.getItemDamage()).getValue(ModLeaves2Block.VARIANT)).name();
                     if(val.equals("KULIST")){
-                        return KulistColorizer.getInventoryColor();
+                        return KulistColorizer.getInventoryColor(); //
+                    }
+                    if (val.equals("HEKUR")){
+                        return ColorizerFoliage.getFoliageColorBasic();
                     }
                 }
-                return ColorizerFoliage.getFoliageColorBasic();
+                else if(block instanceof ModLeaves3Block){
+                    String val = ((ModLog3Block.EnumType)((ModLeavesItem)stack.getItem()).getBlock().getStateFromMeta(stack.getItemDamage()).getValue(ModLeaves3Block.VARIANT)).name();
+                    if (val.equals("LATA")){
+                        return ColorizerFoliage.getFoliageColorBasic();
+                    }
+                    if (val.equals("NUCIS")){
+                        return ColorizerFoliage.getFoliageColorBasic();
+                    }
+                }
+                else if(block instanceof ModLeaves4Block){
+                    return ColorizerFoliage.getFoliageColorBasic();
+                }
+                return 0xFFFFFF;
             }
         },block);
     }
