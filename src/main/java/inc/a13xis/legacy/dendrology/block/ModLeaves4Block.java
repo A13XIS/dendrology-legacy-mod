@@ -84,9 +84,19 @@ public final class ModLeaves4Block extends LeavesBlock
         return check?dcable?0:1:dcable?2:3;
     }
 
+    protected boolean needMask(){
+        return true;
+    }
+
     @Override
     public int damageDropped(IBlockState state) {
         return getMetaFromState(state.withProperty(CHECK_DECAY,true).withProperty(DECAYABLE,true));
+    }
+
+    @Override
+    protected int getSaplingDropChance(IBlockState state)
+    {
+        return Settings.INSTANCE.saplingDropRarity();
     }
 
 }
