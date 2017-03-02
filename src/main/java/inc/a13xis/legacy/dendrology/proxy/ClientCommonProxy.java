@@ -2,6 +2,7 @@ package inc.a13xis.legacy.dendrology.proxy;
 
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.block.ModBlocks;
+import inc.a13xis.legacy.dendrology.compat.chisel.ChiselWoodSubBlockManager;
 import inc.a13xis.legacy.dendrology.item.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -36,5 +37,10 @@ public class ClientCommonProxy extends CommonProxy {
     @Override
     public String safeTranslate(String settingName) {
         return TheMod.fallBackExsists()?TheMod.getFallBack().formatAndSafeTranslate(null,"config." + TheMod.MOD_ID + ':' + settingName): net.minecraft.client.resources.I18n.format("config." + TheMod.MOD_ID + ':' + settingName);
+    }
+
+    @Override
+    public void registerChiselRenders(ChiselWoodSubBlockManager man){
+        man.registerModels();
     }
 }

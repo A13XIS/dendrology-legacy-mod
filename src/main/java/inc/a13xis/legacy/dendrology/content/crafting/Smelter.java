@@ -20,6 +20,6 @@ public class Smelter
 
     private static void registerCharcoalSmelting(Block log)
     {
-        FurnaceRecipes.instance().addSmelting(Item.getItemFromBlock(log), new ItemStack(Items.coal, 1, 1), 0.15F);
+        FurnaceRecipes.instance().addSmelting(Item.getItemFromBlock(log), new ItemStack(Items.COAL, 1, 1), 0.15F);
     }
 }

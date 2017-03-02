@@ -20,19 +20,19 @@ public final class Crafter
 
     private void initSaplingRecipes()
     {
-        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.dye, 1, 9),
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.DYE, 1, 9),
                 new ItemStack(OverworldTreeSpecies.CERASU.saplingBlock(), 1,
                         OverworldTreeSpecies.CERASU.saplingSubBlockVariant().ordinal()));
 
-        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.dye, 1, 10),
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.DYE, 1, 10),
                 new ItemStack(OverworldTreeSpecies.EWCALY.saplingBlock(), 1,
                         OverworldTreeSpecies.EWCALY.saplingSubBlockVariant().ordinal()));
 
-        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.dye, 1, 5),
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.DYE, 1, 5),
                 new ItemStack(OverworldTreeSpecies.PORFFOR.saplingBlock(), 1,
                         OverworldTreeSpecies.PORFFOR.saplingSubBlockVariant().ordinal()));
 
-        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.dye, 1, 14),
+        CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.DYE, 1, 14),
                 new ItemStack(OverworldTreeSpecies.ACEMUS.saplingBlock(), 1,
                         OverworldTreeSpecies.ACEMUS.saplingSubBlockVariant().ordinal()));
     }

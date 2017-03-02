@@ -58,16 +58,17 @@ public enum Settings implements ConfigSyncable
         final Map<ResourceLocation, Integer> map = Maps.newHashMap();
         map.put(CHESTS_VILLAGE_BLACKSMITH, 0);
         map.put(CHESTS_SPAWN_BONUS_CHEST, 0);
-        map.put(CHESTS_DESERT_PYRAMID, 1);
-        map.put(CHESTS_SIMPLE_DUNGEON, 1);
-        map.put(CHESTS_JUNGLE_TEMPLE, 1);
+        map.put(CHESTS_DESERT_PYRAMID, 1000000);
+        map.put(CHESTS_SIMPLE_DUNGEON, 20000);
+        map.put(CHESTS_JUNGLE_TEMPLE, 1000000);
         map.put(CHESTS_JUNGLE_TEMPLE_DISPENSER, 0);
-        map.put(CHESTS_ABANDONED_MINESHAFT, 1);
-        map.put(CHESTS_STRONGHOLD_CORRIDOR, 1);
-        map.put(CHESTS_STRONGHOLD_CROSSING, 1);
-        map.put(CHESTS_STRONGHOLD_LIBRARY, 1);
-        map.put(CHESTS_END_CITY_TREASURE, 5);
-        map.put(CHESTS_NETHER_BRIDGE, 5);
+        map.put(CHESTS_ABANDONED_MINESHAFT, 20000);
+        map.put(CHESTS_STRONGHOLD_CORRIDOR, 1000000);
+        map.put(CHESTS_STRONGHOLD_CROSSING, 1000000);
+        map.put(CHESTS_STRONGHOLD_LIBRARY, 1000000);
+        map.put(CHESTS_END_CITY_TREASURE, 5000000);
+        map.put(CHESTS_NETHER_BRIDGE, 5000000);
+        map.put(CHESTS_IGLOO_CHEST, 1000000);;
         map.put(CHESTS_IGLOO_CHEST, 1);
         return map;
     }

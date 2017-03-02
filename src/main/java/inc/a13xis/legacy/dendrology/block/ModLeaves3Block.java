@@ -90,9 +90,19 @@ public final class ModLeaves3Block extends LeavesBlock
         return par*4+type.ordinal();
     }
 
+    protected boolean needMask(){
+        return false;
+    }
+
     @Override
     public int damageDropped(IBlockState state) {
         return getMetaFromState(state.withProperty(CHECK_DECAY,true).withProperty(DECAYABLE,true));
+    }
+
+    @Override
+    protected int getSaplingDropChance(IBlockState state)
+    {
+        return Settings.INSTANCE.saplingDropRarity();
     }
 
 }

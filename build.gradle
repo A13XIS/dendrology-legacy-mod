@@ -20,7 +20,7 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
-version = "1.9.4-L1.1"
+version = "1.9.4-L1.2"
 group= "inc.a13xis.dendrology" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "dendrology"
 
@@ -51,7 +51,8 @@ dependencies {
     //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
     compile project(":Koresample")
-
+    compile files("../forestry_1.9.4-5.0.24.0.jar")
+    compile files("../Chisel-MC1.9.4-0.0.5.27-api.jar")
     // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
     // except that these dependencies get remapped to your current MCP mappings
     //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
