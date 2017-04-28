@@ -65,7 +65,6 @@ public final class Crafter
     private void initWoodDoorRecipes()
     {
         for (final DefinesDoor definition : ModBlocks.doorDefinitions()) {
-            CraftingManager.getInstance().addRecipe(new ItemStack(definition.doorBlock(),3, definition.slabSubBlockVariant().ordinal())), "## ", "## ", "## ", '#', new ItemStack(definition.doorModelBlock(), 1, definition.doorModelSubBlockVariant().ordinal()));
             CraftingManager.getInstance().addRecipe(new ItemStack(definition.doorBlock(), 3), " ##", " ##", " ##", '#', new ItemStack(definition.doorModelBlock(), 1, definition.doorModelSubBlockVariant().ordinal()));
         }
     }
