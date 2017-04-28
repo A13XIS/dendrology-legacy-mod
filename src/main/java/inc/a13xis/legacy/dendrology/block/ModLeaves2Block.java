@@ -26,6 +26,7 @@ public final class ModLeaves2Block extends LeavesBlock
     public ModLeaves2Block(Iterable<? extends DefinesLeaves> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
+        setUnlocalizedName("leaves");
         setCreativeTab(TheMod.INSTANCE.creativeTab());
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ModLog2Block.EnumType.EWCALY).withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.TRUE));
     }
@@ -46,7 +47,7 @@ public final class ModLeaves2Block extends LeavesBlock
     public BlockPlanks.EnumType getWoodType(int meta) { return BlockPlanks.EnumType.byMetadata(meta); }
 
     @Override
-    protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
+    public String resourcePrefix() { return TheMod.getResourcePrefix(); }
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {

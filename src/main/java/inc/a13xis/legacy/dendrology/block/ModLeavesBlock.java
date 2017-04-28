@@ -57,7 +57,7 @@ public final class ModLeavesBlock extends LeavesBlock
     public BlockPlanks.EnumType getWoodType(int meta) { return BlockPlanks.EnumType.byMetadata(meta); }
 
     @Override
-    protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
+    public String resourcePrefix() { return TheMod.getResourcePrefix(); }
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
