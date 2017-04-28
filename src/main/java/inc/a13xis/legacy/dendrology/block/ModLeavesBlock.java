@@ -5,16 +5,15 @@ import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
 import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.Random;
 public final class ModLeavesBlock extends LeavesBlock
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModLogBlock.EnumType.class);
-    private static int id = -1;
+
     public ModLeavesBlock(Iterable<? extends DefinesLeaves> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
@@ -46,8 +45,8 @@ public final class ModLeavesBlock extends LeavesBlock
     }
 
     @Override
-    public ModLogBlock.EnumType getWoodType(int meta) {
-       return ModLogBlock.EnumType.fromId(meta);
+    public BlockPlanks.EnumType getWoodType(int meta) {
+        return BlockPlanks.EnumType.byMetadata(meta%6);
     }
 
     @Override
@@ -85,18 +84,9 @@ public final class ModLeavesBlock extends LeavesBlock
     public int getMetaFromState(IBlockState state) {
         ModLogBlock.EnumType type = (ModLogBlock.EnumType) state.getValue(ModLogBlock.VARIANT);
         boolean check = (Boolean) state.getValue(CHECK_DECAY);
-        boolean dcable = (Boolean) state.getValue(CHECK_DECAY);
+        boolean dcable = (Boolean) state.getValue(DECAYABLE);
         int par = check?dcable?0:1:dcable?2:3;
         return par*4+type.ordinal();
-    }
-
-    protected boolean needMask(){
-           return false;
-    }
-
-    @Override
-    public int damageDropped(IBlockState state) {
-        return getMetaFromState(state.withProperty(CHECK_DECAY,true).withProperty(DECAYABLE,true));
     }
 
     @Override
@@ -105,12 +95,5 @@ public final class ModLeavesBlock extends LeavesBlock
         return Settings.INSTANCE.saplingDropRarity();
     }
 
-    public static int getId() {
-        return id;
-    }
-
-    public static void setId(int id) {
-        ModLeavesBlock.id = id;
-    }
 
 }

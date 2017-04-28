@@ -1,0 +1,93 @@
+package inc.a13xis.legacy.dendrology.compat.chisel;
+
+import inc.a13xis.legacy.dendrology.TheMod;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import java.util.List;
+
+public final class ChiselWoodBlock extends Block
+{
+    private static PropertyEnum VARIATION = PropertyEnum.create("variation",VARIATIONS.class);
+
+    private final String speciesName;
+
+    public ChiselWoodBlock(String speciesName)
+    {
+        super(Material.WOOD);
+        setHardness(2.0f);
+        setResistance(5.0f);
+        setSoundType(SoundType.WOOD);
+        setHarvestLevel("axe", 0);
+        this.speciesName = speciesName;
+        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIATION,VARIATIONS.DOUBLE));
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(VARIATION,VARIATIONS.values()[meta]);
+    }
+
+    public int getMetaFromState(IBlockState state){
+        int i=0;
+        for(VARIATIONS v:VARIATIONS.values()){
+            if(((VARIATIONS)state.getValue(VARIATION)).equals(v)){
+                break;
+            }
+        }
+        return i;
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return getMetaFromState(state);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(Item item, CreativeTabs tabs, List<ItemStack> list)
+    {
+        for(int i=0;i<15;i++){
+            list.add(new ItemStack(item,1,i));
+        }
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState(){
+        BlockStateContainer bs = new BlockStateContainer(this, new IProperty[]{VARIATION});
+        return bs;
+    }
+
+    public String getVariationName(int i)
+    {
+        return I18n.translateToLocal(
+                String.format("chisel.%s:planks.%s.%s.name", TheMod.MOD_ID, speciesName, VARIATIONS.values()[i]));
+    }
+
+    public enum VARIATIONS implements IStringSerializable{
+        CLEAN("clean"), SHORT("short"), VERTICAL("vertical"), UNEVEN("uneven"), PARQUET("parquet"), FANCY("fancy"), BLINDS("blinds") , PANEL("panel"), DOUBLE("double"), CRATE("crate"),
+                CRATEFANCY("cratefancy"), SCAFFOLD("scaffold"), LARGE("large"), CHAOTIC("chaotic"), VERTICALCHAOTIC("verticalchaotic");
+
+        private final String name;
+
+        VARIATIONS(String name){
+            this.name=name;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+    }
+}

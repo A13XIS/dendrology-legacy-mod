@@ -1,0 +1,20 @@
+package inc.a13xis.legacy.dendrology.compat.chisel;
+
+import team.chisel.api.render.IBlockRenderContext;
+
+/**
+ * Created by Lexis on 04.03.2017.
+ */
+public class DendrologyRenderContext implements IBlockRenderContext{
+
+    private long data;
+
+    public  DendrologyRenderContext(long data){
+        this.data=data;
+    }
+
+    @Override
+    public long getCompressedData() {
+        return data;
+    }
+}

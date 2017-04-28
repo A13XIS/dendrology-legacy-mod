@@ -1,0 +1,36 @@
+package inc.a13xis.legacy.dendrology.compat.chisel;
+
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import team.chisel.api.render.IBlockRenderContext;
+import team.chisel.api.render.IBlockRenderType;
+import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureInfo;
+
+import java.util.List;
+
+public class DendrologyRenderType implements IBlockRenderType {
+
+    List<ResourceLocation> textures;
+
+    public DendrologyRenderType(List<ResourceLocation> textures){
+        this.textures=textures;
+    }
+
+    @Override
+    public <T extends IBlockRenderType> IChiselTexture<? extends T> makeTexture(TextureInfo info) {
+        DendrologyChiselTexture<DendrologyRenderType> texture = new DendrologyChiselTexture<>(info,textures,this);
+        return texture;
+    }
+
+    @Override
+    public IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
+        return null;
+    }
+
+    @Override
+    public IBlockRenderContext getContextFromData(long data) {
+        return new DendrologyRenderContext(data);
+    }
+}

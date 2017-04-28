@@ -1,6 +1,8 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
 import inc.a13xis.legacy.dendrology.block.*;
+import inc.a13xis.legacy.koresample.common.block.DoorBlock;
+import inc.a13xis.legacy.koresample.common.block.FenceBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
 import inc.a13xis.legacy.koresample.common.util.slab.SingleDoubleSlab;
@@ -123,6 +125,22 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
 
         ModBlocks.registerBlock(block);
         return block;
+    }
+
+    @Override
+    public DoorBlock createDoorBlock(DefinesDoor definition) {
+        final DoorBlock block = new ModDoorBlock(definition);
+        block.setUnlocalizedName(String.format("door.%s", definition.doorName()));
+
+        definition.assignDoorBlock(block);
+
+        ModBlocks.registerBlock(block);
+        return block;
+    }
+
+    @Override
+    public FenceBlock createFenceBlock(DefinesFence definition) {
+        return null;
     }
 
     public void resetTypeBit() {

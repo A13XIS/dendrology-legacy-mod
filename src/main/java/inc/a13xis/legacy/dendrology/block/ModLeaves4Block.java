@@ -4,20 +4,17 @@ package inc.a13xis.legacy.dendrology.block;
 import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
-import inc.a13xis.legacy.dendrology.item.ModLeavesItem;
 import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +43,9 @@ public final class ModLeaves4Block extends LeavesBlock
     }
 
     @Override
-    public ModLog4Block.EnumType getWoodType(int meta) {
-       return ModLog4Block.EnumType.TUOPA;
+    public BlockPlanks.EnumType getWoodType(int meta) {
+        return BlockPlanks.EnumType.byMetadata(12+meta);
     }
-
     @Override
     protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
 
@@ -84,23 +80,14 @@ public final class ModLeaves4Block extends LeavesBlock
     @Override
     public int getMetaFromState(IBlockState state) {
         boolean check = (Boolean) state.getValue(CHECK_DECAY);
-        boolean dcable = (Boolean) state.getValue(CHECK_DECAY);
+        boolean dcable = (Boolean) state.getValue(DECAYABLE);
         return check?dcable?0:1:dcable?2:3;
     }
 
-    protected boolean needMask(){
-        return true;
-    }
-
-    @Override
-    public int damageDropped(IBlockState state) {
-        return getMetaFromState(state.withProperty(CHECK_DECAY,true).withProperty(DECAYABLE,true));
-    }
 
     @Override
     protected int getSaplingDropChance(IBlockState state)
     {
         return Settings.INSTANCE.saplingDropRarity();
     }
-
 }

@@ -25,12 +25,6 @@ public final class ModWoodBlock extends WoodBlock
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
 
-
-    protected ModWoodBlock(Collection<? extends DefinesWood> subBlocks){
-        super(subBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.ACEMUS));
-    }
-
     protected static String getUnwrappedUnprefixedUnlocalizedName(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(':') + 1);

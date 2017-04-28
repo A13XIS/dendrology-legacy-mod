@@ -1,0 +1,165 @@
+package inc.a13xis.legacy.dendrology.compat.chisel;
+
+import inc.a13xis.legacy.dendrology.TheMod;
+import inc.a13xis.legacy.dendrology.proxy.Proxy;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import team.chisel.api.carving.*;
+import inc.a13xis.legacy.dendrology.config.Settings;
+import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies;
+import inc.a13xis.legacy.koresample.compat.Integrator;
+import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.LoaderState.ModState;
+import net.minecraftforge.fml.common.Optional.Method;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
+import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
+
+public final class ChiselMod extends Integrator
+{
+    private static final String MOD_ID = "chisel";
+    private static final String MOD_NAME = "Chisel 2";
+
+
+    private final CreativeTabs creativeTab = new CreativeTabs("chiselAncientTrees")
+    {
+        private final OverworldTreeSpecies ICON = OverworldTreeSpecies.PORFFOR;
+
+        @SideOnly(Side.CLIENT)
+        @Override
+        public ItemStack getIconItemStack()
+        {
+            return new ItemStack(ICON.woodBlock(), 1, ICON.woodSubBlockVariant().ordinal());
+        }
+
+        @SuppressWarnings("ReturnOfNull")
+        @SideOnly(Side.CLIENT)
+        @Override
+        public Item getTabIconItem() { return null; }
+    };
+
+    @Method(modid = MOD_ID)
+    private void preInit()
+    {
+        loadBlocks();
+    }
+
+    @Method(modid = MOD_ID)
+    private void init(){
+        addVariations();
+    }
+
+    private void addVariations() {
+        for (final OverworldTreeSpecies species : OverworldTreeSpecies.values())
+        {
+            for(int i=0;i<15;i++){
+                final String speciesName = species.speciesName();
+                final String variationGroupName = String.format("%s%s", speciesName, "_planks");
+                final String variationName = String.format("%s%s%s", variationGroupName,"_",ChiselWoodBlock.VARIATIONS.values()[i].getName());
+                FMLInterModComms.sendMessage("chisel", "variation:add", variationName+"|"+MOD_ID+":"+variationGroupName+"|"+i);
+            }
+        }
+
+    }
+
+    private void assignAttributes(ChiselWoodBlock chiselWoodBlock)
+    {
+        OreDictionary.registerOre("plankWood", new ItemStack(Item.getItemFromBlock(chiselWoodBlock), 1, WILDCARD_VALUE));
+        chiselWoodBlock.setCreativeTab(creativeTab);
+        Blocks.FIRE.setFireInfo(chiselWoodBlock, 5, 20);
+    }
+
+    @Method(modid = MOD_ID)
+    private static void finalizeVariationGroup(WoodBlock woodBlock, int subBlockIndex, String variationGroupName)
+    {
+        final ICarvingRegistry chisel = CarvingUtils.getChiselRegistry();
+        chisel.addVariation(variationGroupName, woodBlock.getStateFromMeta(subBlockIndex), 0);
+        chisel.setVariationSound(variationGroupName, MOD_ID + ":chisel.wood");
+    }
+
+    @Method(modid = MOD_ID)
+    private void loadBlocks()
+    {
+        for (final OverworldTreeSpecies species : OverworldTreeSpecies.values())
+        {
+            final String speciesName = species.speciesName();
+            final String variationGroupName = String.format("%s%s", speciesName, "_planks");
+            final ChiselWoodBlock block = registerVariationBlocks(variationGroupName, speciesName);
+            //finalizeVariationGroup(species.woodBlock(), species.woodSubBlockVariant().ordinal(), variationGroupName);
+            assignAttributes(block);
+        }
+    }
+
+    @Method(modid = MOD_ID)
+    private ChiselWoodBlock registerVariationBlocks(String variationGroupName, String species)
+    {
+        //ArrayList<IVariationInfo> infos = new ArrayList<>();
+        ChiselWoodBlock block = new ChiselWoodBlock(species);
+        block.setRegistryName(MOD_ID,variationGroupName);
+        block.setUnlocalizedName(MOD_ID+"."+TheMod.getResourcePrefix()+variationGroupName);
+        GameRegistry.register(block);
+        GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        /*for (int i = 0; i < 15; i++) {
+            ArrayList<ResourceLocation> textures = new ArrayList<>();
+            textures.add(new ResourceLocation("chisel","textures/blocks/planks-"+variationGroupName.substring(0,variationGroupName.indexOf("_"))+"/"+ ChiselWoodBlock.VARIATIONS.values()[i].getName()));
+            ICarvingVariation var = CarvingUtils.getDefaultVariationFor(block.getStateFromMeta(i), i);
+            IBlockRenderType brt = new DendrologyRenderType(textures);
+            infos.add(new VariationInfoBase(var,variationGroupName+"_"+ChiselWoodBlock.VARIATIONS.values()[i].getName(),brt));
+
+        }*/
+        Proxy.common.registerVariationBlockRenders(block);
+        /*for(IVariationInfo info:infos){
+            Block block = info.getVariation().getBlock();
+            if(block.getDefaultState().isNormalCube()||block.getDefaultState().isOpaqueCube()){
+
+            }
+            CarvingUtils.getChiselRegistry().addVariation(variationGroupName,info.getVariation());
+        }*/
+        return block;
+    }
+
+    public static void registerVariationBlockRenders(ChiselWoodBlock block){
+
+        for (int i=0;i<ChiselWoodBlock.VARIATIONS.values().length;i++)
+        {
+            ChiselWoodBlock.VARIATIONS var = ChiselWoodBlock.VARIATIONS.values()[i];
+            ModelResourceLocation typeLocation = new ModelResourceLocation(block.getRegistryName(),"variation="+var.getName());
+            Item blockItem = Item.getItemFromBlock(block);
+            ModelLoader.setCustomModelResourceLocation(blockItem,i,typeLocation);
+        }
+    }
+
+    @Override
+    public void doIntegration(ModState modState)
+    {
+        if (Loader.isModLoaded(MOD_ID)&& Settings.INSTANCE.integrateChisel())
+        {
+            switch (modState)
+            {
+                case PREINITIALIZED:
+                    preInit();
+                break;
+                case INITIALIZED:
+                    init();
+                break;
+                default:
+            }
+        }
+    }
+
+    @Override
+    protected String modID() { return MOD_ID; }
+
+    @Override
+    protected String modName() { return MOD_NAME; }
+}

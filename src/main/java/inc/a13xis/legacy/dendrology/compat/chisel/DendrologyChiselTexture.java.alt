@@ -1,0 +1,56 @@
+package inc.a13xis.legacy.dendrology.compat.chisel;
+
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ResourceLocation;
+import team.chisel.api.render.IBlockRenderContext;
+import team.chisel.api.render.IBlockRenderType;
+import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureInfo;
+
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * Created by Lexis on 04.03.2017.
+ */
+public class DendrologyChiselTexture<T> implements IChiselTexture {
+
+    List<ResourceLocation> textures;
+    TextureInfo info;
+    T instance;
+
+    public DendrologyChiselTexture(TextureInfo info,List<ResourceLocation> textures,T instance){
+        this.info=info;
+        this.textures=textures;
+        if(instance instanceof IBlockRenderType)
+        this.instance=instance;
+        else throw new IllegalArgumentException("illegal instance! Not implementing IBlockRenderType.");
+    }
+
+    @Override
+    public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
+        return null;
+    }
+
+    @Override
+    public Collection<ResourceLocation> getTextures() {
+        return textures;
+    }
+
+    @Override
+    public IBlockRenderType getType() {
+        return (IBlockRenderType)instance;
+    }
+
+    @Override
+    public TextureAtlasSprite getParticle() {
+        return null;
+    }
+
+    @Override
+    public BlockRenderLayer getLayer() {
+        return info.getRenderLayer();
+    }
+}

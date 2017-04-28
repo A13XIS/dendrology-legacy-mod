@@ -2,7 +2,6 @@ package inc.a13xis.legacy.dendrology.proxy;
 
 
 import inc.a13xis.legacy.dendrology.TheMod;
-import inc.a13xis.legacy.dendrology.compat.chisel.ChiselWoodSubBlockManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
@@ -32,7 +31,4 @@ public class CommonProxy {
         return val==settingName?I18n.translateToFallback(settingName):val;
     }
 
-    public void registerChiselRenders(ChiselWoodSubBlockManager man) {
-
-    }
 }

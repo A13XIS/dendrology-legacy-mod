@@ -9,12 +9,11 @@ import inc.a13xis.legacy.dendrology.content.loader.TreeSpeciesLoader;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeBlockFactory;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeTaxonomy;
 import inc.a13xis.legacy.dendrology.item.*;
+import inc.a13xis.legacy.koresample.common.block.DoorBlock;
+import inc.a13xis.legacy.koresample.common.block.FenceBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
-import inc.a13xis.legacy.koresample.tree.DefinesLog;
-import inc.a13xis.legacy.koresample.tree.DefinesSapling;
-import inc.a13xis.legacy.koresample.tree.DefinesSlab;
-import inc.a13xis.legacy.koresample.tree.DefinesStairs;
+import inc.a13xis.legacy.koresample.tree.*;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
@@ -55,6 +54,7 @@ public final class ModBlocks
     private static final List<SlabBlock> singleSlabBlocks = Lists.newArrayList();
     private static final List<SlabBlock> doubleSlabBlocks = Lists.newArrayList();
     private static final List<StairsBlock> stairsBlocks = Lists.newArrayList();
+    private static final List<DoorBlock> doorBlocks = Lists.newArrayList();
     private static final List<SaplingBlock> saplingBlocks = Lists.newArrayList();
     private static final List<LeavesBlock> leavesBlocks = Lists.newArrayList();
     private static final OverworldTreeTaxonomy overworldTaxonomy = new OverworldTreeTaxonomy();
@@ -80,6 +80,7 @@ public final class ModBlocks
         registerAllSaplingBlocks();
         registerAllWoodBlocks();
         registerAllStairsBlocks();
+        registerAllDoorBlocks();
         registerAllSingleSlabBlocks();
         registerAllDoubleSlabBlocks();
     }
@@ -89,6 +90,7 @@ public final class ModBlocks
         for (WoodBlock woodBlock : woodBlocks) woodBlock.registerBlockModels();
         for (SlabBlock singleSlabBlock : singleSlabBlocks) singleSlabBlock.registerBlockModels();
         for (StairsBlock stairsBlock : stairsBlocks) stairsBlock.registerBlockModel();
+        for (DoorBlock doorBlock : doorBlocks) ((ModDoorBlock)doorBlock).registerBlockModel();
         for (SaplingBlock saplingBlock : saplingBlocks) saplingBlock.registerBlockModels();
         for (LeavesBlock leavesBlock : leavesBlocks) leavesBlock.registerBlockModels();
     }
@@ -154,6 +156,15 @@ public final class ModBlocks
         }
     }
 
+    private static void registerAllDoorBlocks()
+    {
+        int doorCount = 0;
+        for (final DoorBlock door : doorBlocks)
+        {
+            registerDoorBlock(door, String.format("door%d", doorCount));
+            doorCount++;
+        }
+    }
 
     private static void registerAllWoodBlocks()
 
@@ -180,6 +191,8 @@ public final class ModBlocks
     }
 
     public static void registerBlock(StairsBlock stairsBlock) { stairsBlocks.add(stairsBlock); }
+
+    public static void registerBlock(DoorBlock doorBlock) { doorBlocks.add(doorBlock); }
 
     public static void registerBlock(WoodBlock woodBlock) { woodBlocks.add(woodBlock); }
 
@@ -248,6 +261,13 @@ public final class ModBlocks
         Blocks.FIRE.setFireInfo(block, DEFAULT_STAIRS_FIRE_ENCOURAGEMENT, DEFAULT_STAIRS_FLAMMABILITY);
     }
 
+    private static void registerDoorBlock(Block block, String name)
+    {
+        block.setRegistryName(name);
+        GameRegistry.register(block);
+        GameRegistry.register(new ModDoorItem((DoorBlock) block).setRegistryName(block.getRegistryName()));
+    }
+
     private static void registerWoodBlock(Block block, String name, ImmutableList<String> subblockNames)
     {
         block.setRegistryName(name);
@@ -268,6 +288,13 @@ public final class ModBlocks
     {
         return overworldTaxonomy.stairsDefinitions();
     }
+
+    public static Iterable<? extends DefinesDoor> doorDefinitions()
+    {
+        return overworldTaxonomy.doorDefinitions();
+    }
+
+    public static Iterable<? extends DefinesDoor> fenceDefinitions(){ return overworldTaxonomy.doorDefinitions();}
 
     public static OverworldTreeTaxonomy taxonomyInstance(){
         return overworldTaxonomy;
@@ -314,6 +341,10 @@ public final class ModBlocks
                 recipes.add(mr);
             }
         }
+    }
+
+    public static DoorBlock getDoorBlock(int position){
+        return doorBlocks.get(position);
     }
 
     private static class MixRecipe {
