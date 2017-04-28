@@ -87,6 +87,21 @@ tile.dendrology:slab.porffor.name=Porfforholzstufe
 tile.dendrology:slab.salyx.name=Salyxholzstufe
 tile.dendrology:slab.tuopa.name=Tuopaholzstufe
 
+### Doors
+tile.dendrology:door.acemus.name=Acemusholztür
+tile.dendrology:door.cedrum.name=Cedrumholztür
+tile.dendrology:door.cerasu.name=Cerasuholztür
+tile.dendrology:door.delnas.name=Delnasholztür
+tile.dendrology:door.ewcaly.name=Ewcalyholztür
+tile.dendrology:door.hekur.name=Hekurholztür
+tile.dendrology:door.kiparis.name=Kiparisholztür
+tile.dendrology:door.kulist.name=Kulistholztür
+tile.dendrology:door.lata.name=Lataholztür
+tile.dendrology:door.nucis.name=Nucisholztür
+tile.dendrology:door.porffor.name=Porfforholztür
+tile.dendrology:door.salyx.name=Salyxholztür
+tile.dendrology:door.tuopa.name=Tuopaholztür
+
 ### Stairs
 tile.dendrology:stairs.acemus.name=Acemusholztreppe
 tile.dendrology:stairs.cedrum.name=Cedrumholztreppe

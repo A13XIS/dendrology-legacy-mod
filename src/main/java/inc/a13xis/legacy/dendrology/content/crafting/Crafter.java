@@ -65,12 +65,11 @@ public final class Crafter
     private void initWoodDoorRecipes()
     {
         for (final DefinesDoor definition : ModBlocks.doorDefinitions()) {
-            CraftingManager.getInstance().addRecipe(new ItemStack(definition.doorBlock(), 3), "## ", "## ", "## ", '#', new ItemStack(definition.doorModelBlock(), 1, definition.doorModelSubBlockVariant().ordinal()));
+            CraftingManager.getInstance().addRecipe(new ItemStack(definition.doorBlock(),3, definition.slabSubBlockVariant().ordinal())), "## ", "## ", "## ", '#', new ItemStack(definition.doorModelBlock(), 1, definition.doorModelSubBlockVariant().ordinal()));
             CraftingManager.getInstance().addRecipe(new ItemStack(definition.doorBlock(), 3), " ##", " ##", " ##", '#', new ItemStack(definition.doorModelBlock(), 1, definition.doorModelSubBlockVariant().ordinal()));
         }
     }
 
-    @SuppressWarnings("ObjectAllocationInLoop")
     private void initWoodSlabRecipes()
     {
         for (final DefinesSlab definition : ModBlocks.slabDefinitions())
@@ -78,4 +77,5 @@ public final class Crafter
                     .addRecipe(new ItemStack(definition.singleSlabBlock(), 6, definition.slabSubBlockVariant().ordinal()), "###",
                             '#', new ItemStack(definition.slabModelBlock(), 1, definition.slabModelSubBlockVariant().ordinal()));
     }
+	
 }
