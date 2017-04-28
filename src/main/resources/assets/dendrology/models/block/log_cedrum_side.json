@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_directional",
+  "textures": {
+    "up": "dendrology:blocks/log_cedrum",
+    "down": "dendrology:blocks/log_cedrum",
+    "north": "dendrology:blocks/log_cedrum_top",
+    "south": "dendrology:blocks/log_cedrum_top",
+    "west": "dendrology:blocks/log_cedrum",
+    "east": "dendrology:blocks/log_cedrum"
+  }
+}

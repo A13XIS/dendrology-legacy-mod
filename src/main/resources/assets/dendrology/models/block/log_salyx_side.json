@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_directional",
+  "textures": {
+    "up": "dendrology:blocks/log_salyx",
+    "down": "dendrology:blocks/log_salyx",
+    "north": "dendrology:blocks/log_salyx_top",
+    "south": "dendrology:blocks/log_salyx_top",
+    "west": "dendrology:blocks/log_salyx",
+    "east": "dendrology:blocks/log_salyx"
+  }
+}

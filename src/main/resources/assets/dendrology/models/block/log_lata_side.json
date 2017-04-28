@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_directional",
+  "textures": {
+    "up": "dendrology:blocks/log_lata",
+    "down": "dendrology:blocks/log_lata",
+    "north": "dendrology:blocks/log_lata_top",
+    "south": "dendrology:blocks/log_lata_top",
+    "west": "dendrology:blocks/log_lata",
+    "east": "dendrology:blocks/log_lata"
+  }
+}

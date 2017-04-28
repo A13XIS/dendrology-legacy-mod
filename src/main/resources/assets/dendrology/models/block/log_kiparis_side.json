@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_directional",
+  "textures": {
+    "up": "dendrology:blocks/log_kiparis",
+    "down": "dendrology:blocks/log_kiparis",
+    "north": "dendrology:blocks/log_kiparis_top",
+    "south": "dendrology:blocks/log_kiparis_top",
+    "west": "dendrology:blocks/log_kiparis",
+    "east": "dendrology:blocks/log_kiparis"
+  }
+}

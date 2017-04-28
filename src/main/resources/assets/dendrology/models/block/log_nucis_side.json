@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_directional",
+  "textures": {
+    "up": "dendrology:blocks/log_nucis",
+    "down": "dendrology:blocks/log_nucis",
+    "north": "dendrology:blocks/log_nucis_top",
+    "south": "dendrology:blocks/log_nucis_top",
+    "west": "dendrology:blocks/log_nucis",
+    "east": "dendrology:blocks/log_nucis"
+  }
+}

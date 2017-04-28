@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_directional",
+  "textures": {
+    "up": "dendrology:blocks/log_porffor",
+    "down": "dendrology:blocks/log_porffor",
+    "north": "dendrology:blocks/log_porffor_top",
+    "south": "dendrology:blocks/log_porffor_top",
+    "west": "dendrology:blocks/log_porffor",
+    "east": "dendrology:blocks/log_porffor"
+  }
+}

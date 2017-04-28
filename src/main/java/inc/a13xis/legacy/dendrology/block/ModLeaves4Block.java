@@ -52,7 +52,7 @@ public final class ModLeaves4Block extends LeavesBlock
         return BlockPlanks.EnumType.byMetadata(12+meta);
     }
     @Override
-    protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
+    public String resourcePrefix() { return TheMod.getResourcePrefix(); }
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
