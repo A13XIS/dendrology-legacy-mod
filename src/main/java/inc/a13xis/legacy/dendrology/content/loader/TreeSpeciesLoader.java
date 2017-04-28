@@ -33,6 +33,8 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
         loadSaplingBlocks(factory);
         loadSlabBlocks(factory);
         loadStairsBlocks(factory);
+        loadDoorBlocks(factory);
+        loadFenceBlocks(factory);
     }
 
     public void loadLeavesBlocks(TreeBlockFactory factory)
@@ -165,7 +167,20 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
         if (!subBlocks.isEmpty()) factory.createWoodBlock(subBlocks);
     }
 
-    @Override
+    public void loadDoorBlocks(TreeBlockFactory factory) {
+        for (final DefinesDoor definition : taxonomy.doorDefinitions())
+        {
+            factory.createDoorBlock(definition);
+        }
+    }
+
+    public void loadFenceBlocks(TreeBlockFactory factory) {
+        for (final DefinesFence definition : taxonomy.fenceDefinitions())
+        {
+            factory.createFenceBlock(definition);
+        }
+    }
+
     public String toString()
     {
         return Objects.toStringHelper(this).add("taxonomy", taxonomy).add("slabRegistry", slabRegistry).toString();

@@ -1,9 +1,12 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
+
 import inc.a13xis.legacy.dendrology.world.AcemusColorizer;
 import inc.a13xis.legacy.dendrology.world.CerasuColorizer;
 import inc.a13xis.legacy.dendrology.world.KulistColorizer;
 import inc.a13xis.legacy.dendrology.world.gen.feature.*;
+import inc.a13xis.legacy.koresample.common.block.DoorBlock;
+import inc.a13xis.legacy.koresample.common.block.FenceBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
 import inc.a13xis.legacy.koresample.tree.*;
@@ -23,7 +26,7 @@ import static inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecie
 
 @SuppressWarnings({ "NonSerializableFieldInSerializableClass", "ClassHasNoToStringMethod" })
 public enum OverworldTreeSpecies
-        implements DefinesLeaves, DefinesLog, DefinesSapling, DefinesSlab, DefinesStairs, DefinesTree, DefinesWood
+        implements DefinesLeaves, DefinesLog, DefinesSapling, DefinesSlab, DefinesStairs, DefinesTree, DefinesWood, DefinesDoor, DefinesFence
 {
     // REORDERING WILL CAUSE DAMAGE TO SAVES
     ACEMUS(ACEMUS_COLOR, new AcemusTree(), new AcemusTree(false)),
@@ -57,6 +60,8 @@ public enum OverworldTreeSpecies
     private SaplingBlock saplingBlock = null;
     private SlabBlock singleSlabBlock = null;
     private StairsBlock stairsBlock = null;
+    private DoorBlock doorBlock = null;
+    private FenceBlock fenceBlock = null;
 
     static
     {
@@ -67,17 +72,11 @@ public enum OverworldTreeSpecies
         }
     }
 
-    OverworldTreeSpecies(Colorizer colorizer, AbstractTree saplingTreeGen, AbstractTree worldTreeGen,
-                         String potionEffect)
+    OverworldTreeSpecies(Colorizer colorizer, AbstractTree saplingTreeGen, AbstractTree worldTreeGen)
     {
         this.colorizer = colorizer;
         this.saplingTreeGen = saplingTreeGen;
         this.worldTreeGen = worldTreeGen;
-    }
-
-    OverworldTreeSpecies(Colorizer colorizer, AbstractTree saplingTreeGen, AbstractTree worldTreeGen)
-    {
-        this(colorizer, saplingTreeGen, worldTreeGen, null);
     }
 
 
@@ -97,7 +96,6 @@ public enum OverworldTreeSpecies
                 return KulistColorizer.getInventoryColor();
             default:
                 return 0xffffff;
-
         }
     }
 
@@ -117,7 +115,6 @@ public enum OverworldTreeSpecies
                 return KulistColorizer.getColor(pos);
             default:
                 return blockAccess.getBlockState(pos).getMapColor().colorValue;
-
         }
     }
 
@@ -211,6 +208,54 @@ public enum OverworldTreeSpecies
 
     @Override
     public String stairsName() { return speciesName(); }
+
+    @Override
+    public void assignFenceBlock(FenceBlock fenceBlock)
+    {
+        checkState(this.fenceBlock == null);
+        this.fenceBlock = fenceBlock;
+    }
+
+    @Override
+    public FenceBlock fenceBlock()
+    {
+        checkState(fenceBlock != null);
+        return fenceBlock;
+    }
+
+    @Override
+    public Block fenceModelBlock() { return woodBlock(); }
+
+    @Override
+    public Enum fenceModelSubBlockVariant() { return woodSubBlockVariant();
+    }
+
+    @Override
+    public String fenceName() { return speciesName(); }
+
+    @Override
+    public void assignDoorBlock(DoorBlock doorBlock)
+    {
+        checkState(this.doorBlock == null);
+        this.doorBlock = doorBlock;
+    }
+
+    @Override
+    public DoorBlock doorBlock()
+    {
+        checkState(doorBlock != null);
+        return doorBlock;
+    }
+
+    @Override
+    public Block doorModelBlock() { return woodBlock(); }
+
+    @Override
+    public Enum doorModelSubBlockVariant() { return woodSubBlockVariant();
+    }
+
+    @Override
+    public String doorName() { return speciesName(); }
 
     @Override
     public void assignSaplingBlock(SaplingBlock saplingBlock)

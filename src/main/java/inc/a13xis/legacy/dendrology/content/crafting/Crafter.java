@@ -2,6 +2,7 @@ package inc.a13xis.legacy.dendrology.content.crafting;
 
 import inc.a13xis.legacy.dendrology.block.ModBlocks;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies;
+import inc.a13xis.legacy.koresample.tree.DefinesDoor;
 import inc.a13xis.legacy.koresample.tree.DefinesLog;
 import inc.a13xis.legacy.koresample.tree.DefinesSlab;
 import inc.a13xis.legacy.koresample.tree.DefinesStairs;
@@ -49,6 +50,7 @@ public final class Crafter
     {
         initWoodStairsRecipes();
         initWoodSlabRecipes();
+        initWoodDoorRecipes();
     }
 
     @SuppressWarnings("ObjectAllocationInLoop")
@@ -60,12 +62,20 @@ public final class Crafter
                             new ItemStack(definition.stairsModelBlock(), 1, definition.stairsModelSubBlockVariant().ordinal()));
     }
 
+    private void initWoodDoorRecipes()
+    {
+        for (final DefinesDoor definition : ModBlocks.doorDefinitions()) {
+            CraftingManager.getInstance().addRecipe(new ItemStack(definition.doorBlock(), 3), "## ", "## ", "## ", '#', new ItemStack(definition.doorModelBlock(), 1, definition.doorModelSubBlockVariant().ordinal()));
+            CraftingManager.getInstance().addRecipe(new ItemStack(definition.doorBlock(), 3), " ##", " ##", " ##", '#', new ItemStack(definition.doorModelBlock(), 1, definition.doorModelSubBlockVariant().ordinal()));
+        }
+    }
+
     @SuppressWarnings("ObjectAllocationInLoop")
     private void initWoodSlabRecipes()
     {
         for (final DefinesSlab definition : ModBlocks.slabDefinitions())
             CraftingManager.getInstance()
                     .addRecipe(new ItemStack(definition.singleSlabBlock(), 6, definition.slabSubBlockVariant().ordinal()), "###",
-                            '#', new ItemStack(definition.slabModelBlock(), 1, definition.slabSubBlockVariant().ordinal()));
+                            '#', new ItemStack(definition.slabModelBlock(), 1, definition.slabModelSubBlockVariant().ordinal()));
     }
 }

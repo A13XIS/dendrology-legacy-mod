@@ -5,14 +5,19 @@ import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
 import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +41,11 @@ public final class ModLeavesBlock extends LeavesBlock
         return rarity == 0 || random.nextInt(rarity) != 0 ? 0 : 1;
     }
 
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+        return true;
+    }
+
     @Override
     protected BlockStateContainer createBlockState(){
         BlockStateContainer bs = new BlockStateContainer(this, new IProperty[]{VARIANT,CHECK_DECAY,DECAYABLE});
@@ -44,9 +54,7 @@ public final class ModLeavesBlock extends LeavesBlock
     }
 
     @Override
-    public ModLogBlock.EnumType getWoodType(int meta) {
-       return ModLogBlock.EnumType.fromId(meta);
-    }
+    public BlockPlanks.EnumType getWoodType(int meta) { return BlockPlanks.EnumType.byMetadata(meta); }
 
     @Override
     protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
@@ -83,18 +91,13 @@ public final class ModLeavesBlock extends LeavesBlock
     public int getMetaFromState(IBlockState state) {
         ModLogBlock.EnumType type = (ModLogBlock.EnumType) state.getValue(ModLogBlock.VARIANT);
         boolean check = (Boolean) state.getValue(CHECK_DECAY);
-        boolean dcable = (Boolean) state.getValue(CHECK_DECAY);
+        boolean dcable = (Boolean) state.getValue(DECAYABLE);
         int par = check?dcable?0:1:dcable?2:3;
         return par*4+type.ordinal();
     }
 
     protected boolean needMask(){
         return false;
-    }
-
-    @Override
-    public int damageDropped(IBlockState state) {
-        return getMetaFromState(state.withProperty(CHECK_DECAY,true).withProperty(DECAYABLE,true));
     }
 
     @Override

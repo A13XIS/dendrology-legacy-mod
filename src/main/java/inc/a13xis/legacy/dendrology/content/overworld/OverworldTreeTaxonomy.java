@@ -40,4 +40,14 @@ public final class OverworldTreeTaxonomy implements TreeTaxonomy
     {
         return ImmutableList.copyOf(OverworldTreeSpecies.values());
     }
+
+    @Override
+    public Iterable<? extends DefinesDoor> doorDefinitions() {
+        return ImmutableList.copyOf(OverworldTreeSpecies.values());
+    }
+
+    @Override
+    public Iterable<? extends DefinesFence> fenceDefinitions() {
+        return ImmutableList.copyOf(OverworldTreeSpecies.values());
+    }
 }
