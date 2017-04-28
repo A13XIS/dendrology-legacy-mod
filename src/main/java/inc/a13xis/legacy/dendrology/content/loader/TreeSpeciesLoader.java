@@ -33,6 +33,7 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
         loadSaplingBlocks(factory);
         loadSlabBlocks(factory);
         loadStairsBlocks(factory);
+        loadDoorBlocks(factory);
     }
 
     public void loadLeavesBlocks(TreeBlockFactory factory)
@@ -145,6 +146,14 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
         for (final DefinesStairs definition : taxonomy.stairsDefinitions())
         {
             factory.createStairsBlock(definition);
+        }
+    }
+
+    public void loadDoorBlocks(TreeBlockFactory factory)
+    {
+        for (final DefinesDoor definition : taxonomy.doorDefinitions())
+        {
+            factory.createDoorBlock(definition);
         }
     }
 

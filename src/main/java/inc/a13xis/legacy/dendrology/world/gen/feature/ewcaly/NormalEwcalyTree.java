@@ -3,6 +3,7 @@ package inc.a13xis.legacy.dendrology.world.gen.feature.ewcaly;
 import com.google.common.base.Objects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -11,7 +12,7 @@ import java.util.Random;
 
 public class NormalEwcalyTree extends AbstractTree
 {
-    private int logDirection = 0;
+    private BlockLog.EnumAxis logAxis = BlockLog.EnumAxis.Y;
 
     public NormalEwcalyTree(boolean fromSapling) { super(fromSapling); }
 
@@ -44,7 +45,7 @@ public class NormalEwcalyTree extends AbstractTree
                 for (int dX = -size; dX <= size; dX++)
                     for (int dZ = -size; dZ <= size; dZ++)
                     {
-                        placeLeaves(world, new BlockPos(pos.getX() + dX, y1, pos.getZ() + dZ));
+                        placeLeaves(world, new BlockPos(pos.getX() + dX, y1, pos.getZ() + dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
                         if (size == 3 &&
                                 (Math.abs(dX) == 3 && Math.abs(dZ) == 2 || Math.abs(dX) == 2 && Math.abs(dZ) == 3))
@@ -52,17 +53,16 @@ public class NormalEwcalyTree extends AbstractTree
                             setBlockAndNotifyAdequately(world, new BlockPos(pos.getX() + dX, y1, pos.getZ() + dZ), Blocks.AIR.getDefaultState());
                         }
 
-                        if (y1 == pos.getY() + height && Math.abs(dX) < 3 && Math.abs(dZ) < 3 &&
-                                (Math.abs(dX) != 2 || Math.abs(dZ) != 2))
+                        if (y1 == pos.getY() + height && Math.abs(dX) < 3 && Math.abs(dZ) < 3 && (Math.abs(dX) != 2 || Math.abs(dZ) != 2))
                         {
                             if (size > 1)
                             {
-                                placeLeaves(world, new BlockPos(pos.getX() + dX, y1 + 1, pos.getZ() + dZ));
+                                placeLeaves(world, new BlockPos(pos.getX() + dX, y1 + 1, pos.getZ() + dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
                             }
 
                             if (size == 1 && (Math.abs(dX) != 1 || Math.abs(dZ) != 1))
                             {
-                                placeLeaves(world, new BlockPos(pos.getX() + dX, y1 + 1, pos.getZ() + dZ));
+                                placeLeaves(world, new BlockPos(pos.getX() + dX, y1 + 1, pos.getZ() + dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
                             }
                         }
                     }
@@ -121,29 +121,29 @@ public class NormalEwcalyTree extends AbstractTree
             if (dX == -1 && rand.nextInt(3) == 0)
             {
                 pos = pos.west();
-                logDirection = 4;
+                logAxis = BlockLog.EnumAxis.X;
             }
 
             if (dX == 1 && rand.nextInt(3) == 0)
             {
                 pos = pos.east();
-                logDirection = 4;
+                logAxis = BlockLog.EnumAxis.X;
             }
 
             if (dZ == -1 && rand.nextInt(3) == 0)
             {
                 pos = pos.north();
-                logDirection = 8;
+                logAxis = BlockLog.EnumAxis.Z;
             }
 
             if (dZ == 1 && rand.nextInt(3) == 0)
             {
                 pos = pos.south();
-                logDirection = 8;
+                logAxis = BlockLog.EnumAxis.Z;
             }
 
-            placeLog(world, pos);
-            logDirection = 0;
+            placeLog(world, pos,logAxis);
+            logAxis = BlockLog.EnumAxis.Y;
 
             if (i == 4 && height >= 18)
             {
@@ -164,13 +164,13 @@ public class NormalEwcalyTree extends AbstractTree
         for (int dX = -3; dX <= 3; dX++)
             for (int dZ = -3; dZ <= 3; dZ++)
             {
-                if ((Math.abs(dX) != 3 || Math.abs(dZ) != 3) && (Math.abs(dX) != 2 || Math.abs(dZ) != 3) &&
-                        (Math.abs(dX) != 3 || Math.abs(dZ) != 2)) placeLeaves(world, pos.add(dX,0,dZ));
+                if ((Math.abs(dX) != 3 || Math.abs(dZ) != 3) && (Math.abs(dX) != 2 || Math.abs(dZ) != 3) && (Math.abs(dX) != 3 || Math.abs(dZ) != 2))
+                    placeLeaves(world, pos.add(dX,0,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
                 if (Math.abs(dX) < 3 && Math.abs(dZ) < 3 && (Math.abs(dX) != 2 || Math.abs(dZ) != 2))
                 {
-                    placeLeaves(world, pos.add(dX,-1,dZ));
-                    placeLeaves(world, pos.add(dX,1,dZ));
+                    placeLeaves(world, pos.add(dX,-1,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
+                    placeLeaves(world, pos.add(dX,1,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
                 }
             }
     }
@@ -180,22 +180,21 @@ public class NormalEwcalyTree extends AbstractTree
         for (int dX = -2; dX <= 2; dX++)
             for (int dZ = -2; dZ <= 2; dZ++)
             {
-                if (Math.abs(dX) != 2 || Math.abs(dZ) != 2) placeLeaves(world, pos.add(dX,0,dZ));
+                if (Math.abs(dX) != 2 || Math.abs(dZ) != 2)
+                    placeLeaves(world, pos.add(dX,0,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
                 if (Math.abs(dX) < 2 && Math.abs(dZ) < 2 && (Math.abs(dX) != 1 || Math.abs(dZ) != 1))
                 {
-                    placeLeaves(world, pos.add(dX,1,dZ));
-                    placeLeaves(world, pos.add(dX,-1,dZ));
+                    placeLeaves(world, pos.add(dX,1,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
+                    placeLeaves(world, pos.add(dX,-1,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
                 }
             }
     }
 
-    @Override
-    protected int getLogMetadata() { return super.getLogMetadata() | logDirection; }
 
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("logDirection", logDirection).toString();
+        return Objects.toStringHelper(this).add("logDirection", logAxis.name()).toString();
     }
 }

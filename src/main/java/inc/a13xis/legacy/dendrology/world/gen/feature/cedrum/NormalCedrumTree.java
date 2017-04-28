@@ -3,6 +3,7 @@ package inc.a13xis.legacy.dendrology.world.gen.feature.cedrum;
 import com.google.common.base.Objects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -11,8 +12,7 @@ import java.util.Random;
 
 public class NormalCedrumTree extends AbstractTree
 {
-    @SuppressWarnings("PackageVisibleField")
-    int logDirection = 0;
+    protected BlockLog.EnumAxis logAxis = BlockLog.EnumAxis.Y;
 
     public NormalCedrumTree(boolean fromSapling) { super(fromSapling); }
 
@@ -22,13 +22,11 @@ public class NormalCedrumTree extends AbstractTree
         return super.canBeReplacedByLog(world, pos) || world.getBlockState(pos).getMaterial().equals(Material.WATER);
     }
 
-    @Override
-    protected int getLogMetadata() {return super.getLogMetadata() | logDirection;}
 
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("logDirection", logDirection).toString();
+        return Objects.toStringHelper(this).add("logAxis", logAxis).toString();
     }
 
     @Override
@@ -63,13 +61,13 @@ public class NormalCedrumTree extends AbstractTree
                 {
                     for (int next = 1; next < 3; next++)
                     {
-                        logDirection = 4;
-                        placeLog(world, pos.add(next,level-2,0));
-                        placeLog(world, pos.add(-next,level-2,0));
-                        logDirection = 8;
-                        placeLog(world,pos.add(0,level-2,next));
-                        placeLog(world, pos.add(0,level-2,next));
-                        logDirection = 0;
+                        logAxis = BlockLog.EnumAxis.X;
+                        placeLog(world, pos.add(next,level-2,0),logAxis);
+                        placeLog(world, pos.add(-next,level-2,0),logAxis);
+                        logAxis = BlockLog.EnumAxis.Z;
+                        placeLog(world,pos.add(0,level-2,next),logAxis);
+                        placeLog(world, pos.add(0,level-2,next),logAxis);
+                        logAxis = BlockLog.EnumAxis.Y;
                     }
                     leafGen(world, level == height - 4 ? 3 : 4, pos.up(level));
                 }
@@ -91,11 +89,11 @@ public class NormalCedrumTree extends AbstractTree
         for (int dX = -2; dX <= 2; dX++)
             for (int dZ = -2; dZ <= 2; dZ++)
             {
-                if (Math.abs(dX) + Math.abs(dZ) < 3) placeLeaves(world, pos.add(dX,0,dZ));
+                if (Math.abs(dX) + Math.abs(dZ) < 3) placeLeaves(world, pos.add(dX,0,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
-                if (Math.abs(dX) + Math.abs(dZ) < 2) placeLeaves(world, pos.add(dX,1,dZ));
+                if (Math.abs(dX) + Math.abs(dZ) < 2) placeLeaves(world, pos.add(dX,1,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
-                if (Math.abs(dX) == 0 && Math.abs(dZ) == 0) placeLeaves(world, pos.add(dX,2,dZ));
+                if (Math.abs(dX) == 0 && Math.abs(dZ) == 0) placeLeaves(world, pos.add(dX,2,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
             }
     }
 
@@ -141,11 +139,11 @@ public class NormalCedrumTree extends AbstractTree
         for (int dX = -radius; dX <= radius; dX++)
             for (int dZ = -radius; dZ <= radius; dZ++)
             {
-                if (Math.abs(dX) + Math.abs(dZ) < limiter1) placeLeaves(world, pos.add(dX,0,dZ));
+                if (Math.abs(dX) + Math.abs(dZ) < limiter1) placeLeaves(world, pos.add(dX,0,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
-                if (Math.abs(dX) + Math.abs(dZ) < limiter2) placeLeaves(world, pos.add(dX,-1,dZ));
+                if (Math.abs(dX) + Math.abs(dZ) < limiter2) placeLeaves(world, pos.add(dX,-1,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
-                if (Math.abs(dX) + Math.abs(dZ) < limiter3) placeLeaves(world, pos.add(dX,-2,dZ));
+                if (Math.abs(dX) + Math.abs(dZ) < limiter3) placeLeaves(world, pos.add(dX,-2,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
             }
     }
 }

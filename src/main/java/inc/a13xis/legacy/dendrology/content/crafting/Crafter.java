@@ -66,6 +66,6 @@ public final class Crafter
         for (final DefinesSlab definition : ModBlocks.slabDefinitions())
             CraftingManager.getInstance()
                     .addRecipe(new ItemStack(definition.singleSlabBlock(), 6, definition.slabSubBlockVariant().ordinal()), "###",
-                            '#', new ItemStack(definition.slabModelBlock(), 1, definition.slabSubBlockVariant().ordinal()));
+                            '#', new ItemStack(definition.slabModelBlock(), 1, definition.slabModelSubBlockVariant().ordinal()));
     }
 }

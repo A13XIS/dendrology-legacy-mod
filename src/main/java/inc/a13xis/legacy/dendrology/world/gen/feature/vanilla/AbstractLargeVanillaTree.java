@@ -3,11 +3,13 @@ package inc.a13xis.legacy.dendrology.world.gen.feature.vanilla;
 import com.google.common.base.Objects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+import scala.tools.cmd.gen.AnyVals;
 
 import java.util.Random;
 
@@ -25,7 +27,7 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
     private final int[] basePos = { 0, 0, 0 };
     private int heightLimit = 0;
     private int[][] leafNodes = null;
-    private int logMetaMask = 0;
+    private BlockLog.EnumAxis logMetaAxis = BlockLog.EnumAxis.Y;
 
     protected AbstractLargeVanillaTree(boolean fromSapling) { super(fromSapling); }
 
@@ -105,18 +107,11 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
         return true;
     }
 
-
-    @Override
-    protected final int getLogMetadata()
-    {
-        return getUnmaskedLogMeta() | logMetaMask;
-    }
-
     @Override
     public String toString()
     {
         return Objects.toStringHelper(this).add("rng", rng).add("basePos", basePos).add("heightLimit", heightLimit)
-                .add("leafNodes", leafNodes).add("logMetaMask", logMetaMask).toString();
+                .add("leafNodes", leafNodes).add("logMetaAxis", logMetaAxis.name()).toString();
     }
 
     @Override
@@ -212,22 +207,14 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
                 final int zDistance = Math.abs(aint3[2] - start[2]);
                 final int distance = Math.max(xDistance, zDistance);
 
-                if (distance > 0) if (xDistance == distance) logMetaMask = 4;
-                else if (zDistance == distance) logMetaMask = 8;
+                if (distance > 0) if (xDistance == distance) logMetaAxis = BlockLog.EnumAxis.X;
+                else if (zDistance == distance) logMetaAxis = BlockLog.EnumAxis.Z;
 
-                placeLog(world, new BlockPos(aint3[0], aint3[1], aint3[2]));
-                logMetaMask = 0;
+                placeLog(world, new BlockPos(aint3[0], aint3[1], aint3[2]),logMetaAxis);
+                logMetaAxis = BlockLog.EnumAxis.Y;
                 i += b4;
             }
         }
-    }
-
-    protected abstract int getUnmaskedLogMeta();
-
-    protected void placeLog(World world, BlockPos pos)
-    {
-        if (canBeReplacedByLog(world, pos))
-            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()));
     }
 
     private void generateLeaves(World world)
@@ -285,7 +272,10 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
                     if (block != null && block.isLeaves(world.getBlockState(tmp),world, tmp)) ++var13;
                     else
                     {
-                        placeLeaves(world, new BlockPos(var11[0], var11[1], var11[2]));
+                        if (Math.abs(var11[var8]-var10[var8])<=1&&Math.abs(var11[var9]-var10[var9])<=1)
+                            placeLeaves(world, new BlockPos(var11[0], var11[1], var11[2]),true);
+                        else
+                            placeLeaves(world, new BlockPos(var11[0], var11[1], var11[2]));
                         ++var13;
                     }
                 }

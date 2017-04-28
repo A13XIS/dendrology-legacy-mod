@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_top_rh",
+    "textures": {
+        "bottom": "dendrology:blocks/door_bottom_lata",
+        "top": "dendrology:blocks/door_top_lata"
+    }
+}

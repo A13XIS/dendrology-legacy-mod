@@ -69,6 +69,7 @@ public class SaplingParcel extends Item
             }
 
             Proxy.common.onItemRightClick(content,world,player);
+            player.getHeldItem(hand).setCount(player.getHeldItem(hand).getCount()-1);
         }
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS,player.getHeldItem(hand));
     }

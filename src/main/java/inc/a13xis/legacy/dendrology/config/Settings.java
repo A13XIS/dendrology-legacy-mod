@@ -151,7 +151,7 @@ public enum Settings implements ConfigSyncable
     @Override
     public void syncConfig(Configuration config)
     {
-        saplingDropRarity = get(config, "saplingDropRarity", Configuration.CATEGORY_GENERAL, saplingDropRarity);
+        saplingDropRarity = get(config, "saplingDropRarity", Configuration.CATEGORY_GENERAL, saplingDropRarity,1,Integer.MAX_VALUE);
 
         final String chestsCategory = Configuration.CATEGORY_GENERAL + ".chests";
         for (final ResourceLocation chestType : chestRarities.keySet())

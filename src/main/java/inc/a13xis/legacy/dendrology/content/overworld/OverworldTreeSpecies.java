@@ -4,6 +4,7 @@ import inc.a13xis.legacy.dendrology.world.AcemusColorizer;
 import inc.a13xis.legacy.dendrology.world.CerasuColorizer;
 import inc.a13xis.legacy.dendrology.world.KulistColorizer;
 import inc.a13xis.legacy.dendrology.world.gen.feature.*;
+import inc.a13xis.legacy.koresample.common.block.DoorBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
 import inc.a13xis.legacy.koresample.tree.*;
@@ -23,7 +24,7 @@ import static inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecie
 
 @SuppressWarnings({ "NonSerializableFieldInSerializableClass", "ClassHasNoToStringMethod" })
 public enum OverworldTreeSpecies
-        implements DefinesLeaves, DefinesLog, DefinesSapling, DefinesSlab, DefinesStairs, DefinesTree, DefinesWood
+        implements DefinesLeaves, DefinesLog, DefinesSapling, DefinesSlab, DefinesStairs, DefinesTree, DefinesWood, DefinesDoor
 {
     // REORDERING WILL CAUSE DAMAGE TO SAVES
     ACEMUS(ACEMUS_COLOR, new AcemusTree(), new AcemusTree(false)),
@@ -57,6 +58,7 @@ public enum OverworldTreeSpecies
     private SaplingBlock saplingBlock = null;
     private SlabBlock singleSlabBlock = null;
     private StairsBlock stairsBlock = null;
+    private DoorBlock doorBlock = null;
 
     static
     {
@@ -211,6 +213,30 @@ public enum OverworldTreeSpecies
 
     @Override
     public String stairsName() { return speciesName(); }
+
+    @Override
+    public void assignDoorBlock(DoorBlock doorBlock)
+    {
+        checkState(this.doorBlock == null);
+        this.doorBlock = doorBlock;
+    }
+
+    @Override
+    public DoorBlock doorBlock()
+    {
+        checkState(doorBlock != null);
+        return doorBlock;
+    }
+
+    @Override
+    public Block doorModelBlock() { return woodBlock(); }
+
+    @Override
+    public Enum doorModelSubBlockVariant() { return woodSubBlockVariant();
+    }
+
+    @Override
+    public String doorName() { return speciesName(); }
 
     @Override
     public void assignSaplingBlock(SaplingBlock saplingBlock)

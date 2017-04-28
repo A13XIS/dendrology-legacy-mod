@@ -41,48 +41,48 @@ public class TuopaTree extends AbstractTree
             if (height == 1 && level > 2) for (int dX = -1; dX <= 1; dX++)
             {
                 for (int dZ = -1; dZ <= 1; dZ++)
-                    if (Math.abs(dX) != 1 || Math.abs(dZ) != 1) placeLeaves(world, pos.add(dX,level,dZ));
+                    if (Math.abs(dX) != 1 || Math.abs(dZ) != 1) placeLeaves(world, pos.add(dX,level,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
             }
 
             if (height == 2 && level > 2) for (int dX = -2; dX <= 2; dX++)
                 for (int dZ = -2; dZ <= 2; dZ++)
                 {
                     if (Math.abs(dX) <= 1 && Math.abs(dZ) <= 1 && (Math.abs(dX) != 1 || Math.abs(dZ) != 1))
-                        placeLeaves(world, pos.add(dX,level,dZ));
+                        placeLeaves(world, pos.add(dX,level,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
-                    if (Math.abs(dX) <= 1 && Math.abs(dZ) <= 1 && level == 7) placeLeaves(world, pos.add(dX,7,dZ));
+                    if (Math.abs(dX) <= 1 && Math.abs(dZ) <= 1 && level == 7) placeLeaves(world, pos.add(dX,7,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
                     if ((Math.abs(dX) != 2 || Math.abs(dZ) != 2) && (Math.abs(dX) != 2 || Math.abs(dZ) != 1) &&
                             (Math.abs(dX) != 1 || Math.abs(dZ) != 2) && level <= 6 * height - 1 && level > 3)
-                        placeLeaves(world, pos.add(dX,level,dZ));
+                        placeLeaves(world, pos.add(dX,level,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
                 }
 
             if (height == 3 && level > 2) for (int dX = -2; dX <= 2; dX++)
                 for (int dZ = -2; dZ <= 2; dZ++)
                 {
                     if (Math.abs(dX) <= 1 && Math.abs(dZ) <= 1 && (Math.abs(dX) != 1 || Math.abs(dZ) != 1))
-                        placeLeaves(world,pos.add(dX,level,dZ));
+                        placeLeaves(world,pos.add(dX,level,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
                     if ((Math.abs(dX) != 2 || Math.abs(dZ) != 2) && (Math.abs(dX) != 2 || Math.abs(dZ) != 1) &&
                             (Math.abs(dX) != 1 || Math.abs(dZ) != 2) && level <= 6 * height && level > 3)
-                        placeLeaves(world, pos.add(dX,level,dZ));
+                        placeLeaves(world, pos.add(dX,level,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
                 }
 
             if (height == 4 && level > 2) for (int dX = -3; dX <= 3; dX++)
                 for (int dZ = -3; dZ <= 3; dZ++)
                 {
                     if (Math.abs(dX) <= 1 && Math.abs(dZ) <= 1 && (Math.abs(dX) != 1 || Math.abs(dZ) != 1))
-                        placeLeaves(world, pos.add(dX,level,dZ));
+                        placeLeaves(world, pos.add(dX,level,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
                     if (Math.abs(dX) <= 1 && Math.abs(dZ) <= 1 && level <= 14 && level >= 2)
-                        placeLeaves(world, pos.add(dX,level,dZ));
+                        placeLeaves(world, pos.add(dX,level,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
                     if (Math.abs(dX) <= 2 && Math.abs(dZ) <= 2 && (Math.abs(dX) != 2 || Math.abs(dZ) != 2) &&
-                            (level == 6 * height || level == 5)) placeLeaves(world, pos.add(dX,level,dZ));
+                            (level == 6 * height || level == 5)) placeLeaves(world, pos.add(dX,level,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
                     if ((Math.abs(dX) != 3 || Math.abs(dZ) != 3) && (Math.abs(dX) != 3 || Math.abs(dZ) != 2) &&
                             (Math.abs(dX) != 2 || Math.abs(dZ) != 3) && level <= 6 * height - 1 && level > 5)
-                        placeLeaves(world, pos.add(dX,level,dZ));
+                        placeLeaves(world, pos.add(dX,level,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
                 }
         }
 

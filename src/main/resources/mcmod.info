@@ -3,7 +3,7 @@
   "modid": "dendrology",
   "name": "Ancient Trees",
   "description": "A Minecraft mod that adds many extinct tree species to the world.",
-  "version": "1.11.2-L1.1",
+  "version": "1.11.2-L1.2",
   "mcversion": "1.11.2",
   "url": "",
   "updateUrl": "",
@@ -19,11 +19,11 @@
   ],
   "parent":"",
   "requiredMods": [
-    "koresample@[1.11.2-L1.1,)"
+    "koresample@[1.11.2-L1.2,)"
   ],
   "dependencies": [
     "Forge",
-    "koresample@[1.11.2-L1.1,)",
+    "koresample@[1.11.2-L1.2,)",
     "Forestry",
     "minechem",
     "chisel",

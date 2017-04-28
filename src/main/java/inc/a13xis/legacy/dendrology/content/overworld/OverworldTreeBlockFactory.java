@@ -1,6 +1,7 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
 import inc.a13xis.legacy.dendrology.block.*;
+import inc.a13xis.legacy.koresample.common.block.DoorBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
 import inc.a13xis.legacy.koresample.common.util.slab.SingleDoubleSlab;
@@ -109,6 +110,17 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
         block.setUnlocalizedName(String.format("stairs.%s", definition.stairsName()));
 
         definition.assignStairsBlock(block);
+
+        ModBlocks.registerBlock(block);
+        return block;
+    }
+
+    @Override
+    public DoorBlock createDoorBlock(DefinesDoor definition)
+    {
+        final DoorBlock block = new ModDoorBlock(definition);
+
+        definition.assignDoorBlock(block);
 
         ModBlocks.registerBlock(block);
         return block;

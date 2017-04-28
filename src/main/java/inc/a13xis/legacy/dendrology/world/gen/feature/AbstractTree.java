@@ -7,6 +7,7 @@ import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -66,16 +67,24 @@ public abstract class AbstractTree extends WorldGenAbstractTree
     protected SaplingBlock getSaplingBlock() {
         return tree.saplingBlock(); }
 
-    protected void placeLeaves(World world, BlockPos pos)
+    protected void placeLeaves(World world, BlockPos pos,boolean check_dekay)
     {
         if (world.getBlockState(pos).getBlock().canBeReplacedByLeaves(world.getBlockState(pos),world, pos))
             setBlockAndNotifyAdequately(world, pos, getLeavesBlock().getStateFromMeta(getLeavesMetadata()));
     }
 
-    protected void placeLog(World world, BlockPos pos)
+    protected void placeLeaves(World world, BlockPos pos)
+    {
+        placeLeaves(world,pos,true);
+    }
+    protected void placeLog(World world, BlockPos pos, BlockLog.EnumAxis axis)
     {
         if (canBeReplacedByLog(world, pos))
-            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()));
+            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()).withProperty(BlockLog.LOG_AXIS,axis));
+    }
+
+    protected void placeLog(World world, BlockPos pos){
+        placeLog(world,pos,BlockLog.EnumAxis.Y);
     }
 
     @Override

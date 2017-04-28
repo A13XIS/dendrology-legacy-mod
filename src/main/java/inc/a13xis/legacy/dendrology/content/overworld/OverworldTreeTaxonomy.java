@@ -36,6 +36,12 @@ public final class OverworldTreeTaxonomy implements TreeTaxonomy
     }
 
     @Override
+    public Iterable<? extends DefinesDoor> doorDefinitions()
+    {
+        return ImmutableList.copyOf(OverworldTreeSpecies.values());
+    }
+
+    @Override
     public Iterable<? extends DefinesWood> woodDefinitions()
     {
         return ImmutableList.copyOf(OverworldTreeSpecies.values());

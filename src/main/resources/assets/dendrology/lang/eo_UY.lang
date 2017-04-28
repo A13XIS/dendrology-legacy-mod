@@ -67,6 +67,21 @@ tile.dendrology:sapling.porffor.name=Porffor Arbidon
 tile.dendrology:sapling.salyx.name=Salyx Arbidon
 tile.dendrology:sapling.tuopa.name=Tuopa Arbidon
 
+### Doors
+tile.dendrology:door.acemus.name=Acemus Wood Door
+tile.dendrology:door.cedrum.name=Cedrum Wood Door
+tile.dendrology:door.cerasu.name=Cerasu Wood Door
+tile.dendrology:door.delnas.name=Delnas Wood Door
+tile.dendrology:door.ewcaly.name=Ewcaly Wood Door
+tile.dendrology:door.hekur.name=Hekur Wood Door
+tile.dendrology:door.kiparis.name=Kiparis Wood Door
+tile.dendrology:door.kulist.name=Kulist Wood Door
+tile.dendrology:door.lata.name=Lata Wood Door
+tile.dendrology:door.nucis.name=Nucis Wood Door
+tile.dendrology:door.porffor.name=Porffor Wood Door
+tile.dendrology:door.salyx.name=Salyx Wood Door
+tile.dendrology:door.tuopa.name=Tuopa Wood Door
+
 ### Slabs
 tile.dendrology:slab.acemus.name=Acemus Ligno Slabo
 tile.dendrology:slab.cedrum.name=Cedrum Ligno Slabo

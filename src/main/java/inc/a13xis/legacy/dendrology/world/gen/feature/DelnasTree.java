@@ -59,9 +59,9 @@ public class DelnasTree extends AbstractTree
             {
                 if (Math.abs(dX) + Math.abs(dZ) <= 3 &&
                         !(Math.abs(dX) + Math.abs(dZ) == 3 && Math.abs(dX) != 0 && Math.abs(dZ) != 0))
-                    placeLeaves(world, pos.add(dX,0,dZ));
+                    placeLeaves(world, pos.add(dX,0,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
                 if (Math.abs(dX) < 2 && Math.abs(dZ) < 2 && (Math.abs(dX) != 1 || Math.abs(dZ) != 1))
-                    placeLeaves(world, pos.add(dX,1,dZ));
+                    placeLeaves(world, pos.add(dX,1,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
             }
     }
 

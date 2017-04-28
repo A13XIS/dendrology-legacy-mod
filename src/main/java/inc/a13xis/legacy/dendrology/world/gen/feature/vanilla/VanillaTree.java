@@ -61,8 +61,13 @@ public class VanillaTree extends AbstractTree
                 {
                     final int dZ = pos1.getZ()-pos.getZ();
 
-                    if (Math.abs(dX) != radius || Math.abs(dZ) != radius ||
-                            rand.nextInt(2) != 0 && distanceToTopOfTrunk != 0) placeLeaves(world, pos1);
+                    if (Math.abs(dX) != radius || Math.abs(dZ) != radius || rand.nextInt(2) != 0 && distanceToTopOfTrunk != 0) {
+                        if(Math.abs(dX) <= 1&&Math.abs(dZ) <= 1)
+                            placeLeaves(world, pos1,true);
+                        else{
+                            placeLeaves(world, pos1);
+                        }
+                    }
                 }
             }
         }

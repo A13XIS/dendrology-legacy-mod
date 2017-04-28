@@ -9,16 +9,15 @@ import inc.a13xis.legacy.dendrology.content.loader.TreeSpeciesLoader;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeBlockFactory;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeTaxonomy;
 import inc.a13xis.legacy.dendrology.item.*;
+import inc.a13xis.legacy.koresample.common.block.DoorBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
-import inc.a13xis.legacy.koresample.tree.DefinesLog;
-import inc.a13xis.legacy.koresample.tree.DefinesSapling;
-import inc.a13xis.legacy.koresample.tree.DefinesSlab;
-import inc.a13xis.legacy.koresample.tree.DefinesStairs;
+import inc.a13xis.legacy.koresample.tree.*;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
+import inc.a13xis.legacy.koresample.tree.item.DoorItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.init.Blocks;
@@ -50,12 +49,11 @@ public final class ModBlocks
     private static final List<SlabBlock> singleSlabBlocks = Lists.newArrayList();
     private static final List<SlabBlock> doubleSlabBlocks = Lists.newArrayList();
     private static final List<StairsBlock> stairsBlocks = Lists.newArrayList();
+    private static final List<DoorBlock> doorBlocks = Lists.newArrayList();
     private static final List<SaplingBlock> saplingBlocks = Lists.newArrayList();
     private static final List<LeavesBlock> leavesBlocks = Lists.newArrayList();
     private static final OverworldTreeTaxonomy overworldTaxonomy = new OverworldTreeTaxonomy();
     private static final List<MixRecipe> recipes = new ArrayList<>();
-
-    public static Iterable<? extends LeavesBlock> leavesBlocks() { return ImmutableList.copyOf(leavesBlocks); }
 
     private static void loadOverWorldContent()
     {
@@ -68,6 +66,8 @@ public final class ModBlocks
 
     public static Iterable<? extends DefinesLog> logDefinitions() { return overworldTaxonomy.logDefinitions(); }
 
+    public static Iterable<? extends LeavesBlock> leavesBlocks() { return ImmutableList.copyOf(leavesBlocks); }
+
     private static void registerAllBlocks()
     {
         registerAllLogBlocks();
@@ -75,6 +75,7 @@ public final class ModBlocks
         registerAllSaplingBlocks();
         registerAllWoodBlocks();
         registerAllStairsBlocks();
+        registerAllDoorBlocks();
         registerAllSingleSlabBlocks();
         registerAllDoubleSlabBlocks();
     }
@@ -85,6 +86,7 @@ public final class ModBlocks
         for (SlabBlock singleSlabBlock : singleSlabBlocks) singleSlabBlock.registerBlockModels();
         for (StairsBlock stairsBlock : stairsBlocks) stairsBlock.registerBlockModel();
         for (SaplingBlock saplingBlock : saplingBlocks) saplingBlock.registerBlockModels();
+        for (DoorBlock doorBlock : doorBlocks) doorBlock.registerBlockModel();
         for (LeavesBlock leavesBlock : leavesBlocks) leavesBlock.registerBlockModels();
 
     }
@@ -150,6 +152,14 @@ public final class ModBlocks
         }
     }
 
+    private static void registerAllDoorBlocks()
+    {
+        for (final DoorBlock door : doorBlocks)
+        {
+            registerDoorBlock(door);
+        }
+    }
+
     private static void registerAllWoodBlocks()
 
     {
@@ -174,6 +184,8 @@ public final class ModBlocks
     }
 
     public static void registerBlock(StairsBlock stairsBlock) { stairsBlocks.add(stairsBlock); }
+
+    public static void registerBlock(DoorBlock doorBlock) { doorBlocks.add(doorBlock); }
 
     public static void registerBlock(WoodBlock woodBlock) { woodBlocks.add(woodBlock); }
 
@@ -245,6 +257,12 @@ public final class ModBlocks
         Blocks.FIRE.setFireInfo(block, DEFAULT_STAIRS_FIRE_ENCOURAGEMENT, DEFAULT_STAIRS_FLAMMABILITY);
     }
 
+    private static void registerDoorBlock(Block def)
+    {
+        GameRegistry.register(def);
+        GameRegistry.register(new DoorItem((DoorBlock) def).setRegistryName(def.getRegistryName()));
+    }
+
     private static void registerWoodBlock(Block block, String name, ImmutableList<String> subblockNames)
     {
         block.setRegistryName(name);
@@ -264,6 +282,10 @@ public final class ModBlocks
     public static Iterable<? extends DefinesStairs> stairsDefinitions()
     {
         return overworldTaxonomy.stairsDefinitions();
+    }
+
+    public static DoorBlock getDoorBlock(int ind){
+        return doorBlocks.get(ind);
     }
 
     public static OverworldTreeTaxonomy taxonomyInstance(){
