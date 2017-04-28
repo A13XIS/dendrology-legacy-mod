@@ -27,7 +27,7 @@ public class ModLeavesItem extends LeavesItem {
         else if(leaves instanceof ModLeaves3Block)
             name = ((ModLeaves3Block)leaves).resourcePrefix()+"leaves."+ ModLog3Block.EnumType.fromId(this.getDamage(stack)).getName();
         else
-            name = "tuopa";
+            name = ((ModLeaves4Block)leaves).resourcePrefix()+"leaves.tuopa";
         return "tile."+name;
     }
 }
