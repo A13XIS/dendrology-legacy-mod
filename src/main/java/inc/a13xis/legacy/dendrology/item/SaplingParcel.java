@@ -26,7 +26,6 @@ public class SaplingParcel extends Item
         setCreativeTab(TheMod.INSTANCE.creativeTab());
         setUnlocalizedName("parcel");
         setRegistryName("parcel");
-        GameRegistry.register(this);
     }
 
     @Override
