@@ -10,6 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class ModDoorBlock extends DoorBlock
 {
@@ -30,6 +32,7 @@ public final class ModDoorBlock extends DoorBlock
         return Item.getItemFromBlock(this);
     }
 
+    @SideOnly(Side.CLIENT)
     public void registerBlockModel()
     {
         ModelResourceLocation typeLocation = new ModelResourceLocation(new ResourceLocation("dendrology","door"+"_"+variant.name().toLowerCase()),"inventory");
