@@ -33,6 +33,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.codec.language.bm.Lang;
@@ -50,7 +51,7 @@ public final class TheMod
 {
     public static final String MOD_ID = "dendrology";
     static final String MOD_NAME = "Ancient Trees";
-    static final String MOD_VERSION = "1.11.2-L1.2";
+    static final String MOD_VERSION = "1.11.2-L1.2.1";
     static final String MOD_GUI_FACTORY = "inc.a13xis.legacy.dendrology.config.client.ModGuiFactory";
     private static Optional<LangMap> fallback = Optional.absent();
     private static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ':';
@@ -129,6 +130,7 @@ public final class TheMod
         configEventHandler.get().activate();
         MinecraftForge.EVENT_BUS.register(new GenerationEvents());
         new ModBlocks().loadContent();
+        GameRegistry.register(ModItems.parcelInstance());
         Proxy.common.registerRenders();
         //initIntegrators();
         //integrateMods(event.getModState());
