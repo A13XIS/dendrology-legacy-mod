@@ -83,10 +83,7 @@ public final class ModLeavesBlock extends LeavesBlock
     @Override
     public int getMetaFromState(IBlockState state) {
         ModLogBlock.EnumType type = (ModLogBlock.EnumType) state.getValue(ModLogBlock.VARIANT);
-        boolean check = (Boolean) state.getValue(CHECK_DECAY);
-        boolean dcable = (Boolean) state.getValue(DECAYABLE);
-        int par = check?dcable?0:1:dcable?2:3;
-        return par*4+type.ordinal();
+        return type.ordinal();
     }
 
     @Override
