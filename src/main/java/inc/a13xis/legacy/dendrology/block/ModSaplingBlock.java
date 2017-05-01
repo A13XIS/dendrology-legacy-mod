@@ -43,14 +43,7 @@ public final class ModSaplingBlock extends SaplingBlock
     @Override
     public int getMetaFromState(IBlockState state) {
         ModSlabBlock.EnumType type = (ModSlabBlock.EnumType) state.getValue(VARIANT);
-        int stage = (Integer)state.getValue(STAGE);
-        int id = type.ordinal();
-        return stage*8+type.ordinal();
-    }
-
-    @Override
-    public int damageDropped(IBlockState state) {
-        return getMetaFromState(state);
+        return type.ordinal();
     }
 
     @Override
