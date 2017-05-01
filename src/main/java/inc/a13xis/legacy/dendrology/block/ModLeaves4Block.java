@@ -84,9 +84,7 @@ public final class ModLeaves4Block extends LeavesBlock
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        boolean check = (Boolean) state.getValue(CHECK_DECAY);
-        boolean dcable = (Boolean) state.getValue(CHECK_DECAY);
-        return check?dcable?0:1:dcable?2:3;
+        return 0;
     }
 
 

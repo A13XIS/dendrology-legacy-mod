@@ -33,7 +33,7 @@ public class LargeEwcalyTree extends AbstractTree
 
         int size = 1;
 
-        for (BlockPos pos1 = pos.up(height/2); pos1.getY() <= pos.up(height).getY(); pos1 = pos.up())
+        for (BlockPos pos1 = pos.up(height/2); pos1.getY() <= pos.up(height).getY(); pos1 = pos1.up())
         {
             if (rng.nextInt(5) > 2 || pos1.getY() == pos.up(height).getY())
             {
