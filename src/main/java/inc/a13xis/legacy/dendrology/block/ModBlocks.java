@@ -284,6 +284,11 @@ public final class ModBlocks
         return overworldTaxonomy.stairsDefinitions();
     }
 
+    public static Iterable<? extends DefinesDoor> doorDefinitions()
+    {
+        return overworldTaxonomy.doorDefinitions();
+    }
+
     public static DoorBlock getDoorBlock(int ind){
         return doorBlocks.get(ind);
     }

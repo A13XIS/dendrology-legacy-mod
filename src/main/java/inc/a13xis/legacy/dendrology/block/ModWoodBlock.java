@@ -16,7 +16,7 @@ import java.util.Collection;
 
 public final class ModWoodBlock extends WoodBlock
 {
-    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
+    public final static PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
 
     protected ModWoodBlock(Collection<? extends DefinesWood> subBlocks){
         super(subBlocks);

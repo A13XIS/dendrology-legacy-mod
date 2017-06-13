@@ -2,6 +2,7 @@ package inc.a13xis.legacy.dendrology.content.crafting;
 
 import inc.a13xis.legacy.dendrology.block.ModBlocks;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies;
+import inc.a13xis.legacy.koresample.tree.DefinesDoor;
 import inc.a13xis.legacy.koresample.tree.DefinesLog;
 import inc.a13xis.legacy.koresample.tree.DefinesSlab;
 import inc.a13xis.legacy.koresample.tree.DefinesStairs;
@@ -49,6 +50,19 @@ public final class Crafter
     {
         initWoodStairsRecipes();
         initWoodSlabRecipes();
+        initWoodDoorRecipes();
+    }
+
+    private void initWoodDoorRecipes()
+    {
+        for (final DefinesDoor definition : ModBlocks.doorDefinitions()) {
+            CraftingManager.getInstance()
+                    .addRecipe(new ItemStack(definition.doorBlock(), 1), "## ", "## ", "## ", '#',
+                            new ItemStack(definition.doorModelBlock(), 1, definition.doorModelSubBlockVariant().ordinal()));
+            CraftingManager.getInstance()
+                    .addRecipe(new ItemStack(definition.doorBlock(), 1), " ##", " ##", " ##", '#',
+                            new ItemStack(definition.doorModelBlock(), 1, definition.doorModelSubBlockVariant().ordinal()));
+        }
     }
 
     @SuppressWarnings("ObjectAllocationInLoop")

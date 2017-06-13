@@ -28,12 +28,11 @@ public enum Settings implements ConfigSyncable
 
     private int overworldTreeGenRarity = DEFAULT_OVER_WORLD_TREE_GEN_RARITY;
     private int saplingDropRarity = 200;
-    private boolean integrateChisel = true;
-    private boolean integrateForestry = true;
-    private boolean integrateGardenStuff = true;
-    private boolean integrateMFR = true;
-    private boolean integrateMinechem = true;
-    private boolean integrateStorageDrawers = true;
+    private boolean integrateChisel = false;
+    private boolean integrateForestry = false;
+    private boolean integrateGardenStuff = false;
+    private boolean integrateMFR = false;
+    private boolean integrateMinechem = false;
 
     private static ImmutableMap<ResourceLocation, String> chestConfigNames()
     {
@@ -167,10 +166,9 @@ public enum Settings implements ConfigSyncable
         final String integrationCategory = Configuration.CATEGORY_GENERAL + ".integration";
         integrateChisel = get(config, "integrateChisel", integrationCategory, true);
         integrateForestry = get(config, "integrateForestry", integrationCategory, true);
-        integrateGardenStuff = get(config, "integrateGardenStuff", integrationCategory, true);
-        integrateMFR = get(config, "integrateMFR", integrationCategory, true);
-        integrateMinechem = get(config, "integrateMinechem", integrationCategory, true);
-        integrateStorageDrawers = get(config, "integrateStorageDrawers", integrationCategory, true);
+        integrateGardenStuff = get(config, "integrateGardenStuffStub", integrationCategory, false);
+        integrateMFR = get(config, "integrateMFRStub", integrationCategory, false);
+        integrateMinechem = get(config, "integrateMinechemStub", integrationCategory, false);
     }
 
     public int saplingDropRarity()
@@ -188,5 +186,4 @@ public enum Settings implements ConfigSyncable
 
     public boolean integrateMinechem() { return integrateMinechem; }
 
-    public boolean integrateStorageDrawers() { return integrateStorageDrawers; }
 }

@@ -9,15 +9,19 @@ import java.util.Set;
 @SuppressWarnings({ "WeakerAccess", "UnusedDeclaration" })
 public final class ModGuiFactory implements IModGuiFactory
 {
-    @Override
     public void initialize(Minecraft minecraftInstance) { }
 
-    @Override
+    public boolean hasConfigGui() {
+        return true;
+    }
+
+    public GuiScreen createConfigGui(GuiScreen parentScreen) {
+        return new ConfigGUI(parentScreen);
+    }
+
     public Class<? extends GuiScreen> mainConfigGuiClass() { return ConfigGUI.class; }
 
-    @Override
     public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() { return null; }
 
-    @Override
     public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) { return null; }
 }

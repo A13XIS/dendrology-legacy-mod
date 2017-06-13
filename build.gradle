@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.11.2-L1.2"
+version = "1.11.2-L1.3"
 group = "inc.a13xis.dendrology" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "dendrology"
 
@@ -46,6 +46,8 @@ dependencies {
     // the 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
     //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
     compile project(":Koresample")
+    provided name:'chisel-1.11.2'
+    provided name:'forestry-1.11.2'
     // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
     // except that these dependencies get remapped to your current MCP mappings
     //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
