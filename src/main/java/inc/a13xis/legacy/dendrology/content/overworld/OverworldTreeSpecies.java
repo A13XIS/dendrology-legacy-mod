@@ -25,8 +25,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies.Colorizer.*;
 
 @SuppressWarnings({ "NonSerializableFieldInSerializableClass", "ClassHasNoToStringMethod" })
-public enum OverworldTreeSpecies
-        implements DefinesLeaves, DefinesLog, DefinesSapling, DefinesSlab, DefinesStairs, DefinesTree, DefinesWood, DefinesDoor, DefinesFence
+public enum OverworldTreeSpecies implements DefinesLeaves, DefinesLog, DefinesSapling, DefinesSlab, DefinesStairs, DefinesTree, DefinesWood, DefinesDoor, DefinesFence, ProvidesColor
 {
     // REORDERING WILL CAUSE DAMAGE TO SAVES
     ACEMUS(ACEMUS_COLOR, new AcemusTree(), new AcemusTree(false)),
@@ -100,7 +99,6 @@ public enum OverworldTreeSpecies
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
     public int getLeavesColor(IBlockAccess blockAccess, BlockPos pos)
     {
         switch (colorizer)

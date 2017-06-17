@@ -4,6 +4,8 @@ import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import inc.a13xis.legacy.dendrology.block.ModBlocks;
+import inc.a13xis.legacy.dendrology.compat.chisel.ChiselMod;
+import inc.a13xis.legacy.dendrology.compat.forestry.ForestryMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
 import inc.a13xis.legacy.dendrology.content.ParcelManager;
 import inc.a13xis.legacy.dendrology.content.crafting.Crafter;
@@ -51,7 +53,7 @@ public final class TheMod
 {
     public static final String MOD_ID = "dendrology";
     static final String MOD_NAME = "Ancient Trees";
-    static final String MOD_VERSION = "1.10.2-L1.2.1";
+    static final String MOD_VERSION = "1.10.2-L1.3";
     static final String MOD_GUI_FACTORY = "inc.a13xis.legacy.dendrology.config.client.ModGuiFactory";
     private static Optional<LangMap> fallback = Optional.absent();
     private static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ':';
@@ -81,17 +83,17 @@ public final class TheMod
 
     public static Logger logger() { return Logger.forMod(MOD_ID); }
 
-//    private void initIntegrators()
-//    {
-//        Logger.forMod(MOD_ID).info("Preparing integration with other mods.");
+    private void initIntegrators()
+    {
+        Logger.forMod(MOD_ID).info("Preparing integration with other mods.");
 //        integrators.add(new MinechemMod());
-//        integrators.add(new ForestryMod());
+        integrators.add(new ForestryMod());
 //        integrators.add(new GardenCoreMod());
 //        integrators.add(new GardenTreesMod());
-//        integrators.add(new ChiselMod());
+        integrators.add(new ChiselMod());
 //        integrators.add(new MineFactoryReloadedMod());
 //        integrators.add(new StorageDrawersMod());
-//   }
+   }
 
     public Configuration configuration()
     {
@@ -132,8 +134,8 @@ public final class TheMod
         new ModBlocks().loadContent();
         GameRegistry.register(ModItems.parcelInstance());
         Proxy.common.registerRenders();
-        //initIntegrators();
-        //integrateMods(event.getModState());
+        initIntegrators();
+        integrateMods(event.getModState());
     }
 
     @EventHandler
@@ -145,7 +147,7 @@ public final class TheMod
         new OreDictHandler().registerBlocksWithOreDictinary();
         new Crafter().writeRecipes();
         new Smelter().registerSmeltings();
-        //integrateMods(event.getModState());
+        integrateMods(event.getModState());
     }
 
     @EventHandler
@@ -154,7 +156,7 @@ public final class TheMod
         Proxy.render.postInit();
         ModBlocks.registerPotionEffects();
         FuelHandler.postInit();
-        //integrateMods(event.getModState());
+        integrateMods(event.getModState());
         integrators.clear();
         ParcelManager.INSTANCE.init();
 

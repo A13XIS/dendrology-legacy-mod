@@ -240,7 +240,7 @@ chisel.dendrology:planks.acemus.parquet.name=Acemus wood parquet
 chisel.dendrology:planks.acemus.blinds.name=Acemus wood plank blinds
 chisel.dendrology:planks.acemus.scaffold.name=Acemus wood scaffold
 chisel.dendrology:planks.acemus.chaotic.name=Acemus wood planks in disarray
-chisel.dendrology:planks.acemus.verticalchaotic.name=Vetical acemus wood planks in disarray
+chisel.dendrology:planks.acemus.vchaotic.name=Vetical acemus wood planks in disarray
 
 chisel.dendrology:planks.cedrum.clean.name=Smooth cedrum wood planks
 chisel.dendrology:planks.cedrum.short.name=Short cedrum wood planks
@@ -256,7 +256,7 @@ chisel.dendrology:planks.cedrum.parquet.name=Cedrum wood parquet
 chisel.dendrology:planks.cedrum.blinds.name=Cedrum wood plank blinds
 chisel.dendrology:planks.cedrum.scaffold.name=Cedrum wood scaffold
 chisel.dendrology:planks.cedrum.chaotic.name=Cedrum wood planks in disarray
-chisel.dendrology:planks.cedrum.verticalchaotic.name=Vetical cedrum wood planks in disarray
+chisel.dendrology:planks.cedrum.vchaotic.name=Vetical cedrum wood planks in disarray
 
 chisel.dendrology:planks.cerasu.clean.name=Smooth cerasu wood planks
 chisel.dendrology:planks.cerasu.short.name=Short cerasu wood planks
@@ -272,7 +272,7 @@ chisel.dendrology:planks.cerasu.parquet.name=Cerasu wood parquet
 chisel.dendrology:planks.cerasu.blinds.name=Cerasu wood plank blinds
 chisel.dendrology:planks.cerasu.scaffold.name=Cerasu wood scaffold
 chisel.dendrology:planks.cerasu.chaotic.name=Cerasu wood planks in disarray
-chisel.dendrology:planks.cerasu.verticalchaotic.name=Vetical cerasu wood planks in disarray
+chisel.dendrology:planks.cerasu.vchaotic.name=Vetical cerasu wood planks in disarray
 
 chisel.dendrology:planks.delnas.clean.name=Smooth delnas wood planks
 chisel.dendrology:planks.delnas.short.name=Short delnas wood planks
@@ -288,7 +288,7 @@ chisel.dendrology:planks.delnas.parquet.name=Delnas wood parquet
 chisel.dendrology:planks.delnas.blinds.name=Delnas wood plank blinds
 chisel.dendrology:planks.delnas.scaffold.name=Delnas wood scaffold
 chisel.dendrology:planks.delnas.chaotic.name=Delnas wood planks in disarray
-chisel.dendrology:planks.delnas.verticalchaotic.name=Vetical delnas wood planks in disarray
+chisel.dendrology:planks.delnas.vchaotic.name=Vetical delnas wood planks in disarray
 
 chisel.dendrology:planks.ewcaly.clean.name=Smooth ewcaly wood planks
 chisel.dendrology:planks.ewcaly.short.name=Short ewcaly wood planks
@@ -304,7 +304,7 @@ chisel.dendrology:planks.ewcaly.parquet.name=Ewcaly wood parquet
 chisel.dendrology:planks.ewcaly.blinds.name=Ewcaly wood plank blinds
 chisel.dendrology:planks.ewcaly.scaffold.name=Ewcaly wood scaffold
 chisel.dendrology:planks.ewcaly.chaotic.name=Ewcaly wood planks in disarray
-chisel.dendrology:planks.ewcaly.verticalchaotic.name=Vetical ewcaly wood planks in disarray
+chisel.dendrology:planks.ewcaly.vchaotic.name=Vetical ewcaly wood planks in disarray
 
 chisel.dendrology:planks.hekur.clean.name=Smooth hekur wood planks
 chisel.dendrology:planks.hekur.short.name=Short hekur wood planks
@@ -320,7 +320,7 @@ chisel.dendrology:planks.hekur.parquet.name=Hekur wood parquet
 chisel.dendrology:planks.hekur.blinds.name=Hekur wood plank blinds
 chisel.dendrology:planks.hekur.scaffold.name=Hekur wood scaffold
 chisel.dendrology:planks.hekur.chaotic.name=Hekur wood planks in disarray
-chisel.dendrology:planks.hekur.verticalchaotic.name=Vetical hekur wood planks in disarray
+chisel.dendrology:planks.hekur.vchaotic.name=Vetical hekur wood planks in disarray
 
 chisel.dendrology:planks.kiparis.clean.name=Smooth kiparis wood planks
 chisel.dendrology:planks.kiparis.short.name=Short kiparis wood planks
@@ -336,7 +336,7 @@ chisel.dendrology:planks.kiparis.parquet.name=Kiparis wood parquet
 chisel.dendrology:planks.kiparis.blinds.name=Kiparis wood plank blinds
 chisel.dendrology:planks.kiparis.scaffold.name=Kiparis wood scaffold
 chisel.dendrology:planks.kiparis.chaotic.name=Kiparis wood planks in disarray
-chisel.dendrology:planks.kiparis.verticalchaotic.name=Vetical kiparis wood planks in disarray
+chisel.dendrology:planks.kiparis.vchaotic.name=Vetical kiparis wood planks in disarray
 
 chisel.dendrology:planks.kiparis.clean.name=Smooth kiparis wood planks
 chisel.dendrology:planks.kiparis.short.name=Short kiparis wood planks
@@ -352,7 +352,7 @@ chisel.dendrology:planks.kiparis.parquet.name=Kiparis wood parquet
 chisel.dendrology:planks.kiparis.blinds.name=Kiparis wood plank blinds
 chisel.dendrology:planks.kiparis.scaffold.name=Kiparis wood scaffold
 chisel.dendrology:planks.kiparis.chaotic.name=Kiparis wood planks in disarray
-chisel.dendrology:planks.kiparis.verticalchaotic.name=Vetical kiparis wood planks in disarray
+chisel.dendrology:planks.kiparis.vchaotic.name=Vetical kiparis wood planks in disarray
 
 chisel.dendrology:planks.lata.clean.name=Smooth lata wood planks
 chisel.dendrology:planks.lata.short.name=Short lata wood planks
@@ -368,7 +368,7 @@ chisel.dendrology:planks.lata.parquet.name=Lata wood parquet
 chisel.dendrology:planks.lata.blinds.name=Lata wood plank blinds
 chisel.dendrology:planks.lata.scaffold.name=Lata wood scaffold
 chisel.dendrology:planks.lata.chaotic.name=Lata wood planks in disarray
-chisel.dendrology:planks.lata.verticalchaotic.name=Vetical lata wood planks in disarray
+chisel.dendrology:planks.lata.vchaotic.name=Vetical lata wood planks in disarray
 
 chisel.dendrology:planks.nucis.clean.name=Smooth nucis wood planks
 chisel.dendrology:planks.nucis.short.name=Short nucis wood planks
@@ -384,7 +384,7 @@ chisel.dendrology:planks.nucis.parquet.name=Nucis wood parquet
 chisel.dendrology:planks.nucis.blinds.name=Nucis wood plank blinds
 chisel.dendrology:planks.nucis.scaffold.name=Nucis wood scaffold
 chisel.dendrology:planks.nucis.chaotic.name=Nucis wood planks in disarray
-chisel.dendrology:planks.nucis.verticalchaotic.name=Vetical nucis wood planks in disarray
+chisel.dendrology:planks.nucis.vchaotic.name=Vetical nucis wood planks in disarray
 
 chisel.dendrology:planks.porffor.clean.name=Smooth porffor wood planks
 chisel.dendrology:planks.porffor.short.name=Short porffor wood planks
@@ -400,7 +400,7 @@ chisel.dendrology:planks.porffor.parquet.name=Porffor wood parquet
 chisel.dendrology:planks.porffor.blinds.name=Porffor wood plank blinds
 chisel.dendrology:planks.porffor.scaffold.name=Porffor wood scaffold
 chisel.dendrology:planks.porffor.chaotic.name=Porffor wood planks in disarray
-chisel.dendrology:planks.porffor.verticalchaotic.name=Vetical porffor wood planks in disarray
+chisel.dendrology:planks.porffor.vchaotic.name=Vetical porffor wood planks in disarray
 
 chisel.dendrology:planks.salyx.clean.name=Smooth salyx wood planks
 chisel.dendrology:planks.salyx.short.name=Short salyx wood planks
@@ -416,7 +416,7 @@ chisel.dendrology:planks.salyx.parquet.name=Salyx wood parquet
 chisel.dendrology:planks.salyx.blinds.name=Salyx wood plank blinds
 chisel.dendrology:planks.salyx.scaffold.name=Salyx wood scaffold
 chisel.dendrology:planks.salyx.chaotic.name=Salyx wood planks in disarray
-chisel.dendrology:planks.salyx.verticalchaotic.name=Vetical salyx wood planks in disarray
+chisel.dendrology:planks.salyx.vchaotic.name=Vetical salyx wood planks in disarray
 
 chisel.dendrology:planks.tuopa.clean.name=Smooth tuopa wood planks
 chisel.dendrology:planks.tuopa.short.name=Short tuopa wood planks
@@ -432,9 +432,9 @@ chisel.dendrology:planks.tuopa.parquet.name=Tuopa wood parquet
 chisel.dendrology:planks.tuopa.blinds.name=Tuopa wood plank blinds
 chisel.dendrology:planks.tuopa.scaffold.name=Tuopa wood scaffold
 chisel.dendrology:planks.tuopa.chaotic.name=Tuopa wood planks in disarray
-chisel.dendrology:planks.tuopa.verticalchaotic.name=Vertical tuopa wood planks in disarray
+chisel.dendrology:planks.tuopa.vchaotic.name=Vertical tuopa wood planks in disarray
 
-# Creatibe Tabs
+# Creative Tabs
 itemGroup.dendrology=Ancient Trees
 itemGroup.storageDrawersAncientTrees=Storage Drawers: Ancient Trees
 itemGroup.chiselAncientTrees=Chisel 2: Ancient Trees

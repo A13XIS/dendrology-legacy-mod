@@ -33,6 +33,12 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+repositories{
+    flatDir{
+        dirs 'C:\\Users\\Lexis\\.gradle\\caches\\minecraft\\net\\minecraftforge\\forge\\1.10.2-12.18.3.2185\\snapshot\\20161111'
+    }
+}
+
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -47,7 +53,9 @@ dependencies {
     //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
     
     compile project(":Koresample")
-    
+    provided name: "chisel-1.10"
+    provided name: "forestry-1.10"
+
     // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
     // except that these dependencies get remapped to your current MCP mappings
     //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'

@@ -3,10 +3,13 @@ package inc.a13xis.legacy.dendrology.proxy;
 
 import inc.a13xis.legacy.dendrology.TheMod;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 public class CommonProxy {
     public void registerRenders(){}
@@ -30,4 +33,6 @@ public class CommonProxy {
         String val=I18n.translateToLocal(settingName);
         return val==settingName?I18n.translateToFallback(settingName):val;
     }
+
+    public void registerIntegratorRenders(String mod, ArrayList<ItemBlock> itemBlocks){}
 }
