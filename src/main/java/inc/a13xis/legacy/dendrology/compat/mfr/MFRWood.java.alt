@@ -55,6 +55,6 @@ public final class MFRWood implements IFactoryHarvestable
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("woodBlock", woodBlock).toString();
+        return MoreObjects.toStringHelper(this).add("woodBlock", woodBlock).toString();
     }
 }

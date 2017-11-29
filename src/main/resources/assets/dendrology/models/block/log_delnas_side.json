@@ -1,7 +1,11 @@
 {
-  "parent": "block/column_side",
+  "parent": "block/cube_directional",
   "textures": {
-    "end": "dendrology:blocks/log_delnas_top",
-    "side": "dendrology:blocks/log_delnas"
+    "up": "dendrology:blocks/log_delnas",
+    "down": "dendrology:blocks/log_delnas",
+    "north": "dendrology:blocks/log_delnas_top",
+    "south": "dendrology:blocks/log_delnas_top",
+    "west": "dendrology:blocks/log_delnas",
+    "east": "dendrology:blocks/log_delnas"
   }
 }

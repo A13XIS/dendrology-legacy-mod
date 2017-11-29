@@ -1,0 +1,14 @@
+{
+  "type": "crafting_shapeless",
+  "group": "purple_dye",
+  "ingredients": [
+    {
+      "item": "dendrology:sapling1",
+      "data": 2
+    }
+  ],
+  "result": {
+    "item": "minecraft:dye",
+    "data": 13
+  }
+}

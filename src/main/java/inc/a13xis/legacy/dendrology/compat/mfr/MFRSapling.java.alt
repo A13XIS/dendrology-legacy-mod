@@ -82,7 +82,7 @@ public final class MFRSapling implements IFactoryPlantable, IFactoryFertilizable
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("saplingItem", saplingItem).add("sapling", sapling)
+        return MoreObjects.toStringHelper(this).add("saplingItem", saplingItem).add("sapling", sapling)
                 .add("plantedSapling", plantedSapling).toString();
     }
 }

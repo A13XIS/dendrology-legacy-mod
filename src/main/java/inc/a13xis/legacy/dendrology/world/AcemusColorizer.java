@@ -5,8 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,7 +29,7 @@ public enum AcemusColorizer implements IResourceManagerReloadListener
     public static int getColor(BlockPos pos)
     {
         int day = 0;
-        final World world = Minecraft.getMinecraft().theWorld;
+        final World world = Minecraft.getMinecraft().world;
         if (world != null)
         {
             final WorldInfo info = world.getWorldInfo();

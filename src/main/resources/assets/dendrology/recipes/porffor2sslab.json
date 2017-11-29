@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "group": "wooden_slab",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "dendrology:wood0",
+      "data": 10
+    }
+  },
+  "result": {
+    "item": "dendrologytsslab1",
+	"data":2,
+	"count": 6
+  }
+}

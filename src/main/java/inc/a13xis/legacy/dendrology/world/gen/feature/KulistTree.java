@@ -1,10 +1,10 @@
 package inc.a13xis.legacy.dendrology.world.gen.feature;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.kulist.LargeKulistTree;
 import inc.a13xis.legacy.dendrology.world.gen.feature.kulist.NormalKulistTree;
 import inc.a13xis.legacy.koresample.tree.DefinesTree;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -33,7 +33,7 @@ public class KulistTree extends AbstractTree
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("treeGen", treeGen).add("largeTreeGen", largeTreeGen).toString();
+        return MoreObjects.toStringHelper(this).add("treeGen", treeGen).add("largeTreeGen", largeTreeGen).toString();
     }
 
     @Override

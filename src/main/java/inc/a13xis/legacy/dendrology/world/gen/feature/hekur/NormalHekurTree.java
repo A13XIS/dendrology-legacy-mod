@@ -1,11 +1,12 @@
 package inc.a13xis.legacy.dendrology.world.gen.feature.hekur;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -16,7 +17,7 @@ import java.util.Random;
 @SuppressWarnings("OverlyComplexClass")
 public class NormalHekurTree extends AbstractTree
 {
-    private int logDirection = 0;
+    private BlockLog.EnumAxis logAxis = BlockLog.EnumAxis.Y;
 
     public NormalHekurTree(boolean fromSapling) { super(fromSapling); }
 
@@ -24,19 +25,13 @@ public class NormalHekurTree extends AbstractTree
     protected boolean isPoorGrowthConditions(World world, BlockPos pos, int unused, IPlantable plantable)
     {
         final Block block = world.getBlockState(pos.down()).getBlock();
-        return !block.canSustainPlant(world, pos.down(), EnumFacing.UP, plantable);
-    }
-
-    @Override
-    protected int getLogMetadata()
-    {
-        return super.getLogMetadata() | logDirection;
+        return !block.canSustainPlant(world.getBlockState(pos.down()),world, pos.down(), EnumFacing.UP, plantable);
     }
 
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("logDirection", logDirection).toString();
+        return MoreObjects.toStringHelper(this).add("logAxis", logAxis).toString();
     }
 
     @Override
@@ -47,7 +42,7 @@ public class NormalHekurTree extends AbstractTree
         if (isPoorGrowthConditions(world, pos, 0, getSaplingBlock())) return false;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, pos.down(), pos);
+        block.onPlantGrow(world.getBlockState(pos),world, pos.down(), pos);
 
         genRoots(world, random, pos);
         growTrunk(world, random, pos);
@@ -91,17 +86,16 @@ public class NormalHekurTree extends AbstractTree
 
     private void setLogDirection(int dX, int dZ)
     {
-        if (dX != 0) logDirection = 4;
+        if (dX != 0) logAxis = BlockLog.EnumAxis.X;
 
-        if (dZ != 0) logDirection = 8;
+        if (dZ != 0) logAxis = BlockLog.EnumAxis.Z;
     }
 
     private boolean canBeReplacedByRoot(World world, BlockPos pos)
     {
-        final Block block = world.getBlockState(pos).getBlock();
-        final Material material = block.getMaterial();
+        final Material material = world.getBlockState(pos).getMaterial();
 
-        return canBeReplacedByLog(world, pos) || material.equals(Material.sand) || material.equals(Material.ground);
+        return canBeReplacedByLog(world, pos) || material.equals(Material.SAND) || material.equals(Material.GROUND);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -149,8 +143,7 @@ public class NormalHekurTree extends AbstractTree
         }
     }
 
-    void largeDirect(World world, Random rand, int dX, int dZ, BlockPos pos, int size, int splitCount,
-                     int splitCount1, int splitCount2)
+    void largeDirect(World world, Random rand, int dX, int dZ, BlockPos pos, int size, int splitCount,int splitCount1, int splitCount2)
     {
         setLogDirection(dX, dZ);
 
@@ -162,9 +155,9 @@ public class NormalHekurTree extends AbstractTree
         {
             if (size == 1) pos = pos.up();
 
-            placeLog(world, pos);
+            placeLog(world, pos, logAxis);
 
-            if (next <= 9 && size == 2) placeLog(world, pos.add(-dX,0,-dZ));
+            if (next <= 9 && size == 2) placeLog(world, pos.add(-dX,0,-dZ), logAxis);
 
             if (next == 5 * size) branchAndLeaf(world, pos.up());
 
@@ -224,7 +217,7 @@ public class NormalHekurTree extends AbstractTree
             }
 
             pos = pos.up();
-            placeLog(world, pos);
+            placeLog(world, pos,logAxis);
 
             if (i == splitCount) branchAndLeaf(world, pos);
         }
@@ -254,7 +247,7 @@ public class NormalHekurTree extends AbstractTree
             }
 
             pos = pos.up();
-            placeLog(world, pos);
+            placeLog(world, pos,logAxis);
 
             if (i == splitCount) branchAndLeaf(world, pos);
         }
@@ -281,7 +274,7 @@ public class NormalHekurTree extends AbstractTree
 
             if (i >= 3) pos = pos.up(rand.nextInt(2));
 
-            placeLog(world, pos);
+            placeLog(world, pos,logAxis);
 
             if (i == length) branchAndLeaf(world, pos);
         }
@@ -308,7 +301,7 @@ public class NormalHekurTree extends AbstractTree
             }
             if (i >= 3) pos = pos.up(rand.nextInt(2));
 
-            placeLog(world, pos);
+            placeLog(world, pos,logAxis);
 
             if (i == length) branchAndLeaf(world, pos);
         }
@@ -344,7 +337,7 @@ public class NormalHekurTree extends AbstractTree
             }
 
             pos = pos.up();
-            placeLog(world, pos);
+            placeLog(world, pos,logAxis);
 
             if (i == splitCount2) branchAndLeaf(world, pos);
         }
@@ -377,27 +370,28 @@ public class NormalHekurTree extends AbstractTree
             }
 
             pos = pos.up();
-            placeLog(world, pos);
+            placeLog(world, pos,logAxis);
 
             if (i == splitCount2) branchAndLeaf(world, pos);
         }
     }
 
-    private void clearLogDirection() {logDirection = 0;}
+    private void clearLogDirection() {
+        logAxis = BlockLog.EnumAxis.Y;}
 
     private void branchAndLeaf(World world, BlockPos pos)
     {
-        placeLog(world, pos);
+        placeLog(world, pos,logAxis);
 
         for (int dX = -3; dX <= 3; dX++)
         {
             for (int dZ = -3; dZ <= 3; dZ++)
             {
-                if ((Math.abs(dX) != 3 || Math.abs(dZ) != 3) && (Math.abs(dX) != 2 || Math.abs(dZ) != 3) &&
-                        (Math.abs(dX) != 3 || Math.abs(dZ) != 2)) placeLeaves(world, pos.add(dX,0,dZ));
+                if ((Math.abs(dX) != 3 || Math.abs(dZ) != 3) && (Math.abs(dX) != 2 || Math.abs(dZ) != 3) && (Math.abs(dX) != 3 || Math.abs(dZ) != 2))
+                    placeLeaves(world, pos.add(dX,0,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
 
                 if (Math.abs(dX) < 3 && Math.abs(dZ) < 3 && (Math.abs(dX) != 2 || Math.abs(dZ) != 2))
-                    placeLeaves(world,pos.add(dX,1,dZ));
+                    placeLeaves(world,pos.add(dX,1,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
             }
         }
     }

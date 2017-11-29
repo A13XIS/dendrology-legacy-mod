@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "dendrology:wood0",
+      "data": 6
+    }
+  },
+  "result": {
+    "item": "dendrology:stairs6",
+	"count": 4
+  }
+}

@@ -1,6 +1,7 @@
 package inc.a13xis.legacy.dendrology.content.loader;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import inc.a13xis.legacy.dendrology.block.*;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
@@ -33,6 +34,7 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
         loadSaplingBlocks(factory);
         loadSlabBlocks(factory);
         loadStairsBlocks(factory);
+        loadDoorBlocks(factory);
     }
 
     public void loadLeavesBlocks(TreeBlockFactory factory)
@@ -148,6 +150,14 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
         }
     }
 
+    public void loadDoorBlocks(TreeBlockFactory factory)
+    {
+        for (final DefinesDoor definition : taxonomy.doorDefinitions())
+        {
+            factory.createDoorBlock(definition);
+        }
+    }
+
     public void loadWoodBlocks(TreeBlockFactory factory)
     {
         final List<DefinesWood> subBlocks = Lists.newArrayListWithCapacity(WoodBlock.CAPACITY);
@@ -168,6 +178,6 @@ public class TreeSpeciesLoader implements ITreeSpeciesLoader
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("taxonomy", taxonomy).add("slabRegistry", slabRegistry).toString();
+        return MoreObjects.toStringHelper(this).add("taxonomy", taxonomy).add("slabRegistry", slabRegistry).toString();
     }
 }

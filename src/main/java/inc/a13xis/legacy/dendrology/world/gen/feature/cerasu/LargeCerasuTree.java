@@ -7,6 +7,4 @@ public class LargeCerasuTree extends AbstractLargeVanillaTree
 {
     public LargeCerasuTree(boolean fromSapling) { super(fromSapling); }
 
-    @Override
-    protected int getUnmaskedLogMeta() { return OverworldTreeSpecies.CERASU.logSubBlockVariant().ordinal(); }
 }

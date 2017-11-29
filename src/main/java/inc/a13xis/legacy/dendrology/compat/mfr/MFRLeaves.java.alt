@@ -77,6 +77,6 @@ public final class MFRLeaves implements IFactoryHarvestable
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("leavesBlock", leavesBlock).toString();
+        return MoreObjects.toStringHelper(this).add("leavesBlock", leavesBlock).toString();
     }
 }

@@ -1,14 +1,15 @@
 package inc.a13xis.legacy.dendrology.world.gen.feature;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.koresample.tree.DefinesTree;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
+import net.minecraft.block.BlockLog;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.common.IPlantable;
@@ -29,7 +30,7 @@ public abstract class AbstractTree extends WorldGenAbstractTree
     {
         final Block block = world.getBlockState(pos).getBlock();
 
-        return block.isAir(world, pos) || block.isLeaves(world, pos);
+        return block.isAir(world.getBlockState(pos),world, pos) || block.isLeaves(world.getBlockState(pos),world, pos);
     }
 
     public void setTree(DefinesTree tree)
@@ -44,7 +45,7 @@ public abstract class AbstractTree extends WorldGenAbstractTree
         if (!hasRoomToGrow(world, pos, height)) return true;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        return !block.canSustainPlant(world, pos.down(), EnumFacing.UP, plantable);
+        return !block.canSustainPlant(world.getBlockState(pos.down()),world, pos.down(), EnumFacing.UP, plantable);
     }
 
     protected boolean hasRoomToGrow(World world, BlockPos pos, int height)
@@ -66,21 +67,29 @@ public abstract class AbstractTree extends WorldGenAbstractTree
     protected SaplingBlock getSaplingBlock() {
         return tree.saplingBlock(); }
 
-    protected void placeLeaves(World world, BlockPos pos)
+    protected void placeLeaves(World world, BlockPos pos,boolean check_dekay)
     {
-        if (world.getBlockState(pos).getBlock().canBeReplacedByLeaves(world, pos))
+        if (world.getBlockState(pos).getBlock().canBeReplacedByLeaves(world.getBlockState(pos),world, pos))
             setBlockAndNotifyAdequately(world, pos, getLeavesBlock().getStateFromMeta(getLeavesMetadata()));
     }
 
-    protected void placeLog(World world, BlockPos pos)
+    protected void placeLeaves(World world, BlockPos pos)
+    {
+        placeLeaves(world,pos,true);
+    }
+    protected void placeLog(World world, BlockPos pos, BlockLog.EnumAxis axis)
     {
         if (canBeReplacedByLog(world, pos))
-            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()));
+            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()).withProperty(BlockLog.LOG_AXIS,axis));
+    }
+
+    protected void placeLog(World world, BlockPos pos){
+        placeLog(world,pos,BlockLog.EnumAxis.Y);
     }
 
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("tree", tree).toString();
+        return MoreObjects.toStringHelper(this).add("tree", tree).toString();
     }
 }

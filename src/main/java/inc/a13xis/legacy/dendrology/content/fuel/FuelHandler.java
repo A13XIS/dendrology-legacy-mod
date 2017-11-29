@@ -21,9 +21,8 @@ public enum FuelHandler implements IFuelHandler
     public int getBurnTime(ItemStack fuel)
     {
         final Item fuelItem = fuel.getItem();
-        final Material fuelMaterial = Block.getBlockFromItem(fuelItem).getMaterial();
-        if (fuelMaterial.equals(Material.wood) && SlabBlock.isSingleSlab(fuelItem)) return 150;
-
+        final Material fuelMaterial = Block.getBlockFromItem(fuelItem).getDefaultState().getMaterial();
+        if (fuelMaterial.equals(Material.WOOD) && SlabBlock.isSingleSlab(fuelItem)) return 150;
         return 0;
     }
 }

@@ -1,0 +1,14 @@
+{
+  "type": "crafting_shapeless",
+  "group":"planks",
+  "ingredients": [
+    {
+      "item": "dendrology:log0",
+      "data": 5
+    }
+  ],
+  "result": {
+    "item": "minecraft:wood0",
+    "data": 5
+  }
+}

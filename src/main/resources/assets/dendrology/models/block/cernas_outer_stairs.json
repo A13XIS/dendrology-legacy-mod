@@ -1,8 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "dendrology:blocks/planks_cernas",
-        "top": "dendrology:blocks/planks_cernas",
-        "side": "dendrology:blocks/planks_cernas"
-    }
-}

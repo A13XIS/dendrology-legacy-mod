@@ -1,7 +1,11 @@
 {
-  "parent": "block/column_side",
+  "parent": "block/cube_directional",
   "textures": {
-    "end": "dendrology:blocks/log_tuopa_top",
-    "side": "dendrology:blocks/log_tuopa"
+    "up": "dendrology:blocks/log_tuopa",
+    "down": "dendrology:blocks/log_tuopa",
+    "north": "dendrology:blocks/log_tuopa_top",
+    "south": "dendrology:blocks/log_tuopa_top",
+    "west": "dendrology:blocks/log_tuopa",
+    "east": "dendrology:blocks/log_tuopa"
   }
 }

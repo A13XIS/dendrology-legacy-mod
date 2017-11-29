@@ -4,22 +4,19 @@ import com.google.common.collect.ImmutableList;
 import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.koresample.tree.DefinesWood;
 import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.item.Item;
 import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Collection;
 
 
 public final class ModWoodBlock extends WoodBlock
 {
-    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
+    public final static PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
 
     protected ModWoodBlock(Collection<? extends DefinesWood> subBlocks){
         super(subBlocks);
@@ -37,8 +34,8 @@ public final class ModWoodBlock extends WoodBlock
     }
 
     @Override
-    protected BlockState createBlockState() {
-        return new BlockState(this, new IProperty[] { ModWoodBlock.VARIANT });
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[] { ModWoodBlock.VARIANT });
     }
 
     @Override
@@ -58,7 +55,7 @@ public final class ModWoodBlock extends WoodBlock
         setCreativeTab(TheMod.INSTANCE.creativeTab());
         setHardness(2.0f);
         setResistance(5.0f);
-        setStepSound(soundTypeWood);
+        setSoundType(SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(ModWoodBlock.VARIANT, EnumType.ACEMUS));
     }
 

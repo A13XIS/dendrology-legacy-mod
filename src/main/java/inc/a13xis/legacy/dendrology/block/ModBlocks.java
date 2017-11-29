@@ -3,35 +3,39 @@ package inc.a13xis.legacy.dendrology.block;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import inc.a13xis.legacy.dendrology.TheMod;
-import inc.a13xis.legacy.dendrology.config.Settings;
+import inc.a13xis.legacy.dendrology.content.PotionBrewingRecipe;
 import inc.a13xis.legacy.dendrology.content.loader.TreeSpeciesLoader;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeBlockFactory;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeTaxonomy;
 import inc.a13xis.legacy.dendrology.item.*;
+import inc.a13xis.legacy.koresample.common.block.DoorBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
-import inc.a13xis.legacy.koresample.tree.DefinesLog;
-import inc.a13xis.legacy.koresample.tree.DefinesSapling;
-import inc.a13xis.legacy.koresample.tree.DefinesSlab;
-import inc.a13xis.legacy.koresample.tree.DefinesStairs;
+import inc.a13xis.legacy.koresample.tree.*;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
 import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
+import inc.a13xis.legacy.koresample.tree.item.DoorItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.potion.PotionUtils;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ModBlocks
 {
+    private static boolean loaded = false;
     private static final int DEFAULT_LEAVES_FIRE_ENCOURAGEMENT = 30;
     private static final int DEFAULT_LOG_FIRE_ENCOURAGEMENT = 5;
     private static final int DEFAULT_PLANKS_FIRE_ENCOURAGEMENT = 5;
@@ -45,208 +49,362 @@ public final class ModBlocks
     private static final List<SlabBlock> singleSlabBlocks = Lists.newArrayList();
     private static final List<SlabBlock> doubleSlabBlocks = Lists.newArrayList();
     private static final List<StairsBlock> stairsBlocks = Lists.newArrayList();
+    private static final List<DoorBlock> doorBlocks = Lists.newArrayList();
     private static final List<SaplingBlock> saplingBlocks = Lists.newArrayList();
     private static final List<LeavesBlock> leavesBlocks = Lists.newArrayList();
     private static final OverworldTreeTaxonomy overworldTaxonomy = new OverworldTreeTaxonomy();
+    private static final List<MixRecipe> recipes = new ArrayList<>();
 
-    @SuppressWarnings("MethodWithMultipleLoops")
-    private static void addAllSaplingsToChests()
+    public static void loadOverWorldContent()
     {
-        TheMod.logger().info("Hiding saplings in chests.");
-        final Settings settings = Settings.INSTANCE;
-
-        for (final DefinesSapling saplingDefinition : overworldTaxonomy.saplingDefinitions())
-            for (final String chestType : Settings.chestTypes())
-                addSaplingToChest(saplingDefinition, chestType, settings.chestRarity(chestType));
-    }
-
-    private static void addSaplingToChest(DefinesSapling saplingDefinition, String chestType, int rarity)
-    {
-        if (rarity <= 0) return;
-
-        final ItemStack sapling =
-                new ItemStack(saplingDefinition.saplingBlock(), 1, saplingDefinition.saplingSubBlockVariant().ordinal());
-        final WeightedRandomChestContent chestContent = new WeightedRandomChestContent(sapling, 1, 2, rarity);
-
-        final ChestGenHooks chestGenInfo = ChestGenHooks.getInfo(chestType);
-        chestGenInfo.addItem(chestContent);
-    }
-
-    public static Iterable<? extends LeavesBlock> leavesBlocks() { return ImmutableList.copyOf(leavesBlocks); }
-
-    private static void loadOverWorldContent()
-    {
+        if(loaded){
+            return;
+        }
         TheMod.logger().info("Loading overworld species.");
         final TreeSpeciesLoader overworldContent = new TreeSpeciesLoader(overworldTaxonomy);
         overworldContent.load(new OverworldTreeBlockFactory());
+        loaded = true;
     }
-
-    public static Iterable<? extends BlockLog> logBlocks() { return ImmutableList.copyOf(logBlocks); }
 
     public static Iterable<? extends DefinesLog> logDefinitions() { return overworldTaxonomy.logDefinitions(); }
 
-    private static void registerAllBlocks()
+    public static void registerAllBlocks(IForgeRegistry<Block> reg)
     {
-        registerAllLogBlocks();
-        registerAllLeavesBlock();
-        registerAllSaplingBlocks();
-        registerAllWoodBlocks();
-        registerAllStairsBlocks();
-        registerAllSingleSlabBlocks();
-        registerAllDoubleSlabBlocks();
+        registerAllLogBlocks(reg);
+        registerAllLeavesBlock(reg);
+        registerAllSaplingBlocks(reg);
+        registerAllWoodBlocks(reg);
+        registerAllStairsBlocks(reg);
+        registerAllDoorBlocks(reg);
+        registerAllSingleSlabBlocks(reg);
+        registerAllDoubleSlabBlocks(reg);
     }
 
-    public static void registerAllRenders() {
-        for(int i=0;i<logBlocks.size();i++) logBlocks.get(i).registerBlockModels(i);
-        for(int i=0;i<woodBlocks.size();i++) woodBlocks.get(i).registerBlockModels(i);
-        for(int i=0;i<singleSlabBlocks.size();i++) singleSlabBlocks.get(i).registerBlockModels(i);
-        for(int i=0;i<stairsBlocks.size();i++) stairsBlocks.get(i).registerBlockModel(i);
-        for(int i=0;i<saplingBlocks.size();i++) saplingBlocks.get(i).registerBlockModels(i);
-        for(int i=0;i<leavesBlocks.size();i++) leavesBlocks.get(i).registerBlockModels(i);
+    public static void registerAllItems(IForgeRegistry<Item> reg)
+    {
+        registerAllLogItems(reg);
+        registerAllLeavesItems(reg);
+        registerAllSaplingItems(reg);
+        registerAllWoodItems(reg);
+        registerAllStairsItems(reg);
+        registerAllDoorItems(reg);
+        registerAllSingleSlabItems(reg);
     }
 
-    private static void registerAllDoubleSlabBlocks()
+    public static void registerAllItemRenders() {
+        for (LogBlock logBlock : logBlocks) logBlock.registerItemModels();
+        for (WoodBlock woodBlock : woodBlocks) woodBlock.registerItemModels();
+        for (SlabBlock singleSlabBlock : singleSlabBlocks) singleSlabBlock.registerItemModels();
+        for (StairsBlock stairsBlock : stairsBlocks) stairsBlock.registerItemModels();
+        for (SaplingBlock saplingBlock : saplingBlocks) saplingBlock.registerItemModels();
+        for (DoorBlock doorBlock : doorBlocks) doorBlock.registerItemModels();
+        for (LeavesBlock leavesBlock : leavesBlocks) leavesBlock.registerItemModels();
+
+    }
+
+    private static void registerAllDoubleSlabBlocks(IForgeRegistry<Block> reg)
     {
         int slabCount = 0;
         for (final SlabBlock slab : doubleSlabBlocks)
         {
-            registerSlabBlock(slab, String.format("dslab%d", slabCount), singleSlabBlocks.get(slabCount), slab, true);
+            String name = String.format("dslab%d", slabCount);
+            reg.register(slab.setRegistryName(name));
             slabCount++;
         }
     }
 
-    private static void registerAllLeavesBlock()
+    private static void registerAllLeavesBlock(IForgeRegistry<Block> reg)
     {
         int leavesCount = 0;
-        for (final Block block : leavesBlocks)
+        for (final LeavesBlock leaves : leavesBlocks)
         {
-            registerLeavesBlock(block, String.format("leaves%d", leavesCount));
+            String name = String.format("leaves%d", leavesCount);
+            leaves.setRegistryName(name);
+            reg.register(leaves);
+            Blocks.FIRE.setFireInfo(leaves, DEFAULT_LEAVES_FIRE_ENCOURAGEMENT, DEFAULT_LEAVES_FLAMMABILITY);
             leavesCount++;
         }
     }
 
-    private static void registerAllLogBlocks()
+    private static void registerAllLogBlocks(IForgeRegistry<Block> reg)
     {
         int logCount = 0;
         for (final LogBlock block : logBlocks)
         {
-            registerLogBlock(block, String.format("log%d", logCount), block.getSubBlockNames());
+            String name = String.format("log%d", logCount);
+            reg.register(block.setRegistryName(name));
+            Blocks.FIRE.setFireInfo(block, DEFAULT_LOG_FIRE_ENCOURAGEMENT, DEFAULT_LOG_FLAMMABILITY);
             logCount++;
         }
     }
 
-    private static void registerAllSaplingBlocks()
+    private static void registerAllSaplingBlocks(IForgeRegistry<Block> reg)
     {
         int saplingCount = 0;
 
         for (final SaplingBlock sapling : saplingBlocks)
         {
-            registerSaplingBlock(sapling, String.format("sapling%d", saplingCount), sapling.subBlockNames());
+            String name = String.format("sapling%d", saplingCount);
+            reg.register(sapling.setRegistryName(name));
             saplingCount++;
         }
     }
 
-    private static void registerAllSingleSlabBlocks()
+    private static void registerAllSingleSlabBlocks(IForgeRegistry<Block> reg)
     {
         int slabCount = 0;
         for (final SlabBlock slab : singleSlabBlocks)
         {
-            registerSlabBlock(slab, String.format("sslab%d", slabCount), slab, doubleSlabBlocks.get(slabCount), false);
+            String name = String.format("sslab%d", slabCount);
+            reg.register(slab.setRegistryName(name));
+            Blocks.FIRE.setFireInfo(slab, DEFAULT_STAIRS_FIRE_ENCOURAGEMENT, DEFAULT_STAIRS_FLAMMABILITY);
             slabCount++;
         }
     }
 
-    private static void registerAllStairsBlocks()
+    private static void registerAllStairsBlocks(IForgeRegistry<Block> reg)
     {
         int stairsCount = 0;
         for (final StairsBlock stairs : stairsBlocks)
         {
-            registerStairsBlock(stairs, String.format("stairs%d", stairsCount));
+            reg.register(stairs);
+            Blocks.FIRE.setFireInfo(stairs, DEFAULT_STAIRS_FIRE_ENCOURAGEMENT, DEFAULT_STAIRS_FLAMMABILITY);
             stairsCount++;
         }
     }
 
-    private static void registerAllWoodBlocks()
+    private static void registerAllDoorBlocks(IForgeRegistry<Block> reg)
+    {
+        for (final DoorBlock door : doorBlocks)
+        {
+            reg.register(door);
+        }
+    }
+
+    private static void registerAllWoodBlocks(IForgeRegistry<Block> reg)
+
     {
         int woodBlockCount = 0;
         for (final WoodBlock wood : woodBlocks)
         {
-            registerWoodBlock(wood, String.format("planks%d", woodBlockCount), wood.getSubBlockNames());
+            String name = String.format("wood%d", woodBlockCount);
+            reg.register(wood.setRegistryName(name));
+            Blocks.FIRE.setFireInfo(wood, DEFAULT_PLANKS_FIRE_ENCOURAGEMENT, DEFAULT_PLANKS_FLAMMABILITY);
             woodBlockCount++;
         }
     }
 
-    public static void registerBlock(LeavesBlock leavesBlock) { leavesBlocks.add(leavesBlock); }
+    private static void registerAllLeavesItems(IForgeRegistry<Item> reg)
+    {
+        int leavesCount = 0;
+        for (final LeavesBlock leaves : leavesBlocks)
+        {
+            String name = String.format("leaves%d", leavesCount);
+            reg.register(new ModLeavesItem(leaves).setRegistryName(name));
+            leavesCount++;
+        }
+    }
 
-    public static void registerBlock(LogBlock logBlock) { logBlocks.add(logBlock); }
+    private static void registerAllLogItems(IForgeRegistry<Item> reg)
+    {
+        int logCount = 0;
+        for (final LogBlock block : logBlocks)
+        {
+            String name = String.format("log%d", logCount);
+            ImmutableList<String> subblockNames = block.getSubBlockNames();
+            if(block instanceof  ModLogBlock){
+                reg.register(new ModLogItem(block,(ModLogBlock)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(name));
+            }
+            else if(block instanceof  ModLog2Block){
+                reg.register(new ModLogItem(block,(ModLog2Block)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(name));
+            }
+            else if(block instanceof  ModLog3Block){
+                reg.register(new ModLogItem(block,(ModLog3Block)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(name));
+            }
+            else{
+                reg.register(new ModLogItem(block,(ModLog4Block)block,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(name));
+            }
+            logCount++;
+        }
+    }
 
-    public static void registerBlock(SaplingBlock saplingBlock) { saplingBlocks.add(saplingBlock); }
+    private static void registerAllSaplingItems(IForgeRegistry<Item> reg)
+    {
+        int saplingCount = 0;
 
-    public static void registerBlock(SlabBlock singleSlabBlock, SlabBlock doubleSlabBlock)
+        for (final SaplingBlock sapling : saplingBlocks)
+        {
+            String name = String.format("sapling%d", saplingCount);
+            List<String> subblockNames = sapling.subBlockNames();
+            if(sapling instanceof  ModSaplingBlock){
+                reg.register(new ModSaplingItem(sapling,(ModSaplingBlock)sapling,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(name));
+            }
+            else{
+                reg.register(new ModSaplingItem(sapling,(ModSapling2Block)sapling,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(name));
+            }
+            saplingCount++;
+        }
+    }
+
+    private static void registerAllSingleSlabItems(IForgeRegistry<Item> reg)
+    {
+        int slabCount = 0;
+        for (final SlabBlock slab : singleSlabBlocks)
+        {
+            String name = String.format("sslab%d", slabCount);
+            if(slab instanceof  ModSlabBlock){
+                reg.register(new ModSlabItem(slab,(ModSlabBlock) slab,(ModSlabBlock) doubleSlabBlocks.get(slabCount)).setRegistryName(name));
+            }
+            else{
+                reg.register(new ModSlabItem(slab,(ModSlab2Block) slab,(ModSlab2Block) doubleSlabBlocks.get(slabCount)).setRegistryName(name));
+            }
+            slabCount++;
+        }
+    }
+
+    private static void registerAllStairsItems(IForgeRegistry<Item> reg)
+    {
+        int stairsCount = 0;
+        for (final StairsBlock stairs : stairsBlocks)
+        {
+            reg.register(new ItemBlock(stairs).setRegistryName(stairs.getRegistryName()));
+            stairsCount++;
+        }
+    }
+
+    private static void registerAllDoorItems(IForgeRegistry<Item> reg)
+    {
+        for (final DoorBlock door : doorBlocks)
+        {
+            reg.register(new DoorItem((DoorBlock) door).setRegistryName(door.getRegistryName()));
+        }
+    }
+
+    private static void registerAllWoodItems(IForgeRegistry<Item> reg)
+
+    {
+        int woodBlockCount = 0;
+        for (final WoodBlock wood : woodBlocks)
+        {
+            String name = String.format("wood%d", woodBlockCount);
+            ImmutableList<String> subblockNames = wood.getSubBlockNames();
+            reg.register(new ModWoodItem(wood,(ModWoodBlock)wood,subblockNames.toArray(new String[subblockNames.size()])).setRegistryName(name));
+            woodBlockCount++;
+        }
+    }
+
+    public static void loadBlock(LeavesBlock leavesBlock) { leavesBlocks.add(leavesBlock); }
+
+    public static void loadBlock(LogBlock logBlock) { logBlocks.add(logBlock); }
+
+    public static void loadBlock(SaplingBlock saplingBlock) { saplingBlocks.add(saplingBlock); }
+
+    public static void loadBlock(SlabBlock singleSlabBlock, SlabBlock doubleSlabBlock)
     {
         singleSlabBlocks.add(singleSlabBlock);
         doubleSlabBlocks.add(doubleSlabBlock);
     }
 
-    public static void registerBlock(StairsBlock stairsBlock) { stairsBlocks.add(stairsBlock); }
+    public static void loadBlock(StairsBlock stairsBlock) { stairsBlocks.add(stairsBlock); }
 
-    public static void registerBlock(WoodBlock woodBlock) { woodBlocks.add(woodBlock); }
+    public static void loadBlock(DoorBlock doorBlock) { doorBlocks.add(doorBlock); }
 
-    private static void registerLeavesBlock(Block block, String name)
-    {
-        GameRegistry.registerBlock(block, ModLeavesItem.class, name);
-        Blocks.fire.setFireInfo(block, DEFAULT_LEAVES_FIRE_ENCOURAGEMENT, DEFAULT_LEAVES_FLAMMABILITY);
-    }
-
-    private static void registerLogBlock(Block block, String name, ImmutableList<String> subblockNames)
-    {
-        GameRegistry.registerBlock(block, ModLogItem.class, name, block, subblockNames.toArray(new String[subblockNames.size()]));
-        Blocks.fire.setFireInfo(block, DEFAULT_LOG_FIRE_ENCOURAGEMENT, DEFAULT_LOG_FLAMMABILITY);
-    }
-
-    private static void registerSaplingBlock(Block block, String name, List<String> subblockNames)
-    {
-        GameRegistry.registerBlock(block, ModSaplingItem.class, name, block, subblockNames.toArray(new String[subblockNames.size()]));
-    }
-
-    private static void registerSlabBlock(Block block, String name, SlabBlock singleSlab, SlabBlock doubleSlab,
-                                          boolean unused)
-    {
-        GameRegistry.registerBlock(block, ModSlabItem.class, name, singleSlab, doubleSlab);
-    }
-
-    private static void registerStairsBlock(Block block, String name)
-    {
-        GameRegistry.registerBlock(block, name);
-        Blocks.fire.setFireInfo(block, DEFAULT_STAIRS_FIRE_ENCOURAGEMENT, DEFAULT_STAIRS_FLAMMABILITY);
-    }
-
-    private static void registerWoodBlock(Block block, String name, ImmutableList<String> subblockNames)
-    {
-        GameRegistry.registerBlock(block, ModWoodItem.class, name, block, subblockNames.toArray(new String[subblockNames.size()]));
-        Blocks.fire.setFireInfo(block, DEFAULT_PLANKS_FIRE_ENCOURAGEMENT, DEFAULT_PLANKS_FLAMMABILITY);
-    }
-
-    public static Iterable<? extends SaplingBlock> saplingBlocks() { return ImmutableList.copyOf(saplingBlocks); }
-
-    public static Iterable<? extends Block> singleSlabBlocks() { return ImmutableList.copyOf(singleSlabBlocks); }
+    public static void loadBlock(WoodBlock woodBlock) { woodBlocks.add(woodBlock); }
 
     public static Iterable<? extends DefinesSlab> slabDefinitions() { return overworldTaxonomy.slabDefinitions(); }
-
-    public static Iterable<? extends Block> stairsBlocks() { return ImmutableList.copyOf(stairsBlocks); }
 
     public static Iterable<? extends DefinesStairs> stairsDefinitions()
     {
         return overworldTaxonomy.stairsDefinitions();
     }
 
-    public static Iterable<? extends Block> woodBlocks() { return ImmutableList.copyOf(woodBlocks); }
-
-    @SuppressWarnings("MethodMayBeStatic")
-    public void loadContent()
+    public static Iterable<? extends DefinesDoor> doorDefinitions()
     {
-        loadOverWorldContent();
-        registerAllBlocks();
-        addAllSaplingsToChests();
+        return overworldTaxonomy.doorDefinitions();
+    }
+
+    public static OverworldTreeTaxonomy taxonomyInstance(){
+        return overworldTaxonomy;
+    }
+
+    public static void registerPotionEffects() {
+        ArrayList<MixRecipe> list = new ArrayList<>();
+        for(DefinesSapling define:overworldTaxonomy.saplingDefinitions()){
+            if(define.saplingBlock() instanceof ModSaplingBlock){
+                switch(((ModSlabBlock.EnumType)define.saplingSubBlockVariant())){
+                    case EWCALY:{
+                        ItemStack sapling = new ItemStack(Item.getItemFromBlock(define.saplingBlock()),1,define.saplingSubBlockVariant().ordinal());
+                        ItemStack frompotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.WATER);
+                        ItemStack topotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.MUNDANE);
+                        list.add(new MixRecipe(frompotion,sapling,topotion));
+                        frompotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.AWKWARD);
+                        topotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.POISON);
+                        list.add(new MixRecipe(frompotion,sapling,topotion));
+                    break;}
+                    case KIPARIS:{
+                        ItemStack sapling = new ItemStack(Item.getItemFromBlock(define.saplingBlock()),1,define.saplingSubBlockVariant().ordinal());
+                        ItemStack frompotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.WATER);
+                        ItemStack topotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.MUNDANE);
+                        list.add(new MixRecipe(frompotion,sapling,topotion));
+                        frompotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.AWKWARD);
+                        topotion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM,1,0),PotionTypes.SWIFTNESS);
+                        list.add(new MixRecipe(frompotion,sapling,topotion));
+                    break;}
+                }
+            }
+        }
+        for(MixRecipe mr:list) {
+            if (!recipes.contains(mr)){
+                BrewingRecipeRegistry.addRecipe(new PotionBrewingRecipe(PotionUtils.getPotionFromItem(mr.getFrom()), mr.getConversator(), PotionUtils.getPotionFromItem(mr.getTo())));
+                recipes.add(mr);
+            }
+        }
+    }
+
+    public static Iterable<? extends BlockLog> logBlocks() { return ImmutableList.copyOf(logBlocks); }
+
+    public static Iterable<? extends LeavesBlock> leavesBlocks() { return ImmutableList.copyOf(leavesBlocks); }
+
+    public static Iterable<? extends WoodBlock> woodBlocks() { return ImmutableList.copyOf(woodBlocks); }
+
+    public static Iterable<? extends SlabBlock> singleSlabBlocks() { return ImmutableList.copyOf(singleSlabBlocks); }
+
+    public static Iterable<? extends StairsBlock> stairsBlocks() { return ImmutableList.copyOf(stairsBlocks); }
+
+    public static Iterable<? extends SaplingBlock> saplingBlocks() { return ImmutableList.copyOf(saplingBlocks); }
+
+    private static class MixRecipe {
+        private final ItemStack from, to, conversator;
+        MixRecipe(ItemStack from, ItemStack conversator, ItemStack to){
+            if(!(from.getItem() instanceof ItemPotion)||!(to.getItem() instanceof ItemPotion)){
+                throw new IllegalArgumentException("Both \"from\" and \"to\" have to be an item potion stack");
+            }
+            this.from=from;
+            this.to=to;
+            this.conversator=conversator;
+        }
+
+        public ItemStack getFrom() {
+            return from;
+        }
+
+        public ItemStack getTo() {
+            return to;
+        }
+
+        public ItemStack getConversator() {
+            return conversator;
+        }
+
+        @Override
+        public boolean equals(Object other){
+            if(!(other instanceof MixRecipe)){
+                return false;
+            }
+            MixRecipe omr=(MixRecipe)other;
+            boolean test = from.getItem()==omr.from.getItem()&&conversator.getItem()==omr.conversator.getItem()&&to.getItem()==omr.to.getItem();
+            boolean test2 = PotionUtils.getPotionFromItem(from)==PotionUtils.getPotionFromItem(omr.from)&&conversator.getItemDamage()==omr.conversator.getItemDamage()&&PotionUtils.getPotionFromItem(to)==PotionUtils.getPotionFromItem(omr.to);
+            return test && test2;
+        }
     }
 }

@@ -1,21 +1,21 @@
 package inc.a13xis.legacy.dendrology.world.gen.feature;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
+import net.minecraft.block.BlockLog;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class LataTree extends AbstractTree
 {
-    private int logDirection = 0;
+    private BlockLog.EnumAxis logAxis = BlockLog.EnumAxis.Y;
 
     public LataTree(boolean fromSapling) { super(fromSapling); }
 
     public LataTree() { this(true); }
 
-    @SuppressWarnings({ "OverlyComplexMethod", "OverlyLongMethod" })
     @Override
     public boolean generate(World world, Random rand, BlockPos pos)
     {
@@ -27,7 +27,7 @@ public class LataTree extends AbstractTree
         if (isPoorGrowthConditions(world, pos, height, getSaplingBlock())) return false;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, pos.down(), pos);
+        block.onPlantGrow(world.getBlockState(pos.down()),world, pos.down(), pos);
 
         for (int level = 0; level <= height; level++)
         {
@@ -71,13 +71,13 @@ public class LataTree extends AbstractTree
             if (dX == -1 && rand.nextInt(3) > 0)
             {
                 pos = pos.west();
-                logDirection = 4;
+                logAxis = BlockLog.EnumAxis.X;
 
                 if (dZ == 0 && rand.nextInt(4) == 0) pos = pos.south(rand.nextInt(3) - 1);
             } else if (dX == 1 && rand.nextInt(3) > 0)
             {
                 pos=pos.east();
-                logDirection = 4;
+                logAxis = BlockLog.EnumAxis.X;
 
                 if (dZ == 0 && rand.nextInt(4) == 0) pos = pos.south(rand.nextInt(3) - 1);
             }
@@ -85,19 +85,19 @@ public class LataTree extends AbstractTree
             if (dZ == -1 && rand.nextInt(3) > 0)
             {
                 pos = pos.north();
-                logDirection = 8;
+                logAxis = BlockLog.EnumAxis.Z;
 
                 if (dX == 0 && rand.nextInt(4) == 0) pos = pos.east(rand.nextInt(3) - 1);
             } else if (dZ == 1 && rand.nextInt(3) > 0)
             {
                 pos = pos.south();
-                logDirection = 8;
+                logAxis = BlockLog.EnumAxis.Z;
 
                 if (dX == 0 && rand.nextInt(4) == 0) pos = pos.east(rand.nextInt(3) - 1);
             }
 
-            placeLog(world, pos);
-            logDirection = 0;
+            placeLog(world, pos,logAxis);
+            logAxis = BlockLog.EnumAxis.Y;
 
             if (rand.nextInt(3) == 0)
             {
@@ -145,11 +145,8 @@ public class LataTree extends AbstractTree
     }
 
     @Override
-    protected int getLogMetadata() {return super.getLogMetadata() | logDirection;}
-
-    @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("logDirection", logDirection).toString();
+        return MoreObjects.toStringHelper(this).add("logAxis", logAxis).toString();
     }
 }

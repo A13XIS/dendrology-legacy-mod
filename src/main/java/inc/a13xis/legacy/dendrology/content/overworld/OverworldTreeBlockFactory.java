@@ -1,6 +1,7 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
 import inc.a13xis.legacy.dendrology.block.*;
+import inc.a13xis.legacy.koresample.common.block.DoorBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
 import inc.a13xis.legacy.koresample.common.util.slab.SingleDoubleSlab;
@@ -33,7 +34,7 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
         for (final DefinesLeaves subBlock : subBlocks)
             subBlock.assignLeavesBlock(block);
         typebit++;
-        ModBlocks.registerBlock(block);
+        ModBlocks.loadBlock(block);
         return block;
     }
 
@@ -55,7 +56,7 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
         }
         for (final DefinesLog subBlock : subBlocks)
             subBlock.assignLogBlock(block);
-        ModBlocks.registerBlock(block);
+        ModBlocks.loadBlock(block);
         typebit++;
         return block;
     }
@@ -72,7 +73,7 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
         }
         for (final DefinesSapling subBlock : subBlocks)
             subBlock.assignSaplingBlock(block);
-        ModBlocks.registerBlock(block);
+        ModBlocks.loadBlock(block);
         typebit++;
         return block;
     }
@@ -97,7 +98,7 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
             subBlock.assignDoubleSlabBlock(doubleSlabBlock);
         }
 
-        ModBlocks.registerBlock(singleSlabBlock, doubleSlabBlock);
+        ModBlocks.loadBlock(singleSlabBlock, doubleSlabBlock);
         typebit++;
         return new SingleDoubleSlab(singleSlabBlock, doubleSlabBlock);
     }
@@ -110,7 +111,18 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
 
         definition.assignStairsBlock(block);
 
-        ModBlocks.registerBlock(block);
+        ModBlocks.loadBlock(block);
+        return block;
+    }
+
+    @Override
+    public DoorBlock createDoorBlock(DefinesDoor definition)
+    {
+        final DoorBlock block = new ModDoorBlock(definition);
+
+        definition.assignDoorBlock(block);
+
+        ModBlocks.loadBlock(block);
         return block;
     }
 
@@ -121,7 +133,7 @@ public final class OverworldTreeBlockFactory implements TreeBlockFactory
         for (final DefinesWood subBlock : subBlocks)
             subBlock.assignWoodBlock(block);
 
-        ModBlocks.registerBlock(block);
+        ModBlocks.loadBlock(block);
         return block;
     }
 

@@ -1,11 +1,10 @@
 package inc.a13xis.legacy.dendrology.content.overworld;
 
-
-import inc.a13xis.legacy.dendrology.content.ProvidesPotionEffect;
 import inc.a13xis.legacy.dendrology.world.AcemusColorizer;
 import inc.a13xis.legacy.dendrology.world.CerasuColorizer;
 import inc.a13xis.legacy.dendrology.world.KulistColorizer;
 import inc.a13xis.legacy.dendrology.world.gen.feature.*;
+import inc.a13xis.legacy.koresample.common.block.DoorBlock;
 import inc.a13xis.legacy.koresample.common.block.SlabBlock;
 import inc.a13xis.legacy.koresample.common.block.StairsBlock;
 import inc.a13xis.legacy.koresample.tree.*;
@@ -14,9 +13,7 @@ import inc.a13xis.legacy.koresample.tree.block.LogBlock;
 import inc.a13xis.legacy.koresample.tree.block.SaplingBlock;
 import inc.a13xis.legacy.koresample.tree.block.WoodBlock;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.potion.PotionHelper;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,17 +24,16 @@ import static inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecie
 
 @SuppressWarnings({ "NonSerializableFieldInSerializableClass", "ClassHasNoToStringMethod" })
 public enum OverworldTreeSpecies
-        implements DefinesLeaves, DefinesLog, DefinesSapling, DefinesSlab, DefinesStairs, DefinesTree, DefinesWood,
-        ProvidesPotionEffect
+        implements DefinesLeaves, DefinesLog, DefinesSapling, DefinesSlab, DefinesStairs, DefinesTree, DefinesWood, DefinesDoor
 {
     // REORDERING WILL CAUSE DAMAGE TO SAVES
     ACEMUS(ACEMUS_COLOR, new AcemusTree(), new AcemusTree(false)),
     CEDRUM(NO_COLOR, new CedrumTree(), new CedrumTree(false)),
     CERASU(CERASU_COLOR, new CerasuTree(), new CerasuTree(false)),
     DELNAS(NO_COLOR, new DelnasTree(), new DelnasTree(false)),
-    EWCALY(NO_COLOR, new EwcalyTree(), new EwcalyTree(false), PotionHelper.sugarEffect),
+    EWCALY(NO_COLOR, new EwcalyTree(), new EwcalyTree(false)),
     HEKUR(BASIC_COLOR, new HekurTree(), new HekurTree(false)),
-    KIPARIS(NO_COLOR, new KiparisTree(), new KiparisTree(false), PotionHelper.spiderEyeEffect),
+    KIPARIS(NO_COLOR, new KiparisTree(), new KiparisTree(false)),
     KULIST(KULIST_COLOR, new KulistTree(), new KulistTree(false)),
     LATA(BASIC_COLOR, new LataTree(), new LataTree(false)),
     NUCIS(BASIC_COLOR, new NucisTree(), new NucisTree(false)),
@@ -48,7 +44,6 @@ public enum OverworldTreeSpecies
     private final AbstractTree saplingTreeGen;
     private final AbstractTree worldTreeGen;
     private final Colorizer colorizer;
-    private final String potionEffect;
 
     private Enum leavesVariant;
     private Enum logVariant;
@@ -63,6 +58,7 @@ public enum OverworldTreeSpecies
     private SaplingBlock saplingBlock = null;
     private SlabBlock singleSlabBlock = null;
     private StairsBlock stairsBlock = null;
+    private DoorBlock doorBlock = null;
 
     static
     {
@@ -79,7 +75,6 @@ public enum OverworldTreeSpecies
         this.colorizer = colorizer;
         this.saplingTreeGen = saplingTreeGen;
         this.worldTreeGen = worldTreeGen;
-        this.potionEffect = potionEffect;
     }
 
     OverworldTreeSpecies(Colorizer colorizer, AbstractTree saplingTreeGen, AbstractTree worldTreeGen)
@@ -87,8 +82,6 @@ public enum OverworldTreeSpecies
         this(colorizer, saplingTreeGen, worldTreeGen, null);
     }
 
-    @Override
-    public String potionEffect() { return potionEffect; }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -105,7 +98,8 @@ public enum OverworldTreeSpecies
             case KULIST_COLOR:
                 return KulistColorizer.getInventoryColor();
             default:
-                return Blocks.leaves.getRenderColor(Blocks.leaves.getBlockState().getBaseState());
+                return 0xffffff;
+
         }
     }
 
@@ -124,7 +118,8 @@ public enum OverworldTreeSpecies
             case KULIST_COLOR:
                 return KulistColorizer.getColor(pos);
             default:
-                return Blocks.leaves.colorMultiplier(blockAccess, pos);
+                return blockAccess.getBlockState(pos).getMapColor(blockAccess,pos).colorValue;
+
         }
     }
 
@@ -218,6 +213,30 @@ public enum OverworldTreeSpecies
 
     @Override
     public String stairsName() { return speciesName(); }
+
+    @Override
+    public void assignDoorBlock(DoorBlock doorBlock)
+    {
+        checkState(this.doorBlock == null);
+        this.doorBlock = doorBlock;
+    }
+
+    @Override
+    public DoorBlock doorBlock()
+    {
+        checkState(doorBlock != null);
+        return doorBlock;
+    }
+
+    @Override
+    public Block doorModelBlock() { return woodBlock(); }
+
+    @Override
+    public Enum doorModelSubBlockVariant() { return woodSubBlockVariant();
+    }
+
+    @Override
+    public String doorName() { return speciesName(); }
 
     @Override
     public void assignSaplingBlock(SaplingBlock saplingBlock)

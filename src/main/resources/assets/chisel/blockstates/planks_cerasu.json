@@ -1,0 +1,19 @@
+{
+    "variants": {
+		"variation=clean" : { "model": "chisel:planks_cerasu_clean" },
+		"variation=short" : { "model": "chisel:planks_cerasu_short" },
+		"variation=vertical" : { "model": "chisel:planks_cerasu_vertical" },
+		"variation=uneven" : { "model": "chisel:planks_cerasu_uneven" },
+		"variation=parquet" : { "model": "chisel:planks_cerasu_parquet" },
+		"variation=fancy" : { "model": "chisel:planks_cerasu_fancy" },
+		"variation=blinds" : { "model": "chisel:planks_cerasu_blinds" },
+		"variation=panel" : { "model": "chisel:planks_cerasu_panel" },
+		"variation=double" : { "model": "chisel:planks_cerasu_double" },
+		"variation=crate" : { "model": "chisel:planks_cerasu_crate" },
+		"variation=cratefancy" : { "model": "chisel:planks_cerasu_cratefancy" },
+		"variation=scaffold" : { "model": "chisel:planks_cerasu_scaffold" },
+		"variation=large" : { "model": "chisel:planks_cerasu_large" },
+		"variation=chaotic" : { "model": "chisel:planks_cerasu_chaotic" },
+		"variation=vchaotic" : { "model": "chisel:planks_cerasu_vchaotic" }
+	}
+}

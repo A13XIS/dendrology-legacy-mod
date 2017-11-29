@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom",
+    "textures": {
+        "bottom": "dendrology:blocks/door_bottom_cedrum",
+        "top": "dendrology:blocks/door_top_cedrum"
+    }
+}

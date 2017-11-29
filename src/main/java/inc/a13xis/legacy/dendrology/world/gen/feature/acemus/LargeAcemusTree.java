@@ -7,7 +7,4 @@ import static inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecie
 public class LargeAcemusTree extends AbstractLargeVanillaTree
 {
     public LargeAcemusTree(boolean fromSapling) { super(fromSapling); }
-
-    @Override
-    protected int getUnmaskedLogMeta() { return ACEMUS.logSubBlockVariant().ordinal(); }
 }

@@ -1,6 +1,7 @@
 package inc.a13xis.legacy.dendrology.content;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects;
 import inc.a13xis.legacy.dendrology.content.overworld.OverworldTreeSpecies;
 import inc.a13xis.legacy.koresample.common.util.WeightedSet;
 import net.minecraft.block.BlockSapling;
@@ -22,7 +23,7 @@ public enum ParcelManager
         else
         {
             element = itemStack.copy();
-            element.stackSize = 1;
+            element.setCount(1);
         }
         potentialContent.setWeight(element, weight);
     }
@@ -32,17 +33,17 @@ public enum ParcelManager
     @SuppressWarnings({ "MethodWithMultipleLoops", "ObjectAllocationInLoop" })
     public void init()
     {
-        add(null, 600);
+        add(null, 32);
         for (int i = 0; i < BlockSapling.TYPE.getAllowedValues().size(); i++)
-            add(new ItemStack(Blocks.sapling, 1, i), 10);
+            add(new ItemStack(Blocks.SAPLING, 1, i), 1);
 
         for (final OverworldTreeSpecies species : OverworldTreeSpecies.values())
-            add(new ItemStack(species.saplingBlock(), 1, species.saplingSubBlockVariant().ordinal()), 10);
+            add(new ItemStack(species.saplingBlock(), 1, species.saplingSubBlockVariant().ordinal()), 2);
     }
 
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("potentialContent", potentialContent).toString();
+        return MoreObjects.toStringHelper(this).add("potentialContent", potentialContent).toString();
     }
 }

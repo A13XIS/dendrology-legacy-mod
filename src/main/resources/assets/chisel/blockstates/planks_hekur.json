@@ -1,0 +1,19 @@
+{
+    "variants": {
+		"variation=clean" : { "model": "chisel:planks_hekur_clean" },
+		"variation=short" : { "model": "chisel:planks_hekur_short" },
+		"variation=vertical" : { "model": "chisel:planks_hekur_vertical" },
+		"variation=uneven" : { "model": "chisel:planks_hekur_uneven" },
+		"variation=parquet" : { "model": "chisel:planks_hekur_parquet" },
+		"variation=fancy" : { "model": "chisel:planks_hekur_fancy" },
+		"variation=blinds" : { "model": "chisel:planks_hekur_blinds" },
+		"variation=panel" : { "model": "chisel:planks_hekur_panel" },
+		"variation=double" : { "model": "chisel:planks_hekur_double" },
+		"variation=crate" : { "model": "chisel:planks_hekur_crate" },
+		"variation=cratefancy" : { "model": "chisel:planks_hekur_cratefancy" },
+		"variation=scaffold" : { "model": "chisel:planks_hekur_scaffold" },
+		"variation=large" : { "model": "chisel:planks_hekur_large" },
+		"variation=chaotic" : { "model": "chisel:planks_hekur_chaotic" },
+		"variation=vchaotic" : { "model": "chisel:planks_hekur_vchaotic" }
+	}
+}

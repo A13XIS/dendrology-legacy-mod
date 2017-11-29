@@ -5,13 +5,14 @@ import inc.a13xis.legacy.dendrology.TheMod;
 import inc.a13xis.legacy.dendrology.config.Settings;
 import inc.a13xis.legacy.koresample.tree.DefinesLeaves;
 import inc.a13xis.legacy.koresample.tree.block.LeavesBlock;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.Random;
 public final class ModLeavesBlock extends LeavesBlock
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModLogBlock.EnumType.class);
+
     public ModLeavesBlock(Iterable<? extends DefinesLeaves> subBlocks)
     {
         super(ImmutableList.copyOf(subBlocks));
@@ -36,17 +38,23 @@ public final class ModLeavesBlock extends LeavesBlock
     }
 
     @Override
-    protected BlockState createBlockState(){
-        return new BlockState(this, new IProperty[]{VARIANT,CHECK_DECAY,DECAYABLE});
+    protected BlockStateContainer createBlockState(){
+        BlockStateContainer bs = new BlockStateContainer(this, new IProperty[]{VARIANT,CHECK_DECAY,DECAYABLE});
+        return bs;
     }
 
     @Override
-    public ModLogBlock.EnumType getWoodType(int meta) {
+    public ModLogBlock.EnumType getModWoodType(int meta) {
        return ModLogBlock.EnumType.fromId(meta);
     }
 
     @Override
-    protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
+    public BlockPlanks.EnumType getWoodType(int meta) {
+        return BlockPlanks.EnumType.byMetadata(meta%6);
+    }
+
+    @Override
+    public String resourcePrefix() { return TheMod.getResourcePrefix(); }
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
@@ -79,15 +87,14 @@ public final class ModLeavesBlock extends LeavesBlock
     @Override
     public int getMetaFromState(IBlockState state) {
         ModLogBlock.EnumType type = (ModLogBlock.EnumType) state.getValue(ModLogBlock.VARIANT);
-        boolean check = (Boolean) state.getValue(CHECK_DECAY);
-        boolean dcable = (Boolean) state.getValue(CHECK_DECAY);
-        int par = check?dcable?0:1:dcable?2:3;
-        return par*4+type.ordinal();
+        return type.ordinal();
     }
 
     @Override
-    public int damageDropped(IBlockState state) {
-        return getMetaFromState(state.withProperty(CHECK_DECAY,true).withProperty(DECAYABLE,true));
+    protected int getSaplingDropChance(IBlockState state)
+    {
+        return Settings.INSTANCE.saplingDropRarity();
     }
+
 
 }

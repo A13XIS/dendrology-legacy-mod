@@ -1,15 +1,16 @@
 package inc.a13xis.legacy.dendrology.world.gen.feature;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
+import net.minecraft.block.BlockLog;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class SalyxTree extends AbstractTree
 {
-    private int logDirection = 0;
+    private BlockLog.EnumAxis logAxis = BlockLog.EnumAxis.Y;
 
     public SalyxTree(boolean fromSapling) { super(fromSapling); }
 
@@ -56,7 +57,7 @@ public class SalyxTree extends AbstractTree
         if (isPoorGrowthConditions(world, pos, 6 + size / 2, getSaplingBlock())) return false;
 
         final Block block = world.getBlockState(pos.down()).getBlock();
-        block.onPlantGrow(world, pos.down(), pos);
+        block.onPlantGrow(world.getBlockState(pos.down()), world, pos.down(), pos);
 
         for (int dX = -1; dX <= 1; dX++)
             for (int dZ = -1; dZ <= 1; dZ++)
@@ -97,8 +98,8 @@ public class SalyxTree extends AbstractTree
     @SuppressWarnings({ "OverlyComplexMethod", "OverlyLongMethod" })
     private void mainBranch(World world, Random rand, BlockPos pos, int dX, int dZ, int size)
     {
-        if (dX != 0) logDirection = 4;
-        if (dZ != 0) logDirection = 8;
+        if (dX != 0) logAxis = BlockLog.EnumAxis.X;
+        if (dZ != 0) logAxis = BlockLog.EnumAxis.Z;
 
         final int j = dX == 1 ? 1 : -1;
         final int k = calcK(dX, dZ);
@@ -110,8 +111,8 @@ public class SalyxTree extends AbstractTree
 
         for (int i = 0; i < spos; i++)
         {
-            placeLog(world, pos);
-            placeLog(world, pos.down());
+            placeLog(world, pos,logAxis);
+            placeLog(world, pos.down(),logAxis);
 
             if (dZ == 0) pos = pos.south(rand.nextInt(3) - 1);
             else if (dZ == 1) pos = pos.south(rand.nextInt(2));
@@ -131,10 +132,10 @@ public class SalyxTree extends AbstractTree
 
             if (rand.nextInt(24) == 0)
             {
-                final int currentLogDirection = logDirection;
+                final BlockLog.EnumAxis currentLogDirection = logAxis;
                 secFlag(world, rand, pos, j, k, size);
                 secFlag(world, rand, pos, m, n, size);
-                logDirection = currentLogDirection;
+                logAxis = currentLogDirection;
             }
 
             if (i == spos / 3) bend = 1;
@@ -143,17 +144,17 @@ public class SalyxTree extends AbstractTree
             if (rand.nextInt(4) > 0)
             {
                 genLeaves(world, pos);
-                placeLog(world, pos);
+                placeLog(world, pos,logAxis);
             }
         }
-        logDirection = 0;
+        logAxis = BlockLog.EnumAxis.Y;
     }
 
     private void secFlag(World world, Random rand, BlockPos pos, int dX, int dZ, int size)
     {
 
-        if (dX != 0) logDirection = 4;
-        if (dZ != 0) logDirection = 8;
+        if (dX != 0) logAxis = BlockLog.EnumAxis.X;
+        if (dZ != 0) logAxis = BlockLog.EnumAxis.Z;
 
         for (int i = 0; i < 2 * size; i++)
         {
@@ -167,28 +168,28 @@ public class SalyxTree extends AbstractTree
             else if (dZ == -1) pos = pos.north(rand.nextInt(2));
             else pos = pos.south(rand.nextInt(3) - 1);
 
-            placeLog(world, pos);
+            placeLog(world, pos, logAxis);
 
             if (rand.nextInt(4) > 0)
             {
-                placeLog(world, pos);
+                placeLog(world, pos, logAxis);
                 genLeaves(world, pos);
             }
         }
-        logDirection = 0;
+        logAxis = BlockLog.EnumAxis.Y;
     }
 
     private void inner(World world, Random rand, BlockPos pos, int dX, int dZ, int size)
     {
 
-        if (dX != 0) logDirection = 4;
-        if (dZ != 0) logDirection = 8;
+        if (dX != 0) logAxis = BlockLog.EnumAxis.X;
+        if (dZ != 0) logAxis = BlockLog.EnumAxis.Z;
 
         int j = 5;
 
         for (int i = 0; i < 2 * size && j < 14; i++)
         {
-            placeLog(world, pos);
+            placeLog(world, pos,logAxis);
 
             if (rand.nextInt(1 + i / 4) == 0)
             {
@@ -207,25 +208,25 @@ public class SalyxTree extends AbstractTree
             if (rand.nextInt(4) > 0)
             {
                 genLeaves(world, pos);
-                placeLog(world, pos);
+                placeLog(world, pos, logAxis);
             }
         }
 
-        logDirection = 0;
+        logAxis = BlockLog.EnumAxis.Y;
     }
 
     @SuppressWarnings("OverlyComplexMethod")
     private void innerInner(World world, Random rand, BlockPos pos, int dX, int dZ, int size)
     {
 
-        if (dX != 0) logDirection = 4;
-        if (dZ != 0) logDirection = 8;
+        if (dX != 0) logAxis = BlockLog.EnumAxis.X;
+        if (dZ != 0) logAxis = BlockLog.EnumAxis.Z;
 
         int j = 6 + size / 2;
 
         for (int i = 0; i < 2 * size + 1 && j < 16; i++)
         {
-            placeLog(world, pos);
+            placeLog(world, pos, logAxis);
 
             pos = pos.up();
             j++;
@@ -239,32 +240,32 @@ public class SalyxTree extends AbstractTree
             if (rand.nextInt(4) > 0)
             {
                 genLeaves(world, pos);
-                placeLog(world, pos);
+                placeLog(world, pos, logAxis);
             }
         }
 
-        logDirection = 0;
+        logAxis = BlockLog.EnumAxis.Y;
     }
 
     private void genLeaves(World world, BlockPos pos)
     {
-        placeLeaves(world, pos.up());
-        placeLeaves(world, pos.up(2));
+        placeLeaves(world, pos.up(),true);
+        placeLeaves(world, pos.up(2),true);
 
         for (int dY = 1; dY >= -2; dY--)
         {
-            placeLeaves(world, pos.up(dY-1));
+            placeLeaves(world, pos.up(dY-1),true);
 
             for (int dX = -1; dX <= 1; dX++)
                 for (int dZ = -1; dZ <= 1; dZ++)
                     if ((dX != 0 || dZ != 0) && (Math.abs(dX) != 1 || Math.abs(dZ) != 1))
-                        placeLeaves(world, pos.add(dX,dY,dZ));
+                        placeLeaves(world, pos.add(dX,dY,dZ),Math.abs(dX)<=1&&Math.abs(dZ)<=1);
         }
     }
 
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("logDirection", logDirection).toString();
+        return MoreObjects.toStringHelper(this).add("logAxis", logAxis).toString();
     }
 }

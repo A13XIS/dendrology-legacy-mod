@@ -1,0 +1,14 @@
+{
+  "type": "crafting_shapeless",
+  "group": "lime_dye",
+  "ingredients": [
+    {
+      "item": "dendrology:sapling0",
+      "data": 4
+    }
+  ],
+  "result": {
+    "item": "minecraft:dye",
+    "data": 10
+  }
+}

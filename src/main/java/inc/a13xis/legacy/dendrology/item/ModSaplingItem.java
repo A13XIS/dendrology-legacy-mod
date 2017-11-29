@@ -1,6 +1,7 @@
 package inc.a13xis.legacy.dendrology.item;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects;
 import inc.a13xis.legacy.dendrology.block.ModSapling2Block;
 import inc.a13xis.legacy.dendrology.block.ModSaplingBlock;
 import inc.a13xis.legacy.dendrology.block.ModSlab2Block;
@@ -28,15 +29,9 @@ public final class ModSaplingItem extends SaplingItem
     }
 
     @Override
-    public String getPotionEffect(ItemStack itemStack)
-    {
-        return sapling instanceof ModSaplingBlock?((ModSaplingBlock)sapling).getPotionEffect(itemStack):((ModSapling2Block)sapling).getPotionEffect(itemStack);
-    }
-
-    @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("sapling", sapling).toString();
+        return MoreObjects.toStringHelper(this).add("sapling", sapling).toString();
     }
 
     @Override

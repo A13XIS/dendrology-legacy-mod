@@ -1,13 +1,15 @@
 package inc.a13xis.legacy.dendrology.world.gen.feature.vanilla;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import inc.a13xis.legacy.dendrology.world.gen.feature.AbstractTree;
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
+import net.minecraft.block.BlockLog;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+import scala.tools.cmd.gen.AnyVals;
 
 import java.util.Random;
 
@@ -25,7 +27,7 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
     private final int[] basePos = { 0, 0, 0 };
     private int heightLimit = 0;
     private int[][] leafNodes = null;
-    private int logMetaMask = 0;
+    private BlockLog.EnumAxis logMetaAxis = BlockLog.EnumAxis.Y;
 
     protected AbstractLargeVanillaTree(boolean fromSapling) { super(fromSapling); }
 
@@ -65,8 +67,8 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
         while (dX != xLimit)
         {
             coord[xIndex] = start[xIndex] + dX;
-            coord[yIndex] = MathHelper.floor_double(start[yIndex] + dX * ySlope);
-            coord[zindex] = MathHelper.floor_double(start[zindex] + dX * zSlope);
+            coord[yIndex] = MathHelper.floor(start[yIndex] + dX * ySlope);
+            coord[zindex] = MathHelper.floor(start[zindex] + dX * zSlope);
 
             if (!isReplaceable(world, new BlockPos(coord[0], coord[1], coord[2])))
             {
@@ -84,7 +86,8 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
         if (pos.getY() < 1 || pos.getY() + height + 1 > world.getHeight()) return true;
 
         final Block block = world.getBlockState(new BlockPos(basePos[0], basePos[1] - 1, basePos[2])).getBlock();
-        return !block.canSustainPlant(world, pos.down(), EnumFacing.UP, plantable) || !hasRoomToGrow(world, pos, height);
+
+        return !block.canSustainPlant(world.getBlockState(pos.down()), world, pos.down(), EnumFacing.UP, plantable) || !hasRoomToGrow(world, pos, height);
 
     }
 
@@ -104,18 +107,11 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
         return true;
     }
 
-
-    @Override
-    protected final int getLogMetadata()
-    {
-        return getUnmaskedLogMeta() | logMetaMask;
-    }
-
     @Override
     public String toString()
     {
-        return Objects.toStringHelper(this).add("rng", rng).add("basePos", basePos).add("heightLimit", heightLimit)
-                .add("leafNodes", leafNodes).add("logMetaMask", logMetaMask).toString();
+        return MoreObjects.toStringHelper(this).add("rng", rng).add("basePos", basePos).add("heightLimit", heightLimit)
+                .add("leafNodes", leafNodes).add("logMetaAxis", logMetaAxis.name()).toString();
     }
 
     @Override
@@ -204,29 +200,21 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
             final int j = aint2[b1] + b4;
             while (i != j)
             {
-                aint3[b1] = MathHelper.floor_double((start[b1] + i) + 0.5D);
-                aint3[b2] = MathHelper.floor_double(start[b2] + i * d0 + 0.5D);
-                aint3[b3] = MathHelper.floor_double(start[b3] + i * d1 + 0.5D);
+                aint3[b1] = MathHelper.floor((start[b1] + i) + 0.5D);
+                aint3[b2] = MathHelper.floor(start[b2] + i * d0 + 0.5D);
+                aint3[b3] = MathHelper.floor(start[b3] + i * d1 + 0.5D);
                 final int xDistance = Math.abs(aint3[0] - start[0]);
                 final int zDistance = Math.abs(aint3[2] - start[2]);
                 final int distance = Math.max(xDistance, zDistance);
 
-                if (distance > 0) if (xDistance == distance) logMetaMask = 4;
-                else if (zDistance == distance) logMetaMask = 8;
+                if (distance > 0) if (xDistance == distance) logMetaAxis = BlockLog.EnumAxis.X;
+                else if (zDistance == distance) logMetaAxis = BlockLog.EnumAxis.Z;
 
-                placeLog(world, new BlockPos(aint3[0], aint3[1], aint3[2]));
-                logMetaMask = 0;
+                placeLog(world, new BlockPos(aint3[0], aint3[1], aint3[2]),logMetaAxis);
+                logMetaAxis = BlockLog.EnumAxis.Y;
                 i += b4;
             }
         }
-    }
-
-    protected abstract int getUnmaskedLogMeta();
-
-    protected void placeLog(World world, BlockPos pos)
-    {
-        if (canBeReplacedByLog(world, pos))
-            setBlockAndNotifyAdequately(world, pos, getLogBlock().getStateFromMeta(getLogMetadata()));
     }
 
     private void generateLeaves(World world)
@@ -280,10 +268,14 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
                     var11[var9] = var10[var9] + var13;
                     final Block block = world.getBlockState(new BlockPos(var11[0], var11[1], var11[2])).getBlock();
 
-                    if (block != null && block.isLeaves(world, new BlockPos(var11[0], var11[1], var11[2]))) ++var13;
+                    BlockPos tmp=new BlockPos(var11[0], var11[1], var11[2]);
+                    if (block != null && block.isLeaves(world.getBlockState(tmp),world, tmp)) ++var13;
                     else
                     {
-                        placeLeaves(world, new BlockPos(var11[0], var11[1], var11[2]));
+                        if (Math.abs(var11[var8]-var10[var8])<=1&&Math.abs(var11[var9]-var10[var9])<=1)
+                            placeLeaves(world, new BlockPos(var11[0], var11[1], var11[2]),true);
+                        else
+                            placeLeaves(world, new BlockPos(var11[0], var11[1], var11[2]));
                         ++var13;
                     }
                 }
@@ -330,8 +322,8 @@ public abstract class AbstractLargeVanillaTree extends AbstractTree
                 {
                     final double var11 = SCALE_WIDTH * var8 * (rng.nextFloat() + 0.328D);
                     final double var13 = rng.nextFloat() * 2.0D * Math.PI;
-                    final int var15 = MathHelper.floor_double(var11 * StrictMath.sin(var13) + basePos[0] + var9);
-                    final int var16 = MathHelper.floor_double(var11 * StrictMath.cos(var13) + basePos[2] + var9);
+                    final int var15 = MathHelper.floor(var11 * StrictMath.sin(var13) + basePos[0] + var9);
+                    final int var16 = MathHelper.floor(var11 * StrictMath.cos(var13) + basePos[2] + var9);
                     final int[] var17 = { var15, leafLimit, var16 };
                     final int[] var18 = { var15, leafLimit + LEAF_DISTANCE_LIMIT, var16 };
 
