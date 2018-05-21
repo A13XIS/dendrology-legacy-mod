@@ -1,16 +1,14 @@
 [
 {
-  "modid": "dendrology",
-  "name": "Ancient Trees",
-  "description": "A Minecraft mod that adds many extinct tree species to the world.",
+  "modid": "koresample",
+  "name": "Kore Sample",
+  "description": "Kore Sample provides a set of tools and base classes for other Minecraft mods that depend on it.",
   "version": "1.11.2-L1.3",
   "mcversion": "1.11.2",
   "url": "",
   "updateUrl": "",
   "authorList": [
     "ScottKillen",
-    "Blorph",
-    "Ruyuna",
     "A13XIS aka TheA13X"
   ],
   "credits": "",
@@ -18,18 +16,7 @@
   "screenshots": [
   ],
   "parent":"",
-  "requiredMods": [
-    "koresample@[1.11.2-L1.2,)"
-  ],
   "dependencies": [
-    "Forge",
-    "koresample@[1.11.2-L1.2,)",
-    "minechem",
-    "chisel",
-    "forestry"
-  ],
-  "dependants": [
-  ],
-  "useDependencyInformation": true
+  ]
 }
 ]
