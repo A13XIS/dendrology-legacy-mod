@@ -61,7 +61,7 @@ public class Colorizer {
 	public static void registerItemBlockColor(final LeavesBlock block) {
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
 			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+			public int colorMultiplier(ItemStack stack, int tintIndex) {
 				if (block instanceof ModLeavesBlock) {
 					String val = ((ModLogBlock.EnumType) ((ModLeavesItem) stack.getItem()).getBlock().getStateFromMeta(stack.getItemDamage()).getValue(ModLeavesBlock.VARIANT)).name();
 					switch (val) {
