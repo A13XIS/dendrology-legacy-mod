@@ -1,19 +1,49 @@
 {
-    "variants": {
-		"variation=clean" : { "model": "chisel:planks_delnas_clean" },
-		"variation=short" : { "model": "chisel:planks_delnas_short" },
-		"variation=vertical" : { "model": "chisel:planks_delnas_vertical" },
-		"variation=uneven" : { "model": "chisel:planks_delnas_uneven" },
-		"variation=parquet" : { "model": "chisel:planks_delnas_parquet" },
-		"variation=fancy" : { "model": "chisel:planks_delnas_fancy" },
-		"variation=blinds" : { "model": "chisel:planks_delnas_blinds" },
-		"variation=panel" : { "model": "chisel:planks_delnas_panel" },
-		"variation=double" : { "model": "chisel:planks_delnas_double" },
-		"variation=crate" : { "model": "chisel:planks_delnas_crate" },
-		"variation=cratefancy" : { "model": "chisel:planks_delnas_cratefancy" },
-		"variation=scaffold" : { "model": "chisel:planks_delnas_scaffold" },
-		"variation=large" : { "model": "chisel:planks_delnas_large" },
-		"variation=chaotic" : { "model": "chisel:planks_delnas_chaotic" },
-		"variation=vchaotic" : { "model": "chisel:planks_delnas_vchaotic" }
-	}
+  "variants": {
+    "variation=clean": {
+      "model": "chisel:planks_delnas_clean"
+    },
+    "variation=short": {
+      "model": "chisel:planks_delnas_short"
+    },
+    "variation=vertical": {
+      "model": "chisel:planks_delnas_vertical"
+    },
+    "variation=uneven": {
+      "model": "chisel:planks_delnas_uneven"
+    },
+    "variation=parquet": {
+      "model": "chisel:planks_delnas_parquet"
+    },
+    "variation=fancy": {
+      "model": "chisel:planks_delnas_fancy"
+    },
+    "variation=blinds": {
+      "model": "chisel:planks_delnas_blinds"
+    },
+    "variation=panel": {
+      "model": "chisel:planks_delnas_panel"
+    },
+    "variation=double": {
+      "model": "chisel:planks_delnas_double"
+    },
+    "variation=crate": {
+      "model": "chisel:planks_delnas_crate"
+    },
+    "variation=cratefancy": {
+      "model": "chisel:planks_delnas_cratefancy"
+    },
+    "variation=scaffold": {
+      "model": "chisel:planks_delnas_scaffold"
+    },
+    "variation=large": {
+      "model": "chisel:planks_delnas_large"
+    },
+    "variation=chaotic": {
+      "model": "chisel:planks_delnas_chaotic"
+    },
+    "variation=vchaotic": {
+      "model": "chisel:planks_delnas_vchaotic"
+    }
+  }
 }

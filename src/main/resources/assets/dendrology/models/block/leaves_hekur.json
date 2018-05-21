@@ -1,6 +1,6 @@
 {
-    "parent": "block/leaves",
-    "textures": {
-        "all": "dendrology:blocks/leaves_hekur"
-    }
+  "parent": "block/leaves",
+  "textures": {
+    "all": "dendrology:blocks/leaves_hekur"
+  }
 }

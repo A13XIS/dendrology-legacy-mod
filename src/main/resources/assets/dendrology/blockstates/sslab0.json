@@ -1,20 +1,52 @@
 {
-    "variants": {
-        "half=bottom,variant=acemus": { "model": "dendrology:slab_bottom_acemus" },
-        "half=bottom,variant=cedrum": { "model": "dendrology:slab_bottom_cedrum" },
-        "half=bottom,variant=cerasu": { "model": "dendrology:slab_bottom_cerasu" },
-        "half=bottom,variant=delnas": { "model": "dendrology:slab_bottom_delnas" },
-        "half=bottom,variant=ewcaly": { "model": "dendrology:slab_bottom_ewcaly" },
-        "half=bottom,variant=hekur": { "model": "dendrology:slab_bottom_hekur" },
-        "half=bottom,variant=kiparis": { "model": "dendrology:slab_bottom_kiparis" },
-        "half=bottom,variant=kulist": { "model": "dendrology:slab_bottom_kulist" },
-        "half=top,variant=acemus": { "model": "dendrology:slab_top_acemus" },
-        "half=top,variant=cedrum": { "model": "dendrology:slab_top_cedrum" },
-        "half=top,variant=cerasu": { "model": "dendrology:slab_top_cerasu" },
-        "half=top,variant=delnas": { "model": "dendrology:slab_top_delnas" },
-        "half=top,variant=ewcaly": { "model": "dendrology:slab_top_ewcaly" },
-        "half=top,variant=hekur": { "model": "dendrology:slab_top_hekur" },
-        "half=top,variant=kiparis": { "model": "dendrology:slab_top_kiparis" },
-        "half=top,variant=kulist": { "model": "dendrology:slab_top_kulist" }
+  "variants": {
+    "half=bottom,variant=acemus": {
+      "model": "dendrology:slab_bottom_acemus"
+    },
+    "half=bottom,variant=cedrum": {
+      "model": "dendrology:slab_bottom_cedrum"
+    },
+    "half=bottom,variant=cerasu": {
+      "model": "dendrology:slab_bottom_cerasu"
+    },
+    "half=bottom,variant=delnas": {
+      "model": "dendrology:slab_bottom_delnas"
+    },
+    "half=bottom,variant=ewcaly": {
+      "model": "dendrology:slab_bottom_ewcaly"
+    },
+    "half=bottom,variant=hekur": {
+      "model": "dendrology:slab_bottom_hekur"
+    },
+    "half=bottom,variant=kiparis": {
+      "model": "dendrology:slab_bottom_kiparis"
+    },
+    "half=bottom,variant=kulist": {
+      "model": "dendrology:slab_bottom_kulist"
+    },
+    "half=top,variant=acemus": {
+      "model": "dendrology:slab_top_acemus"
+    },
+    "half=top,variant=cedrum": {
+      "model": "dendrology:slab_top_cedrum"
+    },
+    "half=top,variant=cerasu": {
+      "model": "dendrology:slab_top_cerasu"
+    },
+    "half=top,variant=delnas": {
+      "model": "dendrology:slab_top_delnas"
+    },
+    "half=top,variant=ewcaly": {
+      "model": "dendrology:slab_top_ewcaly"
+    },
+    "half=top,variant=hekur": {
+      "model": "dendrology:slab_top_hekur"
+    },
+    "half=top,variant=kiparis": {
+      "model": "dendrology:slab_top_kiparis"
+    },
+    "half=top,variant=kulist": {
+      "model": "dendrology:slab_top_kulist"
     }
+  }
 }

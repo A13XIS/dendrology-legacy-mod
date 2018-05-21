@@ -1,6 +1,6 @@
 {
-    "parent": "block/leaves",
-    "textures": {
-        "all": "dendrology:blocks/leaves_nucis"
-    }
+  "parent": "block/leaves",
+  "textures": {
+    "all": "dendrology:blocks/leaves_nucis"
+  }
 }

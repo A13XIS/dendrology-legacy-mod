@@ -10,74 +10,75 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;
 
-public final class ModLog4Block extends LogBlock
-{
-    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumType.class);
-    public ModLog4Block(Iterable<? extends DefinesLog> subBlocks)
-    {
-        super(ImmutableList.copyOf(subBlocks));
-        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.TUOPA));
-        setCreativeTab(TheMod.INSTANCE.creativeTab());
-    }
+public final class ModLog4Block extends LogBlock {
+	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumType.class);
 
-    @Override
-    protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
+	public ModLog4Block(Iterable<? extends DefinesLog> subBlocks) {
+		super(ImmutableList.copyOf(subBlocks));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.TUOPA));
+		setCreativeTab(TheMod.INSTANCE.creativeTab());
+	}
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        IBlockState state = getDefaultState();
-        switch(meta/4){
-            case 0:
-                state = state.withProperty(LOG_AXIS,EnumAxis.Y);
-                break;
-            case 1:
-                state = state.withProperty(LOG_AXIS,EnumAxis.X);
-                break;
-            case 2:
-                state = state.withProperty(LOG_AXIS,EnumAxis.Z);
-                break;
-            case 3:
-                state = state.withProperty(LOG_AXIS,EnumAxis.NONE);
-        }
-        return state.withProperty(VARIANT,EnumType.TUOPA);
-    }
+	@Override
+	protected String resourcePrefix() {
+		return TheMod.getResourcePrefix();
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        int par = state.getValue(LOG_AXIS).equals(EnumAxis.Y)?0:state.getValue(LOG_AXIS).equals(EnumAxis.X)?1:state.getValue(LOG_AXIS).equals(EnumAxis.Z)?2:3;
-        return par*4;
-    }
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		IBlockState state = getDefaultState();
+		switch (meta / 4) {
+			case 0:
+				state = state.withProperty(LOG_AXIS, EnumAxis.Y);
+				break;
+			case 1:
+				state = state.withProperty(LOG_AXIS, EnumAxis.X);
+				break;
+			case 2:
+				state = state.withProperty(LOG_AXIS, EnumAxis.Z);
+				break;
+			case 3:
+				state = state.withProperty(LOG_AXIS, EnumAxis.NONE);
+		}
+		return state.withProperty(VARIANT, EnumType.TUOPA);
+	}
 
-    @Override
-    public int damageDropped(IBlockState state) {
-        return getMetaFromState(state.withProperty(LOG_AXIS,EnumAxis.Y));
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		int par = state.getValue(LOG_AXIS).equals(EnumAxis.Y) ? 0 : state.getValue(LOG_AXIS).equals(EnumAxis.X) ? 1 : state.getValue(LOG_AXIS).equals(EnumAxis.Z) ? 2 : 3;
+		return par * 4;
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState(){
-        return new BlockStateContainer(this, new IProperty[]{VARIANT,LOG_AXIS});
-    }
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state.withProperty(LOG_AXIS, EnumAxis.Y));
+	}
 
-    public enum EnumType implements IStringSerializable {
-        TUOPA("tuopa");
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[]{VARIANT, LOG_AXIS});
+	}
 
-        private final String species;
+	public enum EnumType implements IStringSerializable {
+		TUOPA("tuopa");
 
-        EnumType(String name){
-            this.species=name;
-        }
+		private final String species;
 
-        public String getName(){
-            return species;
-        }
+		EnumType(String name) {
+			this.species = name;
+		}
 
-        @Override
-        public String toString() {
-            return getName();
-        }
+		public static EnumType getTuopa() {
+			return TUOPA;
+		}
 
-        public static EnumType getTuopa() {
-             return TUOPA;
-        }
-    }
+		public String getName() {
+			return species;
+		}
+
+		@Override
+		public String toString() {
+			return getName();
+		}
+	}
 }

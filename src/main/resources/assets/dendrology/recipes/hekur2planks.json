@@ -1,6 +1,6 @@
 {
   "type": "crafting_shapeless",
-  "group":"planks",
+  "group": "planks",
   "ingredients": [
     {
       "item": "dendrology:log0",

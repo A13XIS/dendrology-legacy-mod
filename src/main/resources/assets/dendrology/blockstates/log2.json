@@ -1,21 +1,64 @@
-
 {
-    "variants": {
-        "axis=y,variant=lata": { "model": "dendrology:log_lata" },
-        "axis=y,variant=nucis": { "model": "dendrology:log_nucis" },
-        "axis=y,variant=porffor": { "model": "dendrology:log_porffor" },
-        "axis=y,variant=salyx": { "model": "dendrology:log_salyx" },
-        "axis=x,variant=lata": { "model": "dendrology:log_lata", "x":90, "y":90},
-        "axis=x,variant=nucis": { "model": "dendrology:log_nucis", "x":90, "y":90},
-        "axis=x,variant=porffor": { "model": "dendrology:log_porffor", "x":90, "y":90},
-        "axis=x,variant=salyx": { "model": "dendrology:log_salyx", "x":90, "y":90},
-        "axis=z,variant=lata": { "model": "dendrology:log_lata", "x":90},
-        "axis=z,variant=nucis": { "model": "dendrology:log_nucis", "x":90},
-        "axis=z,variant=porffor": { "model": "dendrology:log_porffor", "x":90},
-        "axis=z,variant=salyx": { "model": "dendrology:log_salyx", "x":90},
-        "axis=none,variant=lata": { "model": "dendrology:log_lata_bark"},
-        "axis=none,variant=nucis": { "model": "dendrology:log_nucis_bark"},
-        "axis=none,variant=porffor": { "model": "dendrology:log_porffor_bark"},
-        "axis=none,variant=salyx": { "model": "dendrology:log_salyx_bark"}
+  "variants": {
+    "axis=y,variant=lata": {
+      "model": "dendrology:log_lata"
+    },
+    "axis=y,variant=nucis": {
+      "model": "dendrology:log_nucis"
+    },
+    "axis=y,variant=porffor": {
+      "model": "dendrology:log_porffor"
+    },
+    "axis=y,variant=salyx": {
+      "model": "dendrology:log_salyx"
+    },
+    "axis=x,variant=lata": {
+      "model": "dendrology:log_lata",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,variant=nucis": {
+      "model": "dendrology:log_nucis",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,variant=porffor": {
+      "model": "dendrology:log_porffor",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,variant=salyx": {
+      "model": "dendrology:log_salyx",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z,variant=lata": {
+      "model": "dendrology:log_lata",
+      "x": 90
+    },
+    "axis=z,variant=nucis": {
+      "model": "dendrology:log_nucis",
+      "x": 90
+    },
+    "axis=z,variant=porffor": {
+      "model": "dendrology:log_porffor",
+      "x": 90
+    },
+    "axis=z,variant=salyx": {
+      "model": "dendrology:log_salyx",
+      "x": 90
+    },
+    "axis=none,variant=lata": {
+      "model": "dendrology:log_lata_bark"
+    },
+    "axis=none,variant=nucis": {
+      "model": "dendrology:log_nucis_bark"
+    },
+    "axis=none,variant=porffor": {
+      "model": "dendrology:log_porffor_bark"
+    },
+    "axis=none,variant=salyx": {
+      "model": "dendrology:log_salyx_bark"
     }
+  }
 }

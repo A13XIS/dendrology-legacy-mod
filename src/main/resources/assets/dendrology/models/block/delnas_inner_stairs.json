@@ -1,8 +1,8 @@
 {
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "dendrology:blocks/planks_delnas",
-        "top": "dendrology:blocks/planks_delnas",
-        "side": "dendrology:blocks/planks_delnas"
-    }
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "dendrology:blocks/planks_delnas",
+    "top": "dendrology:blocks/planks_delnas",
+    "side": "dendrology:blocks/planks_delnas"
+  }
 }

@@ -1,20 +1,52 @@
 {
-    "variants": {
-        "stage=0,variant=acemus": { "model": "dendrology:sapling_acemus" },
-        "stage=0,variant=cedrum": { "model": "dendrology:sapling_cedrum" },
-        "stage=0,variant=cerasu": { "model": "dendrology:sapling_cerasu" },
-        "stage=0,variant=delnas": { "model": "dendrology:sapling_delnas" },
-        "stage=0,variant=ewcaly": { "model": "dendrology:sapling_ewcaly" },
-        "stage=0,variant=hekur": { "model": "dendrology:sapling_hekur" },
-        "stage=0,variant=kiparis": { "model": "dendrology:sapling_kiparis" },
-        "stage=0,variant=kulist": { "model": "dendrology:sapling_kulist" },
-        "stage=1,variant=acemus": { "model": "dendrology:sapling_acemus" },
-        "stage=1,variant=cedrum": { "model": "dendrology:sapling_cedrum" },
-        "stage=1,variant=cerasu": { "model": "dendrology:sapling_cerasu" },
-        "stage=1,variant=delnas": { "model": "dendrology:sapling_delnas" },
-        "stage=1,variant=ewcaly": { "model": "dendrology:sapling_ewcaly" },
-        "stage=1,variant=hekur": { "model": "dendrology:sapling_hekur" },
-        "stage=1,variant=kiparis": { "model": "dendrology:sapling_kiparis" },
-        "stage=1,variant=kulist": { "model": "dendrology:sapling_kulist" }
+  "variants": {
+    "stage=0,variant=acemus": {
+      "model": "dendrology:sapling_acemus"
+    },
+    "stage=0,variant=cedrum": {
+      "model": "dendrology:sapling_cedrum"
+    },
+    "stage=0,variant=cerasu": {
+      "model": "dendrology:sapling_cerasu"
+    },
+    "stage=0,variant=delnas": {
+      "model": "dendrology:sapling_delnas"
+    },
+    "stage=0,variant=ewcaly": {
+      "model": "dendrology:sapling_ewcaly"
+    },
+    "stage=0,variant=hekur": {
+      "model": "dendrology:sapling_hekur"
+    },
+    "stage=0,variant=kiparis": {
+      "model": "dendrology:sapling_kiparis"
+    },
+    "stage=0,variant=kulist": {
+      "model": "dendrology:sapling_kulist"
+    },
+    "stage=1,variant=acemus": {
+      "model": "dendrology:sapling_acemus"
+    },
+    "stage=1,variant=cedrum": {
+      "model": "dendrology:sapling_cedrum"
+    },
+    "stage=1,variant=cerasu": {
+      "model": "dendrology:sapling_cerasu"
+    },
+    "stage=1,variant=delnas": {
+      "model": "dendrology:sapling_delnas"
+    },
+    "stage=1,variant=ewcaly": {
+      "model": "dendrology:sapling_ewcaly"
+    },
+    "stage=1,variant=hekur": {
+      "model": "dendrology:sapling_hekur"
+    },
+    "stage=1,variant=kiparis": {
+      "model": "dendrology:sapling_kiparis"
+    },
+    "stage=1,variant=kulist": {
+      "model": "dendrology:sapling_kulist"
     }
+  }
 }

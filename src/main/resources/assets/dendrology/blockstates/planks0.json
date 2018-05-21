@@ -1,17 +1,43 @@
 {
-    "variants": {
-        "variant=acemus": { "model": "dendrology:planks_acemus" },
-        "variant=cedrum": { "model": "dendrology:planks_cedrum" },
-        "variant=cerasu": { "model": "dendrology:planks_cerasu" },
-        "variant=delnas": { "model": "dendrology:planks_delnas" },
-        "variant=ewcaly": { "model": "dendrology:planks_ewcaly" },
-        "variant=hekur": { "model": "dendrology:planks_hekur" },
-        "variant=kiparis": { "model": "dendrology:planks_kiparis" },
-        "variant=kulist": { "model": "dendrology:planks_kulist" },
-        "variant=lata": { "model": "dendrology:planks_lata" },
-        "variant=nucis": { "model": "dendrology:planks_nucis" },
-        "variant=porffor": { "model": "dendrology:planks_porffor" },
-        "variant=salyx": { "model": "dendrology:planks_salyx" },
-        "variant=tuopa": { "model": "dendrology:planks_tuopa" }
+  "variants": {
+    "variant=acemus": {
+      "model": "dendrology:planks_acemus"
+    },
+    "variant=cedrum": {
+      "model": "dendrology:planks_cedrum"
+    },
+    "variant=cerasu": {
+      "model": "dendrology:planks_cerasu"
+    },
+    "variant=delnas": {
+      "model": "dendrology:planks_delnas"
+    },
+    "variant=ewcaly": {
+      "model": "dendrology:planks_ewcaly"
+    },
+    "variant=hekur": {
+      "model": "dendrology:planks_hekur"
+    },
+    "variant=kiparis": {
+      "model": "dendrology:planks_kiparis"
+    },
+    "variant=kulist": {
+      "model": "dendrology:planks_kulist"
+    },
+    "variant=lata": {
+      "model": "dendrology:planks_lata"
+    },
+    "variant=nucis": {
+      "model": "dendrology:planks_nucis"
+    },
+    "variant=porffor": {
+      "model": "dendrology:planks_porffor"
+    },
+    "variant=salyx": {
+      "model": "dendrology:planks_salyx"
+    },
+    "variant=tuopa": {
+      "model": "dendrology:planks_tuopa"
     }
+  }
 }

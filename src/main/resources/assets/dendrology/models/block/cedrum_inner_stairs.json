@@ -1,8 +1,8 @@
 {
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "dendrology:blocks/planks_cedrum",
-        "top": "dendrology:blocks/planks_cedrum",
-        "side": "dendrology:blocks/planks_cedrum"
-    }
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "dendrology:blocks/planks_cedrum",
+    "top": "dendrology:blocks/planks_cedrum",
+    "side": "dendrology:blocks/planks_cedrum"
+  }
 }

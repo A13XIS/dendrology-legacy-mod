@@ -1,6 +1,6 @@
 {
-    "parent": "block/cross",
-    "textures": {
-        "cross": "dendrology:blocks/sapling_hekur"
-    }
+  "parent": "block/cross",
+  "textures": {
+    "cross": "dendrology:blocks/sapling_hekur"
+  }
 }

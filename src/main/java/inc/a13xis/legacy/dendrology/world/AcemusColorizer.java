@@ -15,46 +15,38 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.io.IOException;
 
 @SideOnly(Side.CLIENT)
-public enum AcemusColorizer implements IResourceManagerReloadListener
-{
-    INSTANCE;
-    @SuppressWarnings("StaticNonFinalField")
-    private static int[] buffer = new int[256 * 256];
+public enum AcemusColorizer implements IResourceManagerReloadListener {
+	INSTANCE;
+	@SuppressWarnings("StaticNonFinalField")
+	private static int[] buffer = new int[256 * 256];
 
-    public static int getInventoryColor()
-    {
-        return buffer[0x80 << 8 | 0x80];
-    }
+	public static int getInventoryColor() {
+		return buffer[0x80 << 8 | 0x80];
+	}
 
-    public static int getColor(BlockPos pos)
-    {
-        int day = 0;
-        final World world = Minecraft.getMinecraft().world;
-        if (world != null)
-        {
-            final WorldInfo info = world.getWorldInfo();
-            if (info != null)
-            {
-                //noinspection NumericCastThatLosesPrecision
-                day = (int) (info.getWorldTotalTime() / 24000L) & 0xff;
-            }
-        }
+	public static int getColor(BlockPos pos) {
+		int day = 0;
+		final World world = Minecraft.getMinecraft().world;
+		if (world != null) {
+			final WorldInfo info = world.getWorldInfo();
+			if (info != null) {
+				//noinspection NumericCastThatLosesPrecision
+				day = (int) (info.getWorldTotalTime() / 24000L) & 0xff;
+			}
+		}
 
-        final int i = (pos.getX() << 3) + day & 0xff;
-        final int j = (pos.getZ() << 3) + day & 0xff;
-        return buffer[i << 8 | j];
-    }
+		final int i = (pos.getX() << 3) + day & 0xff;
+		final int j = (pos.getZ() << 3) + day & 0xff;
+		return buffer[i << 8 | j];
+	}
 
-    @Override
-    public void onResourceManagerReload(IResourceManager resourceManager)
-    {
-        try
-        {
-            //noinspection AssignmentToStaticFieldFromInstanceMethod
-            buffer = TextureUtil.readImageData(resourceManager,
-                    new ResourceLocation(TheMod.MOD_ID, "textures/colormap/acemus.png"));
-        } catch (final IOException ignored)
-        {
-        }
-    }
+	@Override
+	public void onResourceManagerReload(IResourceManager resourceManager) {
+		try {
+			//noinspection AssignmentToStaticFieldFromInstanceMethod
+			buffer = TextureUtil.readImageData(resourceManager,
+					new ResourceLocation(TheMod.MOD_ID, "textures/colormap/acemus.png"));
+		} catch (final IOException ignored) {
+		}
+	}
 }

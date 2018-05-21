@@ -1,8 +1,16 @@
 {
-    "variants": {
-      "check_decay=true,decayable=true,variant=tuopa": { "model": "dendrology:leaves_tuopa" },
-      "check_decay=true,decayable=false,variant=tuopa": { "model": "dendrology:leaves_tuopa" },
-      "check_decay=false,decayable=true,variant=tuopa": { "model": "dendrology:leaves_tuopa" },
-      "check_decay=false,decayable=false,variant=tuopa": { "model": "dendrology:leaves_tuopa" }
+  "variants": {
+    "check_decay=true,decayable=true,variant=tuopa": {
+      "model": "dendrology:leaves_tuopa"
+    },
+    "check_decay=true,decayable=false,variant=tuopa": {
+      "model": "dendrology:leaves_tuopa"
+    },
+    "check_decay=false,decayable=true,variant=tuopa": {
+      "model": "dendrology:leaves_tuopa"
+    },
+    "check_decay=false,decayable=false,variant=tuopa": {
+      "model": "dendrology:leaves_tuopa"
     }
+  }
 }

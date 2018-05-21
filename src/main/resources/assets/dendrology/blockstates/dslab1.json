@@ -1,14 +1,34 @@
 {
-    "variants": {
-      "half=bottom,variant=lata": { "model": "dendrology:planks_lata" },
-      "half=bottom,variant=nucis": { "model": "dendrology:planks_nucis" },
-      "half=bottom,variant=porffor": { "model": "dendrology:planks_porffor" },
-      "half=bottom,variant=salyx": { "model": "dendrology:planks_salyx" },
-      "half=bottom,variant=tuopa": { "model": "dendrology:planks_tuopa" },
-      "half=top,variant=lata": { "model": "dendrology:planks_lata" },
-      "half=top,variant=nucis": { "model": "dendrology:planks_nucis" },
-      "half=top,variant=porffor": { "model": "dendrology:planks_porffor" },
-      "half=top,variant=salyx": { "model": "dendrology:planks_salyx" },
-      "half=top,variant=tuopa": { "model": "dendrology:planks_tuopa" }
+  "variants": {
+    "half=bottom,variant=lata": {
+      "model": "dendrology:planks_lata"
+    },
+    "half=bottom,variant=nucis": {
+      "model": "dendrology:planks_nucis"
+    },
+    "half=bottom,variant=porffor": {
+      "model": "dendrology:planks_porffor"
+    },
+    "half=bottom,variant=salyx": {
+      "model": "dendrology:planks_salyx"
+    },
+    "half=bottom,variant=tuopa": {
+      "model": "dendrology:planks_tuopa"
+    },
+    "half=top,variant=lata": {
+      "model": "dendrology:planks_lata"
+    },
+    "half=top,variant=nucis": {
+      "model": "dendrology:planks_nucis"
+    },
+    "half=top,variant=porffor": {
+      "model": "dendrology:planks_porffor"
+    },
+    "half=top,variant=salyx": {
+      "model": "dendrology:planks_salyx"
+    },
+    "half=top,variant=tuopa": {
+      "model": "dendrology:planks_tuopa"
     }
+  }
 }
