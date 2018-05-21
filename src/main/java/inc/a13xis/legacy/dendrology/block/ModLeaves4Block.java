@@ -1,4 +1,3 @@
-
 package inc.a13xis.legacy.dendrology.block;
 
 import com.google.common.collect.ImmutableList;
@@ -20,77 +19,77 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public final class ModLeaves4Block extends LeavesBlock
-{
-    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModLog4Block.EnumType.class);
-    public ModLeaves4Block(Iterable<? extends DefinesLeaves> subBlocks)
-    {
-        super(ImmutableList.copyOf(subBlocks));
-        setCreativeTab(TheMod.INSTANCE.creativeTab());
-        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ModLog4Block.EnumType.TUOPA).withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.TRUE));
-    }
+public final class ModLeaves4Block extends LeavesBlock {
+	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", ModLog4Block.EnumType.class);
 
-    @Override
-    public int quantityDropped(Random random)
-    {
-        final int rarity = Settings.INSTANCE.saplingDropRarity();
-        return rarity == 0 || random.nextInt(rarity) != 0 ? 0 : 1;
-    }
+	public ModLeaves4Block(Iterable<? extends DefinesLeaves> subBlocks) {
+		super(ImmutableList.copyOf(subBlocks));
+		setCreativeTab(TheMod.INSTANCE.creativeTab());
+		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ModLog4Block.EnumType.TUOPA).withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.TRUE));
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState(){
-        return new BlockStateContainer(this, new IProperty[]{VARIANT,CHECK_DECAY,DECAYABLE});
-    }
+	@Override
+	public int quantityDropped(Random random) {
+		final int rarity = Settings.INSTANCE.saplingDropRarity();
+		return rarity == 0 || random.nextInt(rarity) != 0 ? 0 : 1;
+	}
 
-    @Override
-    public ModLog4Block.EnumType getModWoodType(int meta) {
-       return ModLog4Block.EnumType.TUOPA;
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[]{VARIANT, CHECK_DECAY, DECAYABLE});
+	}
 
-    @Override
-    public BlockPlanks.EnumType getWoodType(int meta) {
-        return BlockPlanks.EnumType.byMetadata(12+meta);
-    }
-    @Override
-    public String resourcePrefix() { return TheMod.getResourcePrefix(); }
+	@Override
+	public ModLog4Block.EnumType getModWoodType(int meta) {
+		return ModLog4Block.EnumType.TUOPA;
+	}
 
-    @Override
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        ArrayList<ItemStack> list=new ArrayList<ItemStack>();
-        list.add(new ItemStack(Item.getItemFromBlock(this),1,getMetaFromState(world.getBlockState(pos))));
-        return list;
-    }
+	@Override
+	public BlockPlanks.EnumType getWoodType(int meta) {
+		return BlockPlanks.EnumType.byMetadata(12 + meta);
+	}
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        IBlockState state = getDefaultState();
-        switch(meta/4){
-            case 0:
-                state = state.withProperty(CHECK_DECAY,true).withProperty(DECAYABLE,true);
-            break;
-            case 1:
-                state = state.withProperty(CHECK_DECAY,true).withProperty(DECAYABLE,false);
-            break;
-            case 2:
-                state = state.withProperty(CHECK_DECAY,false).withProperty(DECAYABLE,true);
-            break;
-            case 3:
-                state = state.withProperty(CHECK_DECAY,false).withProperty(DECAYABLE,false);
-            break;
-        }
-        state = state.withProperty(VARIANT,ModLog4Block.EnumType.TUOPA);
-        return state;
-    }
+	@Override
+	public String resourcePrefix() {
+		return TheMod.getResourcePrefix();
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return 0;
-    }
+	@Override
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+		list.add(new ItemStack(Item.getItemFromBlock(this), 1, getMetaFromState(world.getBlockState(pos))));
+		return list;
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		IBlockState state = getDefaultState();
+		switch (meta / 4) {
+			case 0:
+				state = state.withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true);
+				break;
+			case 1:
+				state = state.withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, false);
+				break;
+			case 2:
+				state = state.withProperty(CHECK_DECAY, false).withProperty(DECAYABLE, true);
+				break;
+			case 3:
+				state = state.withProperty(CHECK_DECAY, false).withProperty(DECAYABLE, false);
+				break;
+		}
+		state = state.withProperty(VARIANT, ModLog4Block.EnumType.TUOPA);
+		return state;
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return 0;
+	}
 
 
-    @Override
-    protected int getSaplingDropChance(IBlockState state)
-    {
-        return Settings.INSTANCE.saplingDropRarity();
-    }
+	@Override
+	protected int getSaplingDropChance(IBlockState state) {
+		return Settings.INSTANCE.saplingDropRarity();
+	}
 }

@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "chisel:blocks/planks_kiparis/blinds"
-    }
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "chisel:blocks/planks_kiparis/blinds"
+  }
 }

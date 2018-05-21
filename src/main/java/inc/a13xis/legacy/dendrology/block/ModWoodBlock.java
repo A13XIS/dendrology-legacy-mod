@@ -14,106 +14,104 @@ import net.minecraft.util.IStringSerializable;
 import java.util.Collection;
 
 
-public final class ModWoodBlock extends WoodBlock
-{
-    public final static PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
+public final class ModWoodBlock extends WoodBlock {
+	public final static PropertyEnum VARIANT = PropertyEnum.create("variant", ModWoodBlock.EnumType.class);
 
-    protected ModWoodBlock(Collection<? extends DefinesWood> subBlocks){
-        super(subBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.ACEMUS));
-    }
+	protected ModWoodBlock(Collection<? extends DefinesWood> subBlocks) {
+		super(subBlocks);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(ModWoodBlock.VARIANT, ModWoodBlock.EnumType.ACEMUS));
+	}
 
-    protected static String getUnwrappedUnprefixedUnlocalizedName(String unlocalizedName)
-    {
-        return unlocalizedName.substring(unlocalizedName.indexOf(':') + 1);
-    }
+	public ModWoodBlock(Iterable<? extends DefinesWood> subBlocks) {
+		super(ImmutableList.copyOf(subBlocks));
+		setCreativeTab(TheMod.INSTANCE.creativeTab());
+		setHardness(2.0f);
+		setResistance(5.0f);
+		setSoundType(SoundType.WOOD);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(ModWoodBlock.VARIANT, EnumType.ACEMUS));
+	}
 
-    @Override
-    public String getUnlocalizedName() {
-        return String.format("tile.%s%s", resourcePrefix(), getUnwrappedUnprefixedUnlocalizedName(super.getUnlocalizedName()));
-    }
+	protected static String getUnwrappedUnprefixedUnlocalizedName(String unlocalizedName) {
+		return unlocalizedName.substring(unlocalizedName.indexOf(':') + 1);
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] { ModWoodBlock.VARIANT });
-    }
+	@Override
+	public String getUnlocalizedName() {
+		return String.format("tile.%s%s", resourcePrefix(), getUnwrappedUnprefixedUnlocalizedName(super.getUnlocalizedName()));
+	}
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(VARIANT,ModWoodBlock.EnumType.fromId(meta));
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[]{ModWoodBlock.VARIANT});
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        EnumType type = (EnumType) state.getValue(ModWoodBlock.VARIANT);
-        return type.ordinal();
-    }
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(VARIANT, ModWoodBlock.EnumType.fromId(meta));
+	}
 
-    public ModWoodBlock(Iterable<? extends DefinesWood> subBlocks)
-    {
-        super(ImmutableList.copyOf(subBlocks));
-        setCreativeTab(TheMod.INSTANCE.creativeTab());
-        setHardness(2.0f);
-        setResistance(5.0f);
-        setSoundType(SoundType.WOOD);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(ModWoodBlock.VARIANT, EnumType.ACEMUS));
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		EnumType type = (EnumType) state.getValue(ModWoodBlock.VARIANT);
+		return type.ordinal();
+	}
 
-    @Override
-    public int damageDropped(IBlockState state) {
-        return getMetaFromState(state);
-    }
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
+	}
 
 
-    public IBlockState getBlockState(int id){
-       return ModWoodBlock.getStateById(id);
-    }
+	public IBlockState getBlockState(int id) {
+		return ModWoodBlock.getStateById(id);
+	}
 
-    @Override
-    protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
+	@Override
+	protected String resourcePrefix() {
+		return TheMod.getResourcePrefix();
+	}
 
-    public enum EnumType implements IStringSerializable{
-        ACEMUS("acemus"),
-        CEDRUM("cedrum"),
-        CERASU("cerasu"),
-        DELNAS("delnas"),
-        EWCALY("ewcaly"),
-        HEKUR("hekur"),
-        KIPARIS("kiparis"),
-        KULIST("kulist"),
-        LATA("lata"),
-        NUCIS("nucis"),
-        PORFFOR("porffor"),
-        SALYX("salyx"),
-        TUOPA("tuopa");
+	public enum EnumType implements IStringSerializable {
+		ACEMUS("acemus"),
+		CEDRUM("cedrum"),
+		CERASU("cerasu"),
+		DELNAS("delnas"),
+		EWCALY("ewcaly"),
+		HEKUR("hekur"),
+		KIPARIS("kiparis"),
+		KULIST("kulist"),
+		LATA("lata"),
+		NUCIS("nucis"),
+		PORFFOR("porffor"),
+		SALYX("salyx"),
+		TUOPA("tuopa");
 
-        private final String species;
+		private final String species;
 
-        EnumType(String name){
-            this.species=name;
-        }
+		EnumType(String name) {
+			this.species = name;
+		}
 
-        public String getName(){
-            return species;
-        }
+		public static EnumType fromId(int id) {
+			if (id < 0 || id > 12) {
+				return ACEMUS;
+			} else {
+				return EnumType.values()[id];
+			}
+		}
 
-        @Override
-        public String toString() {
-            return getName();
-        }
+		public String getName() {
+			return species;
+		}
 
-        public static EnumType fromId(int id) {
-            if(id<0||id>12){
-                return ACEMUS;
-            }
-            else{
-                return EnumType.values()[id];
-            }
-        }
+		@Override
+		public String toString() {
+			return getName();
+		}
 
-        public int getId() {
-            return ordinal();
-        }
-    }
+		public int getId() {
+			return ordinal();
+		}
+	}
 
 }

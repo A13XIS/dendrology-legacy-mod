@@ -1,6 +1,6 @@
 {
-    "parent": "block/cross",
-    "textures": {
-        "cross": "dendrology:blocks/sapling_lata"
-    }
+  "parent": "block/cross",
+  "textures": {
+    "cross": "dendrology:blocks/sapling_lata"
+  }
 }

@@ -1,19 +1,49 @@
 {
-    "variants": {
-		"variation=clean" : { "model": "chisel:planks_kulist_clean" },
-		"variation=short" : { "model": "chisel:planks_kulist_short" },
-		"variation=vertical" : { "model": "chisel:planks_kulist_vertical" },
-		"variation=uneven" : { "model": "chisel:planks_kulist_uneven" },
-		"variation=parquet" : { "model": "chisel:planks_kulist_parquet" },
-		"variation=fancy" : { "model": "chisel:planks_kulist_fancy" },
-		"variation=blinds" : { "model": "chisel:planks_kulist_blinds" },
-		"variation=panel" : { "model": "chisel:planks_kulist_panel" },
-		"variation=double" : { "model": "chisel:planks_kulist_double" },
-		"variation=crate" : { "model": "chisel:planks_kulist_crate" },
-		"variation=cratefancy" : { "model": "chisel:planks_kulist_cratefancy" },
-		"variation=scaffold" : { "model": "chisel:planks_kulist_scaffold" },
-		"variation=large" : { "model": "chisel:planks_kulist_large" },
-		"variation=chaotic" : { "model": "chisel:planks_kulist_chaotic" },
-		"variation=vchaotic" : { "model": "chisel:planks_kulist_vchaotic" }
-	}
+  "variants": {
+    "variation=clean": {
+      "model": "chisel:planks_kulist_clean"
+    },
+    "variation=short": {
+      "model": "chisel:planks_kulist_short"
+    },
+    "variation=vertical": {
+      "model": "chisel:planks_kulist_vertical"
+    },
+    "variation=uneven": {
+      "model": "chisel:planks_kulist_uneven"
+    },
+    "variation=parquet": {
+      "model": "chisel:planks_kulist_parquet"
+    },
+    "variation=fancy": {
+      "model": "chisel:planks_kulist_fancy"
+    },
+    "variation=blinds": {
+      "model": "chisel:planks_kulist_blinds"
+    },
+    "variation=panel": {
+      "model": "chisel:planks_kulist_panel"
+    },
+    "variation=double": {
+      "model": "chisel:planks_kulist_double"
+    },
+    "variation=crate": {
+      "model": "chisel:planks_kulist_crate"
+    },
+    "variation=cratefancy": {
+      "model": "chisel:planks_kulist_cratefancy"
+    },
+    "variation=scaffold": {
+      "model": "chisel:planks_kulist_scaffold"
+    },
+    "variation=large": {
+      "model": "chisel:planks_kulist_large"
+    },
+    "variation=chaotic": {
+      "model": "chisel:planks_kulist_chaotic"
+    },
+    "variation=vchaotic": {
+      "model": "chisel:planks_kulist_vchaotic"
+    }
+  }
 }

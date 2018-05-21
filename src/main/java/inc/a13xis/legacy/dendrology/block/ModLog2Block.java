@@ -10,87 +10,87 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;
 
-public final class ModLog2Block extends LogBlock
-{
-    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumType.class);
-    public ModLog2Block(Iterable<? extends DefinesLog> subBlocks)
-    {
-        super(ImmutableList.copyOf(subBlocks));
-        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.EWCALY));
-        setCreativeTab(TheMod.INSTANCE.creativeTab());
-    }
+public final class ModLog2Block extends LogBlock {
+	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumType.class);
 
-    @Override
-    protected String resourcePrefix() { return TheMod.getResourcePrefix(); }
+	public ModLog2Block(Iterable<? extends DefinesLog> subBlocks) {
+		super(ImmutableList.copyOf(subBlocks));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.EWCALY));
+		setCreativeTab(TheMod.INSTANCE.creativeTab());
+	}
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        IBlockState state = getDefaultState();
-        switch(meta/4){
-            case 0:
-                state = state.withProperty(LOG_AXIS,EnumAxis.Y);
-                break;
-            case 1:
-                state = state.withProperty(LOG_AXIS,EnumAxis.X);
-                break;
-            case 2:
-                state = state.withProperty(LOG_AXIS,EnumAxis.Z);
-                break;
-            case 3:
-                state = state.withProperty(LOG_AXIS,EnumAxis.NONE);
-        }
-        return state.withProperty(VARIANT, EnumType.fromId(meta%4));
-    }
+	@Override
+	protected String resourcePrefix() {
+		return TheMod.getResourcePrefix();
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        EnumType type = (EnumType) state.getValue(VARIANT);
-        int par = state.getValue(LOG_AXIS).equals(EnumAxis.Y)?0:state.getValue(LOG_AXIS).equals(EnumAxis.X)?1:state.getValue(LOG_AXIS).equals(EnumAxis.Z)?2:3;
-        return par*4+type.ordinal();
-    }
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		IBlockState state = getDefaultState();
+		switch (meta / 4) {
+			case 0:
+				state = state.withProperty(LOG_AXIS, EnumAxis.Y);
+				break;
+			case 1:
+				state = state.withProperty(LOG_AXIS, EnumAxis.X);
+				break;
+			case 2:
+				state = state.withProperty(LOG_AXIS, EnumAxis.Z);
+				break;
+			case 3:
+				state = state.withProperty(LOG_AXIS, EnumAxis.NONE);
+		}
+		return state.withProperty(VARIANT, EnumType.fromId(meta % 4));
+	}
 
-    @Override
-    public int damageDropped(IBlockState state) {
-        return getMetaFromState(state.withProperty(LOG_AXIS,EnumAxis.Y));
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		EnumType type = (EnumType) state.getValue(VARIANT);
+		int par = state.getValue(LOG_AXIS).equals(EnumAxis.Y) ? 0 : state.getValue(LOG_AXIS).equals(EnumAxis.X) ? 1 : state.getValue(LOG_AXIS).equals(EnumAxis.Z) ? 2 : 3;
+		return par * 4 + type.ordinal();
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState(){
-        return new BlockStateContainer(this, new IProperty[]{VARIANT,LOG_AXIS});
-    }
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state.withProperty(LOG_AXIS, EnumAxis.Y));
+	}
 
-    public enum EnumType implements IStringSerializable {
-        EWCALY("ewcaly"),
-        HEKUR("hekur"),
-        KIPARIS("kiparis"),
-        KULIST("kulist");
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[]{VARIANT, LOG_AXIS});
+	}
 
-        private final String species;
+	public enum EnumType implements IStringSerializable {
+		EWCALY("ewcaly"),
+		HEKUR("hekur"),
+		KIPARIS("kiparis"),
+		KULIST("kulist");
 
-        EnumType(String name){
-            this.species=name;
-        }
+		private final String species;
 
-        public String getName(){
-            return species;
-        }
+		EnumType(String name) {
+			this.species = name;
+		}
 
-        @Override
-        public String toString() {
-            return getName();
-        }
+		public static EnumType fromId(int id) {
+			if (id < 0 || id > 3) {
+				return EWCALY;
+			} else {
+				return EnumType.values()[id];
+			}
+		}
 
-        public static EnumType fromId(int id) {
-            if(id<0||id>3){
-                return EWCALY;
-            }
-            else{
-                return EnumType.values()[id];
-            }
-        }
+		public String getName() {
+			return species;
+		}
 
-        public int getId() {
-            return ordinal();
-        }
-    }
+		@Override
+		public String toString() {
+			return getName();
+		}
+
+		public int getId() {
+			return ordinal();
+		}
+	}
 }

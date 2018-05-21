@@ -1,19 +1,49 @@
 {
-    "variants": {
-		"variation=clean" : { "model": "chisel:planks_lata_clean" },
-		"variation=short" : { "model": "chisel:planks_lata_short" },
-		"variation=vertical" : { "model": "chisel:planks_lata_vertical" },
-		"variation=uneven" : { "model": "chisel:planks_lata_uneven" },
-		"variation=parquet" : { "model": "chisel:planks_lata_parquet" },
-		"variation=fancy" : { "model": "chisel:planks_lata_fancy" },
-		"variation=blinds" : { "model": "chisel:planks_lata_blinds" },
-		"variation=panel" : { "model": "chisel:planks_lata_panel" },
-		"variation=double" : { "model": "chisel:planks_lata_double" },
-		"variation=crate" : { "model": "chisel:planks_lata_crate" },
-		"variation=cratefancy" : { "model": "chisel:planks_lata_cratefancy" },
-		"variation=scaffold" : { "model": "chisel:planks_lata_scaffold" },
-		"variation=large" : { "model": "chisel:planks_lata_large" },
-		"variation=chaotic" : { "model": "chisel:planks_lata_chaotic" },
-		"variation=vchaotic" : { "model": "chisel:planks_lata_vchaotic" }
-	}
+  "variants": {
+    "variation=clean": {
+      "model": "chisel:planks_lata_clean"
+    },
+    "variation=short": {
+      "model": "chisel:planks_lata_short"
+    },
+    "variation=vertical": {
+      "model": "chisel:planks_lata_vertical"
+    },
+    "variation=uneven": {
+      "model": "chisel:planks_lata_uneven"
+    },
+    "variation=parquet": {
+      "model": "chisel:planks_lata_parquet"
+    },
+    "variation=fancy": {
+      "model": "chisel:planks_lata_fancy"
+    },
+    "variation=blinds": {
+      "model": "chisel:planks_lata_blinds"
+    },
+    "variation=panel": {
+      "model": "chisel:planks_lata_panel"
+    },
+    "variation=double": {
+      "model": "chisel:planks_lata_double"
+    },
+    "variation=crate": {
+      "model": "chisel:planks_lata_crate"
+    },
+    "variation=cratefancy": {
+      "model": "chisel:planks_lata_cratefancy"
+    },
+    "variation=scaffold": {
+      "model": "chisel:planks_lata_scaffold"
+    },
+    "variation=large": {
+      "model": "chisel:planks_lata_large"
+    },
+    "variation=chaotic": {
+      "model": "chisel:planks_lata_chaotic"
+    },
+    "variation=vchaotic": {
+      "model": "chisel:planks_lata_vchaotic"
+    }
+  }
 }

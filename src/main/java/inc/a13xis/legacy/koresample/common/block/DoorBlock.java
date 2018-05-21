@@ -40,6 +40,7 @@ public abstract class DoorBlock extends Block {
 	protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.8125D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.1875D, 1.0D, 1.0D);
 	protected Enum variant;
+
 	protected DoorBlock(DefinesDoor model) {
 		super(Material.WOOD);
 		setHardness(3f);

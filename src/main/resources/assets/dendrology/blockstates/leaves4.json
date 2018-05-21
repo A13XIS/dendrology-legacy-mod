@@ -1,20 +1,52 @@
 {
-    "variants": {
-      "check_decay=true,decayable=true,variant=ewcaly": { "model": "dendrology:leaves_ewcaly" },
-      "check_decay=true,decayable=true,variant=hekur": { "model": "dendrology:leaves_hekur" },
-      "check_decay=true,decayable=true,variant=kiparis": { "model": "dendrology:leaves_kiparis" },
-      "check_decay=true,decayable=true,variant=kulist": { "model": "dendrology:leaves_kulist" },
-      "check_decay=true,decayable=false,variant=ewcaly": { "model": "dendrology:leaves_ewcaly" },
-      "check_decay=true,decayable=false,variant=hekur": { "model": "dendrology:leaves_hekur" },
-      "check_decay=true,decayable=false,variant=kiparis": { "model": "dendrology:leaves_kiparis" },
-      "check_decay=true,decayable=false,variant=kulist": { "model": "dendrology:leaves_kulist" },
-      "check_decay=false,decayable=true,variant=ewcaly": { "model": "dendrology:leaves_ewcaly" },
-      "check_decay=false,decayable=true,variant=hekur": { "model": "dendrology:leaves_hekur" },
-      "check_decay=false,decayable=true,variant=kiparis": { "model": "dendrology:leaves_kiparis" },
-      "check_decay=false,decayable=true,variant=kulist": { "model": "dendrology:leaves_kulist" },
-      "check_decay=false,decayable=false,variant=ewcaly": { "model": "dendrology:leaves_ewcaly" },
-      "check_decay=false,decayable=false,variant=hekur": { "model": "dendrology:leaves_hekur" },
-      "check_decay=false,decayable=false,variant=kiparis": { "model": "dendrology:leaves_kiparis" },
-      "check_decay=false,decayable=false,variant=kulist": { "model": "dendrology:leaves_kulist" }
+  "variants": {
+    "check_decay=true,decayable=true,variant=ewcaly": {
+      "model": "dendrology:leaves_ewcaly"
+    },
+    "check_decay=true,decayable=true,variant=hekur": {
+      "model": "dendrology:leaves_hekur"
+    },
+    "check_decay=true,decayable=true,variant=kiparis": {
+      "model": "dendrology:leaves_kiparis"
+    },
+    "check_decay=true,decayable=true,variant=kulist": {
+      "model": "dendrology:leaves_kulist"
+    },
+    "check_decay=true,decayable=false,variant=ewcaly": {
+      "model": "dendrology:leaves_ewcaly"
+    },
+    "check_decay=true,decayable=false,variant=hekur": {
+      "model": "dendrology:leaves_hekur"
+    },
+    "check_decay=true,decayable=false,variant=kiparis": {
+      "model": "dendrology:leaves_kiparis"
+    },
+    "check_decay=true,decayable=false,variant=kulist": {
+      "model": "dendrology:leaves_kulist"
+    },
+    "check_decay=false,decayable=true,variant=ewcaly": {
+      "model": "dendrology:leaves_ewcaly"
+    },
+    "check_decay=false,decayable=true,variant=hekur": {
+      "model": "dendrology:leaves_hekur"
+    },
+    "check_decay=false,decayable=true,variant=kiparis": {
+      "model": "dendrology:leaves_kiparis"
+    },
+    "check_decay=false,decayable=true,variant=kulist": {
+      "model": "dendrology:leaves_kulist"
+    },
+    "check_decay=false,decayable=false,variant=ewcaly": {
+      "model": "dendrology:leaves_ewcaly"
+    },
+    "check_decay=false,decayable=false,variant=hekur": {
+      "model": "dendrology:leaves_hekur"
+    },
+    "check_decay=false,decayable=false,variant=kiparis": {
+      "model": "dendrology:leaves_kiparis"
+    },
+    "check_decay=false,decayable=false,variant=kulist": {
+      "model": "dendrology:leaves_kulist"
     }
+  }
 }

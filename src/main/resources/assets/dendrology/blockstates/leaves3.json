@@ -1,20 +1,52 @@
 {
-    "variants": {
-      "check_decay=true,decayable=true,variant=acemus": { "model": "dendrology:leaves_acemus" },
-      "check_decay=true,decayable=true,variant=cedrum": { "model": "dendrology:leaves_cedrum" },
-      "check_decay=true,decayable=true,variant=cerasu": { "model": "dendrology:leaves_cerasu" },
-      "check_decay=true,decayable=true,variant=delnas": { "model": "dendrology:leaves_delnas" },
-      "check_decay=true,decayable=false,variant=acemus": { "model": "dendrology:leaves_acemus" },
-      "check_decay=true,decayable=false,variant=cedrum": { "model": "dendrology:leaves_cedrum" },
-      "check_decay=true,decayable=false,variant=cerasu": { "model": "dendrology:leaves_cerasu" },
-      "check_decay=true,decayable=false,variant=delnas": { "model": "dendrology:leaves_delnas" },
-      "check_decay=false,decayable=true,variant=acemus": { "model": "dendrology:leaves_acemus" },
-      "check_decay=false,decayable=true,variant=cedrum": { "model": "dendrology:leaves_cedrum" },
-      "check_decay=false,decayable=true,variant=cerasu": { "model": "dendrology:leaves_cerasu" },
-      "check_decay=false,decayable=true,variant=delnas": { "model": "dendrology:leaves_delnas" },
-      "check_decay=false,decayable=false,variant=acemus": { "model": "dendrology:leaves_acemus" },
-      "check_decay=false,decayable=false,variant=cedrum": { "model": "dendrology:leaves_cedrum" },
-      "check_decay=false,decayable=false,variant=cerasu": { "model": "dendrology:leaves_cerasu" },
-      "check_decay=false,decayable=false,variant=delnas": { "model": "dendrology:leaves_delnas" }
+  "variants": {
+    "check_decay=true,decayable=true,variant=acemus": {
+      "model": "dendrology:leaves_acemus"
+    },
+    "check_decay=true,decayable=true,variant=cedrum": {
+      "model": "dendrology:leaves_cedrum"
+    },
+    "check_decay=true,decayable=true,variant=cerasu": {
+      "model": "dendrology:leaves_cerasu"
+    },
+    "check_decay=true,decayable=true,variant=delnas": {
+      "model": "dendrology:leaves_delnas"
+    },
+    "check_decay=true,decayable=false,variant=acemus": {
+      "model": "dendrology:leaves_acemus"
+    },
+    "check_decay=true,decayable=false,variant=cedrum": {
+      "model": "dendrology:leaves_cedrum"
+    },
+    "check_decay=true,decayable=false,variant=cerasu": {
+      "model": "dendrology:leaves_cerasu"
+    },
+    "check_decay=true,decayable=false,variant=delnas": {
+      "model": "dendrology:leaves_delnas"
+    },
+    "check_decay=false,decayable=true,variant=acemus": {
+      "model": "dendrology:leaves_acemus"
+    },
+    "check_decay=false,decayable=true,variant=cedrum": {
+      "model": "dendrology:leaves_cedrum"
+    },
+    "check_decay=false,decayable=true,variant=cerasu": {
+      "model": "dendrology:leaves_cerasu"
+    },
+    "check_decay=false,decayable=true,variant=delnas": {
+      "model": "dendrology:leaves_delnas"
+    },
+    "check_decay=false,decayable=false,variant=acemus": {
+      "model": "dendrology:leaves_acemus"
+    },
+    "check_decay=false,decayable=false,variant=cedrum": {
+      "model": "dendrology:leaves_cedrum"
+    },
+    "check_decay=false,decayable=false,variant=cerasu": {
+      "model": "dendrology:leaves_cerasu"
+    },
+    "check_decay=false,decayable=false,variant=delnas": {
+      "model": "dendrology:leaves_delnas"
     }
+  }
 }

@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "dendrology:blocks/planks_porffor"
-    }
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "dendrology:blocks/planks_porffor"
+  }
 }

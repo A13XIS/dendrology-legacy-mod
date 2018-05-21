@@ -1,19 +1,49 @@
 {
-    "variants": {
-		"variation=clean" : { "model": "chisel:planks_tuopa_clean" },
-		"variation=short" : { "model": "chisel:planks_tuopa_short" },
-		"variation=vertical" : { "model": "chisel:planks_tuopa_vertical" },
-		"variation=uneven" : { "model": "chisel:planks_tuopa_uneven" },
-		"variation=parquet" : { "model": "chisel:planks_tuopa_parquet" },
-		"variation=fancy" : { "model": "chisel:planks_tuopa_fancy" },
-		"variation=blinds" : { "model": "chisel:planks_tuopa_blinds" },
-		"variation=panel" : { "model": "chisel:planks_tuopa_panel" },
-		"variation=double" : { "model": "chisel:planks_tuopa_double" },
-		"variation=crate" : { "model": "chisel:planks_tuopa_crate" },
-		"variation=cratefancy" : { "model": "chisel:planks_tuopa_cratefancy" },
-		"variation=scaffold" : { "model": "chisel:planks_tuopa_scaffold" },
-		"variation=large" : { "model": "chisel:planks_tuopa_large" },
-		"variation=chaotic" : { "model": "chisel:planks_tuopa_chaotic" },
-		"variation=vchaotic" : { "model": "chisel:planks_tuopa_vchaotic" }
-	}
+  "variants": {
+    "variation=clean": {
+      "model": "chisel:planks_tuopa_clean"
+    },
+    "variation=short": {
+      "model": "chisel:planks_tuopa_short"
+    },
+    "variation=vertical": {
+      "model": "chisel:planks_tuopa_vertical"
+    },
+    "variation=uneven": {
+      "model": "chisel:planks_tuopa_uneven"
+    },
+    "variation=parquet": {
+      "model": "chisel:planks_tuopa_parquet"
+    },
+    "variation=fancy": {
+      "model": "chisel:planks_tuopa_fancy"
+    },
+    "variation=blinds": {
+      "model": "chisel:planks_tuopa_blinds"
+    },
+    "variation=panel": {
+      "model": "chisel:planks_tuopa_panel"
+    },
+    "variation=double": {
+      "model": "chisel:planks_tuopa_double"
+    },
+    "variation=crate": {
+      "model": "chisel:planks_tuopa_crate"
+    },
+    "variation=cratefancy": {
+      "model": "chisel:planks_tuopa_cratefancy"
+    },
+    "variation=scaffold": {
+      "model": "chisel:planks_tuopa_scaffold"
+    },
+    "variation=large": {
+      "model": "chisel:planks_tuopa_large"
+    },
+    "variation=chaotic": {
+      "model": "chisel:planks_tuopa_chaotic"
+    },
+    "variation=vchaotic": {
+      "model": "chisel:planks_tuopa_vchaotic"
+    }
+  }
 }

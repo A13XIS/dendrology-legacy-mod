@@ -1,20 +1,52 @@
 {
-    "variants": {
-      "check_decay=true,decayable=true,variant=lata": { "model": "dendrology:leaves_lata" },
-      "check_decay=true,decayable=true,variant=nucis": { "model": "dendrology:leaves_nucis" },
-      "check_decay=true,decayable=true,variant=porffor": { "model": "dendrology:leaves_porffor" },
-      "check_decay=true,decayable=true,variant=salyx": { "model": "dendrology:leaves_salyx" },
-      "check_decay=true,decayable=false,variant=lata": { "model": "dendrology:leaves_lata" },
-      "check_decay=true,decayable=false,variant=nucis": { "model": "dendrology:leaves_nucis" },
-      "check_decay=true,decayable=false,variant=porffor": { "model": "dendrology:leaves_porffor" },
-      "check_decay=true,decayable=false,variant=salyx": { "model": "dendrology:leaves_salyx" },
-      "check_decay=false,decayable=true,variant=lata": { "model": "dendrology:leaves_lata" },
-      "check_decay=false,decayable=true,variant=nucis": { "model": "dendrology:leaves_nucis" },
-      "check_decay=false,decayable=true,variant=porffor": { "model": "dendrology:leaves_porffor" },
-      "check_decay=false,decayable=true,variant=salyx": { "model": "dendrology:leaves_salyx" },
-      "check_decay=false,decayable=false,variant=lata": { "model": "dendrology:leaves_lata" },
-      "check_decay=false,decayable=false,variant=nucis": { "model": "dendrology:leaves_nucis" },
-      "check_decay=false,decayable=false,variant=porffor": { "model": "dendrology:leaves_porffor" },
-      "check_decay=false,decayable=false,variant=salyx": { "model": "dendrology:leaves_salyx" }
+  "variants": {
+    "check_decay=true,decayable=true,variant=lata": {
+      "model": "dendrology:leaves_lata"
+    },
+    "check_decay=true,decayable=true,variant=nucis": {
+      "model": "dendrology:leaves_nucis"
+    },
+    "check_decay=true,decayable=true,variant=porffor": {
+      "model": "dendrology:leaves_porffor"
+    },
+    "check_decay=true,decayable=true,variant=salyx": {
+      "model": "dendrology:leaves_salyx"
+    },
+    "check_decay=true,decayable=false,variant=lata": {
+      "model": "dendrology:leaves_lata"
+    },
+    "check_decay=true,decayable=false,variant=nucis": {
+      "model": "dendrology:leaves_nucis"
+    },
+    "check_decay=true,decayable=false,variant=porffor": {
+      "model": "dendrology:leaves_porffor"
+    },
+    "check_decay=true,decayable=false,variant=salyx": {
+      "model": "dendrology:leaves_salyx"
+    },
+    "check_decay=false,decayable=true,variant=lata": {
+      "model": "dendrology:leaves_lata"
+    },
+    "check_decay=false,decayable=true,variant=nucis": {
+      "model": "dendrology:leaves_nucis"
+    },
+    "check_decay=false,decayable=true,variant=porffor": {
+      "model": "dendrology:leaves_porffor"
+    },
+    "check_decay=false,decayable=true,variant=salyx": {
+      "model": "dendrology:leaves_salyx"
+    },
+    "check_decay=false,decayable=false,variant=lata": {
+      "model": "dendrology:leaves_lata"
+    },
+    "check_decay=false,decayable=false,variant=nucis": {
+      "model": "dendrology:leaves_nucis"
+    },
+    "check_decay=false,decayable=false,variant=porffor": {
+      "model": "dendrology:leaves_porffor"
+    },
+    "check_decay=false,decayable=false,variant=salyx": {
+      "model": "dendrology:leaves_salyx"
     }
+  }
 }

@@ -1,7 +1,7 @@
 {
-    "parent": "block/door_top",
-    "textures": {
-        "bottom": "dendrology:blocks/door_bottom_cerasu",
-        "top": "dendrology:blocks/door_top_cerasu"
-    }
+  "parent": "block/door_top",
+  "textures": {
+    "bottom": "dendrology:blocks/door_bottom_cerasu",
+    "top": "dendrology:blocks/door_top_cerasu"
+  }
 }

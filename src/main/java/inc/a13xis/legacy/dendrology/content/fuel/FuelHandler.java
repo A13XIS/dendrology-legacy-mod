@@ -8,21 +8,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public enum FuelHandler implements IFuelHandler
-{
-    INSTANCE;
+public enum FuelHandler implements IFuelHandler {
+	INSTANCE;
 
-    public static void postInit()
-    {
-        GameRegistry.registerFuelHandler(INSTANCE);
-    }
+	public static void postInit() {
+		GameRegistry.registerFuelHandler(INSTANCE);
+	}
 
-    @Override
-    public int getBurnTime(ItemStack fuel)
-    {
-        final Item fuelItem = fuel.getItem();
-        final Material fuelMaterial = Block.getBlockFromItem(fuelItem).getDefaultState().getMaterial();
-        if (fuelMaterial.equals(Material.WOOD) && SlabBlock.isSingleSlab(fuelItem)) return 150;
-        return 0;
-    }
+	@Override
+	public int getBurnTime(ItemStack fuel) {
+		final Item fuelItem = fuel.getItem();
+		final Material fuelMaterial = Block.getBlockFromItem(fuelItem).getDefaultState().getMaterial();
+		if (fuelMaterial.equals(Material.WOOD) && SlabBlock.isSingleSlab(fuelItem)) return 150;
+		return 0;
+	}
 }
